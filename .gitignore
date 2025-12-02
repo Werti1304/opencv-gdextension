@@ -64,3 +64,6 @@ CMakeUserPresets.json
 # Visual Studio
 .vs/
 out/
+
+# opencv src & build
+opencv/
