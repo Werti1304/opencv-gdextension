@@ -6,15 +6,15 @@
 
 using namespace godot;
 
-class ExampleClass : public RefCounted {
-	GDCLASS(ExampleClass, RefCounted)
+class OpenCVExtension : public RefCounted {
+	GDCLASS(OpenCVExtension, RefCounted)
 
 protected:
 	static void _bind_methods();
 
 public:
-	ExampleClass() = default;
-	~ExampleClass() override = default;
+	OpenCVExtension() = default;
+	~OpenCVExtension() override = default;
 
 	void print_type(const Variant &p_variant) const;
 };
