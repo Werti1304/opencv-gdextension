@@ -10,3 +10,4 @@ void OpenCVExtension::print_type(const Variant &p_variant) const {
 	print_line(vformat("Type: 53 %d", p_variant.get_type()));
 	print_line(vformat("OpenCV version: %s", CV_VERSION));
 }
+

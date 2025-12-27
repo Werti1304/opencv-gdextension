@@ -51,29 +51,7 @@ target_sources(${LIBNAME}
     src/register_types.h
     "src/opencv_extension.cpp"
     "src/opencv_extension.h"
-)
-
-# OPENCV Setup
-
-# Adjust this path to point to your OpenCV install directory
-# After building OpenCV:
-#   build/install/ contains: include/, x64/vc17/bin/, x64/vc17/lib/
-set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/build/install")
-
-# Locate OpenCVConfig.cmake from your build
-find_package(OpenCV REQUIRED)
-
-# Add OpenCV include directories
-target_include_directories(${LIBNAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
-
-# Link OpenCV libraries to your GDExtension
-target_link_libraries(${LIBNAME} PRIVATE ${OpenCV_LIBS})
-
-message(STATUS "Found OpenCV version: ${OpenCV_VERSION}")
-message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
-message(STATUS "OpenCV libs: ${OpenCV_LIBS}")
-
-# OPENCV Setup End
+ "src/opencv_camera.cpp" "src/opencv_camera.h")
 
 # Fetch a list of the xml files to use for documentation and add to our target
 file(GLOB_RECURSE DOC_XML LIST_DIRECTORIES NO CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/doc_classes/*.xml")
@@ -85,7 +63,31 @@ if(DOC_XML)
     endif()
 endif()
 
-target_link_libraries(${LIBNAME} PRIVATE godot-cpp)
+#target_link_libraries(${LIBNAME} PRIVATE godot-cpp)
+
+# OPENCV Setup
+
+# Adjust this path to point to your OpenCV install directory
+# After building OpenCV:
+#   build/install/ contains: include/, x64/vc17/bin/, x64/vc17/lib/
+#set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/build/install")
+set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/build/install/x64/vc17/lib/")
+
+# Locate OpenCVConfig.cmake from your build
+find_package(OpenCV REQUIRED COMPONENTS world)
+
+# Add OpenCV include directories
+target_include_directories(${LIBNAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
+
+# Link OpenCV libraries to your GDExtension
+target_link_libraries(${LIBNAME} PRIVATE godot-cpp ${OpenCV_LIBS})
+
+message(STATUS "Found OpenCV version: ${OpenCV_VERSION}")
+message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
+message(STATUS "OpenCV libs: ${OpenCV_LIBS}")
+
+# OPENCV Setup End
+
 
 # Require at least C++17 for this target
 set_property(TARGET ${LIBNAME} PROPERTY CXX_STANDARD 17)

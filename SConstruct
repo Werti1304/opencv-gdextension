@@ -41,7 +41,48 @@ env = SConscript("godot-cpp/SConstruct", {"env": env, "customs": customs})
 
 # OPENCV Stuff start
 
+# set this path to your library files. This is the location of dll, dylib and so files.
+opencv_library_path = [
+    "opencv/build/install/x64/vc17/lib",
+    #'YourCustomOpencvFolder/build/x64/vc16/lib'
+]
 
+# tweak this if you want to use different folders, or more folders, to store your source code in.
+
+opencv_header_files = [
+    "src/",
+    "opencv/build/install/include",
+    #"YourCustomOpencvFolder/build/include"
+]
+
+opencv_library_files = {
+    'windows': [
+        'opencv_world4120.lib',
+#        'opencv_world4120d.lib'
+    ],
+    'macos': [
+        'libopencv_core.dylib',
+        'libopencv_imgcodecs.dylib',
+        'libopencv_imgproc.dylib',
+        'libopencv_videoio.dylib',
+        'libopencv_objdetect.dylib',
+        'libopencv_video.dylib',
+        'libopencv_tracking.dylib'
+    ],
+    'linux': [
+        'libopencv_core.so',
+        'libopencv_imgcodecs.so',
+        'libopencv_imgproc.so',
+        'libopencv_videoio.so',
+        'libopencv_objdetect.so',
+        'libopencv_video.so',
+        'libopencv_tracking.so'
+    ]
+}
+
+env.Append(CPPPATH=opencv_header_files)
+env.Append(LIBPATH=opencv_library_path)
+env.Append(LIBS=opencv_library_files[env["platform"]])
 
 # OPENCV Stuff end
 
