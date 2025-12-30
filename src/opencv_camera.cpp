@@ -3,7 +3,6 @@
 #include <bitset>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
-#include <opencv2/imgproc.hpp>
 
 using namespace godot;
 

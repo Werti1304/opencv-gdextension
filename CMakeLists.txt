@@ -49,9 +49,10 @@ target_sources(${LIBNAME}
     PRIVATE
     src/register_types.cpp
     src/register_types.h
-    "src/opencv_extension.cpp"
-    "src/opencv_extension.h"
- "src/opencv_camera.cpp" "src/opencv_camera.h")
+    src/opencv_extension.cpp
+    src/opencv_extension.h
+    src/opencv_camera.cpp
+    src/opencv_camera.h)
 
 # Fetch a list of the xml files to use for documentation and add to our target
 file(GLOB_RECURSE DOC_XML LIST_DIRECTORIES NO CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/doc_classes/*.xml")
@@ -71,10 +72,10 @@ endif()
 # After building OpenCV:
 #   build/install/ contains: include/, x64/vc17/bin/, x64/vc17/lib/
 #set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/build/install")
-set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/build/install/x64/vc17/lib/")
+set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/")
 
 # Locate OpenCVConfig.cmake from your build
-find_package(OpenCV REQUIRED COMPONENTS world)
+find_package(OpenCV REQUIRED PATHS ${CMAKE_CURRENT_LIST_DIR}/opencv/out/install/x64-Release/)
 
 # Add OpenCV include directories
 target_include_directories(${LIBNAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
