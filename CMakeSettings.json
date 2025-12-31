@@ -8,7 +8,14 @@
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
       "buildCommandArgs": "",
-      "ctestCommandArgs": ""
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "OpenCV_DIR",
+          "value": "I:/BA/opencv-gdextension/opencv/out/install/x64-Release/lib",
+          "type": "PATH"
+        }
+      ]
     }
   ]
 }

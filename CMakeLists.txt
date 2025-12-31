@@ -72,10 +72,10 @@ endif()
 # After building OpenCV:
 #   build/install/ contains: include/, x64/vc17/bin/, x64/vc17/lib/
 #set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/build/install")
-set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/")
+set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/out/install/x64-Debug/lib/")
 
 # Locate OpenCVConfig.cmake from your build
-find_package(OpenCV REQUIRED PATHS ${CMAKE_CURRENT_LIST_DIR}/opencv/out/install/x64-Release/)
+find_package(OpenCV REQUIRED)
 
 # Add OpenCV include directories
 target_include_directories(${LIBNAME} PRIVATE ${OpenCV_INCLUDE_DIRS})

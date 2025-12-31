@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbl45bsjnuvw"]
+[gd_scene load_steps=11 format=3 uid="uid://cbl45bsjnuvw"]
 
-[ext_resource type="Script" path="res://src/world/character_body_3d.gd" id="1_nm35o"]
+[ext_resource type="Script" uid="uid://cy4ikt17hg3b8" path="res://src/world/character_body_3d.gd" id="1_nm35o"]
+[ext_resource type="Script" uid="uid://7o8cak52658o" path="res://src/world/testing_sprite.gd" id="2_cohlg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwe28"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -26,6 +27,9 @@ points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lwe28"]
 size = Vector2(50, 50)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nm35o"]
+size = Vector2(32, 32)
 
 [node name="Overworld" type="Node3D"]
 
@@ -58,3 +62,8 @@ shape = SubResource("ConvexPolygonShape3D_cohlg")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("PlaneMesh_lwe28")
 skeleton = NodePath("../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.99668866, 0, -0.08131234, 0, 1, 0, 0.08131234, 0, -0.99668866, 0, 3.3271418, 2.2126083)
+texture = SubResource("PlaceholderTexture2D_nm35o")
+script = ExtResource("2_cohlg")
