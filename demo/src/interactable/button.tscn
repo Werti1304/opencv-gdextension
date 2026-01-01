@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7t7co8lltyk3"]
+
+[ext_resource type="Script" uid="uid://cpc02q3pmnylq" path="res://src/interactable/button.gd" id="1_7qma7"]
+[ext_resource type="Material" uid="uid://cjhu7x2xnlmtu" path="res://res/mat/button.tres" id="2_d5rvy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6x3b3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dkcen"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e1721"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7bmr5"]
+material = ExtResource("2_d5rvy")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1jiks"]
+material = ExtResource("2_d5rvy")
+
+[node name="Button" type="StaticBody3D" node_paths=PackedStringArray("inactive", "active", "housing", "pivot")]
+physics_material_override = SubResource("PhysicsMaterial_6x3b3")
+script = ExtResource("1_7qma7")
+inactive = NodePath("Inactive")
+active = NodePath("Active")
+housing = NodePath("Housing")
+pivot = NodePath("Pivot")
+metadata/_access_modifiers = {
+"Active": 2,
+"Housing": 2,
+"Inactive": 2,
+"Pivot": 2
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+shape = SubResource("BoxShape3D_dkcen")
+
+[node name="Housing" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_e1721")
+
+[node name="Active" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0.21496)
+mesh = SubResource("BoxMesh_7bmr5")
+
+[node name="Inactive" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0.3)
+mesh = SubResource("BoxMesh_1jiks")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)

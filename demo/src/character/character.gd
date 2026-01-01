@@ -209,10 +209,14 @@ func handle_interact() -> void:
 
 	if collider is IInteractable:
 		collider.interact()
+	elif collider is Button3D:
+		collider.interact()
 
 
 func handle_release() -> void:
 	if currently_interacting is IInteractable:
+		currently_interacting.release()
+	if currently_interacting is Button3D:
 		currently_interacting.release()
 
 
