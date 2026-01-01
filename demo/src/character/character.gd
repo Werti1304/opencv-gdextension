@@ -210,6 +210,8 @@ func handle_interact() -> void:
 	if collider is IInteractable:
 		collider.interact()
 	elif collider is Button3D:
+		collider.interact()	
+	elif collider is Lever3D:
 		collider.interact()
 
 

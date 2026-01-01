@@ -16,6 +16,7 @@ material = ExtResource("2_d5rvy")
 material = ExtResource("2_d5rvy")
 
 [node name="Button" type="StaticBody3D" node_paths=PackedStringArray("inactive", "active", "housing", "pivot")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_6x3b3")
 script = ExtResource("1_7qma7")
 inactive = NodePath("Inactive")
