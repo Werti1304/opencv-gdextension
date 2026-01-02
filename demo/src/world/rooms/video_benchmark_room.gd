@@ -31,5 +31,5 @@ func _process(delta: float) -> void:
 		
 	last_label_update_time += delta
 	if last_label_update_time > label_update_sec:
-		stats_label.text = viewportTester.get_averaged_timings_string()
+		stats_label.text = viewportTester.get_averaged_timings_string().trim_prefix(" ")
 		last_label_update_time = label_update_sec - last_label_update_time
