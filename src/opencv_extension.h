@@ -22,6 +22,7 @@ public:
 	void print_type(const Variant &p_variant) const;
 	void testOpenCV();
 	cv::Mat createTestImage() const;
-	Ref<Image> mat_to_image(const cv::Mat &mat) const;
+	static cv::Mat image_to_mat(const Ref<Image> &image);
+	static Ref<Image> mat_to_image(const cv::Mat &mat);
 	Ref<Image> test_mat_to_image() const;
 };

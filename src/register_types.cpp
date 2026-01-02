@@ -7,6 +7,7 @@
 
 #include "opencv_extension.h"
 #include "opencv_camera.h"
+#include "opencv_viewport_tester.hpp"
 
 using namespace godot;
 
@@ -17,6 +18,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	}
 	GDREGISTER_CLASS(OpenCVExtension);
 	GDREGISTER_CLASS(OpenCVCamera);
+	GDREGISTER_CLASS(OpenCVViewportTester);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

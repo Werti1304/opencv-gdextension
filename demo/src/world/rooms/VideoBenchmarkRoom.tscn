@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://bykjnkwx3fovi"]
+
+[ext_resource type="Script" uid="uid://du15aonps2ddm" path="res://src/world/rooms/video_benchmark_room.gd" id="1_r56dq"]
+[ext_resource type="VideoStream" uid="uid://ri13fe2yxago" path="res://res/benchmark/Brompton_MBOX_HDR-Selects_BT2020-ST2084_UHDp60_v2.ogv" id="1_v46jq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yoe3o"]
+viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
+
+[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subiewportIn", "spriteOut", "stats_label")]
+script = ExtResource("1_r56dq")
+subiewportIn = NodePath("VideoBenchmarkOriginal/SubViewport")
+spriteOut = NodePath("VideoBenchmarkProcessed")
+stats_label = NodePath("Label3D")
+
+[node name="VideoBenchmarkOriginal" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+texture = SubResource("ViewportTexture_yoe3o")
+
+[node name="SubViewport" type="SubViewport" parent="VideoBenchmarkOriginal"]
+size = Vector2i(1920, 1080)
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="VideoBenchmarkOriginal/SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = ExtResource("1_v46jq")
+autoplay = true
+loop = true
+
+[node name="VideoBenchmarkProcessed" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 20, 13, 0)
+pixel_size = 0.02
+text = "Avg. Processing Time
+FPS"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)

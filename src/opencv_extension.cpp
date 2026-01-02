@@ -43,51 +43,51 @@ cv::Mat OpenCVExtension::createTestImage()  const{
 	return image;
 }
 
-Ref<Image> OpenCVExtension::mat_to_image(const cv::Mat &mat) const {
-	ERR_FAIL_COND_V(mat.empty(), nullptr);
-	ERR_FAIL_COND_V(!mat.isContinuous(), nullptr);
 
-	cv::Mat converted;
-	Image::Format format;
+cv::Mat OpenCVExtension::image_to_mat(const Ref<Image> &image) {
+	ERR_FAIL_COND_V(image.is_null(), cv::Mat());
 
-	if (mat.type() == CV_8UC3) {
-		// BGR → RGB
-		cv::cvtColor(mat, converted, cv::COLOR_BGR2RGB);
-		format = Image::FORMAT_RGB8;
-	} else if (mat.type() == CV_8UC4) {
-		// BGRA → RGBA
-		cv::cvtColor(mat, converted, cv::COLOR_BGRA2RGBA);
-		format = Image::FORMAT_RGBA8;
-	} else if (mat.type() == CV_8UC1) {
-		// Grayscale
-		converted = mat;
-		format = Image::FORMAT_L8;
-	} else {
-		ERR_FAIL_V_MSG(nullptr, "Unsupported cv::Mat format");
+	Ref<Image> img = image;
+
+	// Make sure image data is readable
+	if (img->is_compressed()) {
+		img = img->duplicate();
+		img->decompress();
 	}
 
-	int width = converted.cols;
-	int height = converted.rows;
-	size_t data_size = converted.total() * converted.elemSize();
+	const int width = img->get_width();
+	const int height = img->get_height();
+	const Image::Format format = img->get_format();
+	const PackedByteArray data = img->get_data();
 
-	PackedByteArray data;
-	data.resize(data_size);
+	ERR_FAIL_COND_V(data.is_empty(), cv::Mat());
 
-	memcpy(data.ptrw(), converted.data, data_size);
+	cv::Mat mat;
 
-	Ref<Image> image = memnew(Image);
-	image->create_from_data(
-			width,
-			height,
-			false,
-			format,
-			data);
+	switch (format) {
+		case Image::FORMAT_L8: {
+			mat = cv::Mat(height, width, CV_8UC1, (void *)data.ptr());
+		} break;
 
-	return image;
+		case Image::FORMAT_RGB8: {
+			cv::Mat rgb(height, width, CV_8UC3, (void *)data.ptr());
+			cv::cvtColor(rgb, mat, cv::COLOR_RGB2BGR);
+		} break;
+
+		case Image::FORMAT_RGBA8: {
+			cv::Mat rgba(height, width, CV_8UC4, (void *)data.ptr());
+			cv::cvtColor(rgba, mat, cv::COLOR_RGBA2BGRA);
+		} break;
+
+		default:
+			ERR_FAIL_V_MSG(cv::Mat(), "Unsupported Image format");
+	}
+
+	// Ensure data ownership & continuity
+	return mat.clone();
 }
 
-Ref<Image> OpenCVExtension::test_mat_to_image() const {
-	cv::Mat mat = createTestImage();
+Ref<Image> OpenCVExtension::mat_to_image(const cv::Mat &mat) {
 	ERR_FAIL_COND_V(mat.empty(), nullptr);
 	ERR_FAIL_COND_V(!mat.isContinuous(), nullptr);
 
@@ -135,6 +135,11 @@ Ref<Image> OpenCVExtension::test_mat_to_image() const {
 	ERR_FAIL_COND_V(image.is_null(), nullptr);
 	ERR_FAIL_COND_V(!image.is_valid(), nullptr);
 	ERR_FAIL_COND_V(image->is_empty(), nullptr);
-	
+
 	return image;
+}
+
+Ref<Image> OpenCVExtension::test_mat_to_image() const {
+	cv::Mat mat = createTestImage();
+	return mat_to_image(mat);
 }
