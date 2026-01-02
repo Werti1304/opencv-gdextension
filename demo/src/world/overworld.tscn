@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbl45bsjnuvw"]
+[gd_scene load_steps=12 format=3 uid="uid://cbl45bsjnuvw"]
 
 [ext_resource type="Script" uid="uid://7o8cak52658o" path="res://src/world/testing_sprite.gd" id="2_cohlg"]
 [ext_resource type="PackedScene" uid="uid://dtrajbmffube7" path="res://src/character/character.tscn" id="2_uvqrp"]
 [ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_uvqrp"]
 [ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="4_hypj4"]
+[ext_resource type="PackedScene" uid="uid://bykjnkwx3fovi" path="res://src/world/rooms/VideoBenchmarkRoom.tscn" id="5_yt841"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwe28"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -60,3 +61,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.77
 
 [node name="Lever" parent="." instance=ExtResource("4_hypj4")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3, 2, 2)
+
+[node name="VideoBenchmarkRoom" parent="." instance=ExtResource("5_yt841")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)

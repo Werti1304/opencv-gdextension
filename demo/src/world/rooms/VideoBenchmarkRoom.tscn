@@ -1,19 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bykjnkwx3fovi"]
+[gd_scene load_steps=6 format=3 uid="uid://bykjnkwx3fovi"]
 
 [ext_resource type="Script" uid="uid://du15aonps2ddm" path="res://src/world/rooms/video_benchmark_room.gd" id="1_r56dq"]
 [ext_resource type="VideoStream" uid="uid://ri13fe2yxago" path="res://res/benchmark/Brompton_MBOX_HDR-Selects_BT2020-ST2084_UHDp60_v2.ogv" id="1_v46jq"]
+[ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_6g5d1"]
+[ext_resource type="Script" uid="uid://bvwr5dkh578nv" path="res://src/world/rooms/viewport_size_settings.gd" id="3_ja6y4"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yoe3o"]
 viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
 
-[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subiewportIn", "spriteOut", "stats_label")]
+[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subViewportIn", "spriteOut", "stats_label")]
 script = ExtResource("1_r56dq")
-subiewportIn = NodePath("VideoBenchmarkOriginal/SubViewport")
+subViewportIn = NodePath("VideoBenchmarkOriginal/SubViewport")
 spriteOut = NodePath("VideoBenchmarkProcessed")
-stats_label = NodePath("Label3D")
+stats_label = NodePath("PerformanceLabel")
 
 [node name="VideoBenchmarkOriginal" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 texture = SubResource("ViewportTexture_yoe3o")
 
 [node name="SubViewport" type="SubViewport" parent="VideoBenchmarkOriginal"]
@@ -27,10 +29,10 @@ autoplay = true
 loop = true
 
 [node name="VideoBenchmarkProcessed" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5, 0)
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 14, 13, 0)
+[node name="PerformanceLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 14, 15, 0)
 pixel_size = 0.02
 text = "Avg. Processing Time
 FPS"
@@ -38,3 +40,23 @@ horizontal_alignment = 0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)
+
+[node name="ViewportSizeSettings" type="Node3D" parent="." node_paths=PackedStringArray("viewport_size_label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 15)
+script = ExtResource("3_ja6y4")
+viewport_size_label = NodePath("ViewportSizeLabel")
+
+[node name="Button" parent="ViewportSizeSettings" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(0.9999868, -0.00026152868, 0.005147028, -0.0051458622, 0.004312393, 0.9999776, -0.00028372652, -0.99999064, 0.0043109884, 2, 1, 0.07411957)
+
+[node name="Button2" parent="ViewportSizeSettings" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2, 1, -1.9258804)
+
+[node name="ViewportSizeLabel" type="Label3D" parent="ViewportSizeSettings"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3, -1)
+pixel_size = 0.02
+text = "1920 x 1080"
+
+[connection signal="viewportsize_changed" from="ViewportSizeSettings" to="." method="_on_viewport_size_settings_viewportsize_changed"]
+[connection signal="pressed" from="ViewportSizeSettings/Button" to="ViewportSizeSettings" method="_on_button_pressed_smaller"]
+[connection signal="pressed" from="ViewportSizeSettings/Button2" to="ViewportSizeSettings" method="_on_button_pressed_bigger"]
