@@ -65,8 +65,5 @@ CMakeUserPresets.json
 .vs/
 out/
 
-# opencv src & build
-opencv/
-
 # scons build dir
 bin/
