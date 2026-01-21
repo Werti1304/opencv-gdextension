@@ -52,12 +52,12 @@ shape = SubResource("BoxShape3D_dkcen")
 mesh = SubResource("BoxMesh_e1721")
 
 [node name="Active" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.60621774, -0.35, 0, 0.35, 0.60621774, 0, 0, 0, 0.7, -0.17, 0.5025466, 0)
+transform = Transform3D(0.60621774, -0.25, 0, 0.35, 0.4330127, 0, 0, 0, 2, -0.17, 0.5025466, 0)
 mesh = SubResource("BoxMesh_7bmr5")
 surface_material_override/0 = SubResource("StandardMaterial3D_b8rkn")
 
 [node name="Inactive" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.60621774, 0.35, 0, -0.35, 0.60621774, 0, 0, 0, 0.7, 0.17, 0.5025466, 0)
+transform = Transform3D(0.60621774, 0.25, 0, -0.35, 0.4330127, 0, 0, 0, 2, 0.17, 0.5025466, 0)
 mesh = SubResource("BoxMesh_1jiks")
 surface_material_override/0 = SubResource("StandardMaterial3D_38k5j")
 

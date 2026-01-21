@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bykjnkwx3fovi"]
+[gd_scene load_steps=7 format=3 uid="uid://bykjnkwx3fovi"]
 
 [ext_resource type="Script" uid="uid://du15aonps2ddm" path="res://src/world/rooms/video_benchmark_room.gd" id="1_r56dq"]
 [ext_resource type="VideoStream" uid="uid://ri13fe2yxago" path="res://res/benchmark/Brompton_MBOX_HDR-Selects_BT2020-ST2084_UHDp60_v2.ogv" id="1_v46jq"]
+[ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="3_5bgxi"]
 [ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_6g5d1"]
 [ext_resource type="Script" uid="uid://bvwr5dkh578nv" path="res://src/world/rooms/viewport_size_settings.gd" id="3_ja6y4"]
 
@@ -17,23 +18,25 @@ stats_label = NodePath("PerformanceLabel")
 stats_label_2 = NodePath("PerformanceLabel2")
 
 [node name="VideoBenchmarkOriginal" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 18, -6)
 double_sided = false
 texture = SubResource("ViewportTexture_yoe3o")
 
 [node name="SubViewport" type="SubViewport" parent="VideoBenchmarkOriginal"]
 size = Vector2i(1920, 1080)
+render_target_update_mode = 3
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="VideoBenchmarkOriginal/SubViewport"]
 offset_right = 1920.0
 offset_bottom = 1080.0
 stream = ExtResource("1_v46jq")
+volume_db = -10.0
 autoplay = true
 expand = true
 loop = true
 
 [node name="VideoBenchmarkProcessed" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 double_sided = false
 
 [node name="PerformanceLabel" type="Label3D" parent="."]
@@ -56,72 +59,71 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)
 [node name="Operations" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 7.845146)
 
-[node name="OperationGrayScale" type="Node3D" parent="Operations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1.1986978, 0)
+[node name="OperationBlur" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, 0)
 
-[node name="Label" type="Label3D" parent="Operations/OperationGrayScale"]
+[node name="Label" type="Label3D" parent="Operations/OperationBlur"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 pixel_size = 0.02
-text = "Grayscale
-"
+text = "Blur"
 
-[node name="Button" parent="Operations/OperationGrayScale" instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+[node name="Lever" parent="Operations/OperationBlur" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
 
-[node name="Operation2" type="Node3D" parent="Operations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.408037, 0)
+[node name="OperationResize" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.3, 0)
 
-[node name="Label" type="Label3D" parent="Operations/Operation2"]
+[node name="Label" type="Label3D" parent="Operations/OperationResize"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 pixel_size = 0.02
-text = "2"
+text = "Resize"
 
-[node name="Button" parent="Operations/Operation2" instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+[node name="Lever" parent="Operations/OperationResize" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
 
-[node name="Operation3" type="Node3D" parent="Operations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.5638058, 0)
+[node name="OperationCvtColor" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.6, 0)
 
-[node name="Label" type="Label3D" parent="Operations/Operation3"]
+[node name="Label" type="Label3D" parent="Operations/OperationCvtColor"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 pixel_size = 0.02
-text = "3"
+text = "GrayScale"
 
-[node name="Button" parent="Operations/Operation3" instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+[node name="Lever" parent="Operations/OperationCvtColor" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
 
-[node name="Operation4" type="Node3D" parent="Operations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1.1073513, -4.5911083)
+[node name="OperationContours" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, -4.5911083)
 
-[node name="Label" type="Label3D" parent="Operations/Operation4"]
+[node name="Label" type="Label3D" parent="Operations/OperationContours"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 pixel_size = 0.02
-text = "4"
+text = "Contours"
 
-[node name="Button" parent="Operations/Operation4" instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+[node name="Lever" parent="Operations/OperationContours" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
 
-[node name="Operation5" type="Node3D" parent="Operations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.4339285, -4.5911083)
+[node name="OperationDilate" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 3.6, -4.591)
 
-[node name="Label" type="Label3D" parent="Operations/Operation5"]
+[node name="Label" type="Label3D" parent="Operations/OperationDilate"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 pixel_size = 0.02
-text = "5"
+text = "Dilate"
 
-[node name="Button" parent="Operations/Operation5" instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+[node name="Lever" parent="Operations/OperationDilate" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
 
-[node name="Operation6" type="Node3D" parent="Operations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.5444536, -4.5911083)
+[node name="OperationEdgeDetection" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 2.3, -4.591)
 
-[node name="Label" type="Label3D" parent="Operations/Operation6"]
+[node name="Label" type="Label3D" parent="Operations/OperationEdgeDetection"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 pixel_size = 0.02
-text = "6"
+text = "Edge"
 
-[node name="Button" parent="Operations/Operation6" instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+[node name="Lever" parent="Operations/OperationEdgeDetection" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
 
 [node name="ViewportSizeSettings" type="Node3D" parent="." node_paths=PackedStringArray("viewport_size_label")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 15)
@@ -139,6 +141,12 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.99
 pixel_size = 0.02
 text = "1920 x 1080"
 
+[connection signal="changed" from="Operations/OperationBlur/Lever" to="." method="_on_gaussian_blur_lever_change"]
+[connection signal="changed" from="Operations/OperationResize/Lever" to="." method="_on_resize_lever_change"]
+[connection signal="changed" from="Operations/OperationCvtColor/Lever" to="." method="_on_grayscale_lever_change"]
+[connection signal="changed" from="Operations/OperationContours/Lever" to="." method="_on_find_contours_lever_change"]
+[connection signal="changed" from="Operations/OperationDilate/Lever" to="." method="_on_dilate_lever_change"]
+[connection signal="changed" from="Operations/OperationEdgeDetection/Lever" to="." method="_on_canny_edge_lever_change"]
 [connection signal="viewportsize_changed" from="ViewportSizeSettings" to="." method="_on_viewport_size_settings_viewportsize_changed"]
 [connection signal="pressed" from="ViewportSizeSettings/Button" to="ViewportSizeSettings" method="_on_button_pressed_smaller"]
 [connection signal="pressed" from="ViewportSizeSettings/Button2" to="ViewportSizeSettings" method="_on_button_pressed_bigger"]

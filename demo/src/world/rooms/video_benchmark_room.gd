@@ -37,8 +37,24 @@ func _process(delta: float) -> void:
 		stats_label_2.text = stats_label.text
 		last_label_update_time = label_update_sec - last_label_update_time
 
-
-
 func _on_viewport_size_settings_viewportsize_changed(new_size: Vector2i) -> void:
 	subViewportIn.size = new_size
 	videoStreamPlayer.size = new_size
+
+func _on_grayscale_lever_change(change: bool):
+	viewportTester.set_gray_scale(change)
+
+func _on_resize_lever_change(change: bool):
+	viewportTester.set_resize(change)
+
+func _on_gaussian_blur_lever_change(change: bool):
+	viewportTester.set_gaussian_blur(change)
+
+func _on_canny_edge_lever_change(change: bool):
+	viewportTester.set_canny_edge(change)
+
+func _on_dilate_lever_change(change: bool):
+	viewportTester.set_dilate(change)
+
+func _on_find_contours_lever_change(change: bool):
+	viewportTester.set_find_contours(change)

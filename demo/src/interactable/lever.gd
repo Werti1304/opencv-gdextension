@@ -11,6 +11,7 @@ extends StaticBody3D
 
 signal pressed
 signal released
+signal changed(new_state : bool)
 
 # Godot is single-threaded for gameplay logic,
 # so we don't need an explicit lock like in C#
@@ -32,6 +33,7 @@ func interact() -> void:
 	active.show()
 	inactive.visible = false
 	emit_signal("pressed")
+	emit_signal("changed", true)
 
 
 func release() -> void:
@@ -42,3 +44,4 @@ func release() -> void:
 		inactive.visible = true
 		active.hide()
 		emit_signal("released")
+		emit_signal("changed", false)

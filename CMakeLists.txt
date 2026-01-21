@@ -66,28 +66,14 @@ endif()
 
 #target_link_libraries(${LIBNAME} PRIVATE godot-cpp)
 
-# OPENCV Setup
+# OPENCV Stuff start
 
-# Adjust this path to point to your OpenCV install directory
-# After building OpenCV:
-#   build/install/ contains: include/, x64/vc17/bin/, x64/vc17/lib/
-#set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/build/install")
-set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/opencv/out/install/x64-Debug/lib/")
+set(OpenCV_DIR "D:/BA/opencv-gdextension/lib/opencv")
 
-# Locate OpenCVConfig.cmake from your build
 find_package(OpenCV REQUIRED)
 
-# Add OpenCV include directories
-target_include_directories(${LIBNAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
 
-# Link OpenCV libraries to your GDExtension
-target_link_libraries(${LIBNAME} PRIVATE godot-cpp ${OpenCV_LIBS})
-
-message(STATUS "Found OpenCV version: ${OpenCV_VERSION}")
-message(STATUS "OpenCV include dirs: ${OpenCV_INCLUDE_DIRS}")
-message(STATUS "OpenCV libs: ${OpenCV_LIBS}")
-
-# OPENCV Setup End
+# OPENCV Stuff end
 
 
 # Require at least C++17 for this target
