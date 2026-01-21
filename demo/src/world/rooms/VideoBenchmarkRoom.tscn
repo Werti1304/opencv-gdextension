@@ -8,31 +8,43 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_yoe3o"]
 viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
 
-[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subViewportIn", "spriteOut", "stats_label")]
+[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subViewportIn", "videoStreamPlayer", "spriteOut", "stats_label", "stats_label_2")]
 script = ExtResource("1_r56dq")
 subViewportIn = NodePath("VideoBenchmarkOriginal/SubViewport")
+videoStreamPlayer = NodePath("VideoBenchmarkOriginal/SubViewport/VideoStreamPlayer")
 spriteOut = NodePath("VideoBenchmarkProcessed")
 stats_label = NodePath("PerformanceLabel")
+stats_label_2 = NodePath("PerformanceLabel2")
 
 [node name="VideoBenchmarkOriginal" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+double_sided = false
 texture = SubResource("ViewportTexture_yoe3o")
 
 [node name="SubViewport" type="SubViewport" parent="VideoBenchmarkOriginal"]
 size = Vector2i(1920, 1080)
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="VideoBenchmarkOriginal/SubViewport"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 stream = ExtResource("1_v46jq")
 autoplay = true
+expand = true
 loop = true
 
 [node name="VideoBenchmarkProcessed" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 5, 0)
+double_sided = false
 
 [node name="PerformanceLabel" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 14, 15, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40.314655, 8.801096, 4.842711)
+pixel_size = 0.02
+text = "Avg. Processing Time
+FPS"
+horizontal_alignment = 0
+
+[node name="PerformanceLabel2" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15.685345, 8.801096, 10.8427105)
 pixel_size = 0.02
 text = "Avg. Processing Time
 FPS"
@@ -41,8 +53,78 @@ horizontal_alignment = 0
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)
 
+[node name="Operations" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 7.845146)
+
+[node name="OperationGrayScale" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1.1986978, 0)
+
+[node name="Label" type="Label3D" parent="Operations/OperationGrayScale"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Grayscale
+"
+
+[node name="Button" parent="Operations/OperationGrayScale" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+
+[node name="Operation2" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.408037, 0)
+
+[node name="Label" type="Label3D" parent="Operations/Operation2"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "2"
+
+[node name="Button" parent="Operations/Operation2" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+
+[node name="Operation3" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.5638058, 0)
+
+[node name="Label" type="Label3D" parent="Operations/Operation3"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "3"
+
+[node name="Button" parent="Operations/Operation3" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+
+[node name="Operation4" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1.1073513, -4.5911083)
+
+[node name="Label" type="Label3D" parent="Operations/Operation4"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "4"
+
+[node name="Button" parent="Operations/Operation4" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+
+[node name="Operation5" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.4339285, -4.5911083)
+
+[node name="Label" type="Label3D" parent="Operations/Operation5"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "5"
+
+[node name="Button" parent="Operations/Operation5" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+
+[node name="Operation6" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.5444536, -4.5911083)
+
+[node name="Label" type="Label3D" parent="Operations/Operation6"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "6"
+
+[node name="Button" parent="Operations/Operation6" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0, 0, 2.151122)
+
 [node name="ViewportSizeSettings" type="Node3D" parent="." node_paths=PackedStringArray("viewport_size_label")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 15)
 script = ExtResource("3_ja6y4")
 viewport_size_label = NodePath("ViewportSizeLabel")
 
@@ -53,7 +135,7 @@ transform = Transform3D(0.9999868, -0.00026152868, 0.005147028, -0.0051458622, 0
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2, 1, -1.9258804)
 
 [node name="ViewportSizeLabel" type="Label3D" parent="ViewportSizeSettings"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3, -1)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.99612236, 3, -1)
 pixel_size = 0.02
 text = "1920 x 1080"
 

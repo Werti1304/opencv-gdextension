@@ -40,7 +40,7 @@ env = SConscript("godot-cpp/SConstruct", {"env": env, "customs": customs})
 # OPENCV Stuff start
 
 env.Append(CPPPATH=["src/", "include/"])
-env.Append(LIBS=["opencv_world4120"])
+env.Append(LIBS=["opencv_world4130"])
 env.Append(LIBPATH=["lib/opencv"])
 
 # OPENCV Stuff end
@@ -71,9 +71,9 @@ copy = env.Install("{}/bin/{}/".format(projectdir, env["platform"]), library)
 
 # Copy opencv dll
 if env["target"] in ["editor", "template_debug"]:
-    opencv_dll = "opencv_world4120.dll" # We only use release dll from opencv
+    opencv_dll = "opencv_world4130.dll" # We only use release dll from opencv
 else:
-    opencv_dll = "opencv_world4120.dll"
+    opencv_dll = "opencv_world4130.dll"
 
 opencv_bin_dir = "lib/opencv/"
 opencv_dll_path = os.path.join(opencv_bin_dir, opencv_dll)

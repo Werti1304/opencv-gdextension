@@ -4,8 +4,10 @@ extends Node3D
 @export var label_update_sec : float = 1.0
 
 @export var subViewportIn : SubViewport
+@export var videoStreamPlayer : VideoStreamPlayer
 @export var spriteOut : Sprite3D
 @export var stats_label : Label3D
+@export var stats_label_2 : Label3D
 
 var viewportTester : OpenCVViewportTester
 
@@ -32,9 +34,11 @@ func _process(delta: float) -> void:
 	last_label_update_time += delta
 	if last_label_update_time > label_update_sec:
 		stats_label.text = viewportTester.get_averaged_timings_string().trim_prefix(" ")
+		stats_label_2.text = stats_label.text
 		last_label_update_time = label_update_sec - last_label_update_time
 
 
 
 func _on_viewport_size_settings_viewportsize_changed(new_size: Vector2i) -> void:
 	subViewportIn.size = new_size
+	videoStreamPlayer.size = new_size
