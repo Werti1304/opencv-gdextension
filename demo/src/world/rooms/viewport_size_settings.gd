@@ -27,7 +27,7 @@ func _on_button_pressed_smaller() -> void:
 		current_index -= 1
 		viewportsize = viewport_sizes[current_index]
 		print("Viewport size changed to: ", viewportsize)
-		viewport_size_label.text = "%d x %d" % [viewportsize.x, viewportsize.y]
+		viewport_size_label.text = "Resolution:\n%d x %d" % [viewportsize.x, viewportsize.y]
 		emit_signal("viewportsize_changed", viewportsize)
 
 func _on_button_pressed_bigger() -> void:
@@ -35,5 +35,5 @@ func _on_button_pressed_bigger() -> void:
 		current_index += 1
 		viewportsize = viewport_sizes[current_index]
 		print("Viewport size changed to: ", viewportsize)
-		viewport_size_label.text = "%d x %d" % [viewportsize.x, viewportsize.y]
+		viewport_size_label.text = "Resolution:\n%d x %d" % [viewportsize.x, viewportsize.y]
 		emit_signal("viewportsize_changed", viewportsize)

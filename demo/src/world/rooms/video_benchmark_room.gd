@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var processing_fps : float = 60
+
 @export var label_update_sec : float = 1.0
 
 @export var subViewportIn : SubViewport
@@ -13,6 +13,8 @@ var viewportTester : OpenCVViewportTester
 
 var last_processing_time : float = 0.0
 var frame_time : float
+
+var processing_fps : float = 60
 
 var last_label_update_time : float = 0.0
 
@@ -40,6 +42,10 @@ func _process(delta: float) -> void:
 func _on_viewport_size_settings_viewportsize_changed(new_size: Vector2i) -> void:
 	subViewportIn.size = new_size
 	videoStreamPlayer.size = new_size
+	
+func _on_viewport_fps_setting_fps_changed(new_fps: int) -> void:
+	processing_fps = new_fps
+	frame_time = 1.0 / processing_fps
 
 func _on_grayscale_lever_change(change: bool):
 	viewportTester.set_gray_scale(change)

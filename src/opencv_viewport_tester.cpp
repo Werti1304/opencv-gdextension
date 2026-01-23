@@ -212,9 +212,9 @@ String OpenCVViewportTester::timingsToString(const ProcessingTimings &t) const {
 	return vformat(
 			"%7.3f ms  Grab from viewport/gpu\n"
 			"%7.3f ms  Image to Mat\n"
-			"%7.3f ms  Grayscale\n"
-			"%7.3f ms  Gray to RGBA\n"
-			"%7.3f ms  Mat to Image\n"
+			"%7.3f ms  Processing\n"
+			"%7.3f ms  Processed -> Godot Color Space\n"
+			"%7.3f ms  Mat to Image\n\n"
 			"%7.3f ms  Total",
 			t.grab_ms,
 			t.image_to_mat_ms,

@@ -172,9 +172,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-# =========================
-# Input
-# =========================
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			
+	if event.is_action_pressed("mouse_capture_release"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
@@ -187,11 +193,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		handle_release()
 	elif event.is_action_pressed("interact_alt"):
 		handle_alt_interact()
-	elif event.is_action_pressed("mouse_capture_release"):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif event.is_action_released("mouse_capture_release"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 
 func handle_alt_interact() -> void:
 	var collider = interact_raycast.get_collider()

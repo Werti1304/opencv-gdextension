@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bykjnkwx3fovi"]
+[gd_scene load_steps=8 format=3 uid="uid://bykjnkwx3fovi"]
 
 [ext_resource type="Script" uid="uid://du15aonps2ddm" path="res://src/world/rooms/video_benchmark_room.gd" id="1_r56dq"]
 [ext_resource type="VideoStream" uid="uid://ri13fe2yxago" path="res://res/benchmark/Brompton_MBOX_HDR-Selects_BT2020-ST2084_UHDp60_v2.ogv" id="1_v46jq"]
 [ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="3_5bgxi"]
 [ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_6g5d1"]
 [ext_resource type="Script" uid="uid://bvwr5dkh578nv" path="res://src/world/rooms/viewport_size_settings.gd" id="3_ja6y4"]
+[ext_resource type="Script" uid="uid://dvhffqj2ackc" path="res://src/world/rooms/viewport_fps_setting.gd" id="4_l4x3x"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yoe3o"]
 viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
@@ -40,7 +41,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 double_sided = false
 
 [node name="PerformanceLabel" type="Label3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40.314655, 8.801096, 4.842711)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.399027, 6.449876, 4.842711)
 pixel_size = 0.02
 text = "Avg. Processing Time
 FPS"
@@ -58,6 +59,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)
 
 [node name="Operations" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 7.845146)
+
+[node name="OperationsLabel" type="Label3D" parent="Operations"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.8953018, 5.547072, -0.60737133)
+pixel_size = 0.02
+text = "Processing Options"
 
 [node name="OperationBlur" type="Node3D" parent="Operations"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, 0)
@@ -125,6 +131,23 @@ text = "Edge"
 [node name="Lever" parent="Operations/OperationEdgeDetection" instance=ExtResource("3_5bgxi")]
 transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
 
+[node name="ViewportFPSSetting" type="Node3D" parent="." node_paths=PackedStringArray("fps_label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 18.98931)
+script = ExtResource("4_l4x3x")
+fps_label = NodePath("FPSLabel")
+
+[node name="Button" parent="ViewportFPSSetting" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(0.9999868, -0.00026152868, 0.005147028, -0.0051458622, 0.004312393, 0.9999776, -0.00028372652, -0.99999064, 0.0043109884, 2, 1, 0.07411957)
+
+[node name="Button2" parent="ViewportFPSSetting" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2, 1, -1.9258804)
+
+[node name="FPSLabel" type="Label3D" parent="ViewportFPSSetting"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.99612236, 3, -1)
+pixel_size = 0.02
+text = "FPS:
+60"
+
 [node name="ViewportSizeSettings" type="Node3D" parent="." node_paths=PackedStringArray("viewport_size_label")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 15)
 script = ExtResource("3_ja6y4")
@@ -139,7 +162,8 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2, 1
 [node name="ViewportSizeLabel" type="Label3D" parent="ViewportSizeSettings"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.99612236, 3, -1)
 pixel_size = 0.02
-text = "1920 x 1080"
+text = "Resolution:
+1920 x 1080"
 
 [connection signal="changed" from="Operations/OperationBlur/Lever" to="." method="_on_gaussian_blur_lever_change"]
 [connection signal="changed" from="Operations/OperationResize/Lever" to="." method="_on_resize_lever_change"]
@@ -147,6 +171,9 @@ text = "1920 x 1080"
 [connection signal="changed" from="Operations/OperationContours/Lever" to="." method="_on_find_contours_lever_change"]
 [connection signal="changed" from="Operations/OperationDilate/Lever" to="." method="_on_dilate_lever_change"]
 [connection signal="changed" from="Operations/OperationEdgeDetection/Lever" to="." method="_on_canny_edge_lever_change"]
+[connection signal="fps_changed" from="ViewportFPSSetting" to="." method="_on_viewport_fps_setting_fps_changed"]
+[connection signal="pressed" from="ViewportFPSSetting/Button" to="ViewportFPSSetting" method="_on_button_pressed_smaller"]
+[connection signal="pressed" from="ViewportFPSSetting/Button2" to="ViewportFPSSetting" method="_on_button_pressed_bigger"]
 [connection signal="viewportsize_changed" from="ViewportSizeSettings" to="." method="_on_viewport_size_settings_viewportsize_changed"]
 [connection signal="pressed" from="ViewportSizeSettings/Button" to="ViewportSizeSettings" method="_on_button_pressed_smaller"]
 [connection signal="pressed" from="ViewportSizeSettings/Button2" to="ViewportSizeSettings" method="_on_button_pressed_bigger"]

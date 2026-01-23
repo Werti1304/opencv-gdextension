@@ -20,11 +20,11 @@ tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cohlg"]
-points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_lwe28"]
-size = Vector2(50, 50)
+size = Vector2(5000, 5000)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yt841"]
+points = PackedVector3Array(2539.683, 0, 2539.683, -2539.6826, -39.68254, -2539.6826, -2539.683, 0, -2539.683, 2539.6826, -39.68254, -2539.6826, -2539.6826, -39.68254, 2539.6826, -2539.683, 0, 2539.683, 2539.683, 0, -2539.683, 2539.6826, -39.68254, 2539.6826)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nm35o"]
 size = Vector2(32, 32)
@@ -41,12 +41,12 @@ shadow_enabled = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_cohlg")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("PlaneMesh_lwe28")
 skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_yt841")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-0.99668866, 0, -0.08131234, 0, 1, 0, 0.08131234, 0, -0.99668866, 0, 3.3271418, 2.2126083)
@@ -54,7 +54,7 @@ texture = SubResource("PlaceholderTexture2D_nm35o")
 script = ExtResource("2_cohlg")
 
 [node name="Character" parent="." instance=ExtResource("2_uvqrp")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 3, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 4.4579287, -11.094752)
 
 [node name="Button" parent="." instance=ExtResource("3_uvqrp")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.7795725, 1.6435106, 0)
@@ -64,3 +64,5 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3, 2
 
 [node name="VideoBenchmarkRoom" parent="." instance=ExtResource("5_yt841")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
+
+[node name="Room" type="Node3D" parent="."]
