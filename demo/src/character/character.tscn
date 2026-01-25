@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtrajbmffube7"]
+[gd_scene load_steps=9 format=3 uid="uid://dtrajbmffube7"]
 
 [ext_resource type="Script" uid="uid://b41njbrlr6pli" path="res://src/character/character.gd" id="1_8mo58"]
 [ext_resource type="Texture2D" uid="uid://vshdvcoef0w5" path="res://res/pixel/Cursor.png" id="2_b5gf6"]
@@ -7,7 +7,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_aoocb"]
 size = Vector3(1, 3, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mo58"]
+albedo_color = Color(1, 0, 0, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ru04e"]
+material = SubResource("StandardMaterial3D_8mo58")
 height = 3.0
 
 [sub_resource type="ORMMaterial3D" id="ORMMaterial3D_xn63p"]

@@ -1,8 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cbl45bsjnuvw"]
 
-[ext_resource type="Script" uid="uid://7o8cak52658o" path="res://src/world/testing_sprite.gd" id="2_cohlg"]
+[ext_resource type="Script" uid="uid://tygrl2kq0po7" path="res://src/world/overworld.gd" id="1_o8prm"]
 [ext_resource type="PackedScene" uid="uid://dtrajbmffube7" path="res://src/character/character.tscn" id="2_uvqrp"]
-[ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_uvqrp"]
 [ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="4_hypj4"]
 [ext_resource type="PackedScene" uid="uid://bykjnkwx3fovi" path="res://src/world/rooms/VideoBenchmarkRoom.tscn" id="5_yt841"]
 [ext_resource type="PackedScene" uid="uid://c86g0wmp2teaw" path="res://src/world/rooms/hide_and_seek.tscn" id="6_ioc64"]
@@ -27,46 +26,73 @@ size = Vector2(5000, 5000)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yt841"]
 points = PackedVector3Array(2539.683, 0, 2539.683, -2539.6826, -39.68254, -2539.6826, -2539.683, 0, -2539.683, 2539.6826, -39.68254, -2539.6826, -2539.6826, -39.68254, 2539.6826, -2539.683, 0, 2539.683, 2539.683, 0, -2539.683, 2539.6826, -39.68254, 2539.6826)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_nm35o"]
-size = Vector2(32, 32)
+[sub_resource type="BoxMesh" id="BoxMesh_yt841"]
+size = Vector3(7, 2, 2)
 
-[node name="Overworld" type="Node3D"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ioc64"]
+points = PackedVector3Array(-3.3677616, -1, -1, 3.3677616, 1, 1, 3.3677616, 1, -1, -3.3677616, 1, 1, 3.3677616, -1, 1, 3.3677616, -1, -1, -3.3677616, 1, -1, -3.3677616, -1, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="Overworld" type="Node3D" node_paths=PackedStringArray("video_benchmark_room", "hide_and_seek_room")]
+script = ExtResource("1_o8prm")
+video_benchmark_room = NodePath("VideoBenchmarkRoom")
+hide_and_seek_room = NodePath("HideAndSeek")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_cohlg")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.8660253, -0.4330129, 0.2500001, 0, 0.49999994, 0.86602545, -0.50000024, 0.74999994, -0.43301257, 0, 0, 0)
 light_color = Color(1, 0.9965, 0.93, 1)
 shadow_enabled = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/StaticBody3D"]
 mesh = SubResource("PlaneMesh_lwe28")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_yt841")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(-0.99668866, 0, -0.08131234, 0, 1, 0, 0.08131234, 0, -0.99668866, 0, 3.3271418, 2.2126083)
-texture = SubResource("PlaceholderTexture2D_nm35o")
-script = ExtResource("2_cohlg")
-
 [node name="Character" parent="." instance=ExtResource("2_uvqrp")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 4.4579287, -11.094752)
-
-[node name="Button" parent="." instance=ExtResource("3_uvqrp")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 21.779572, 1.6435106, -7)
-
-[node name="Lever" parent="." instance=ExtResource("4_hypj4")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3, 2, 2)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 4.4579287, 3.9052477)
 
 [node name="VideoBenchmarkRoom" parent="." instance=ExtResource("5_yt841")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
-
-[node name="Room" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
 
 [node name="HideAndSeek" parent="." instance=ExtResource("6_ioc64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.262398, 0, -21.03358)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.262398, 0, -18.03358)
+
+[node name="ControlStation" type="Node3D" parent="."]
+
+[node name="LeverToggleVideoBenchmarkRoom\\" parent="ControlStation" instance=ExtResource("4_hypj4")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10, 2, 5)
+state = true
+
+[node name="Label3D" type="Label3D" parent="ControlStation/LeverToggleVideoBenchmarkRoom\\"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, 0.5)
+text = "Video Benchmark"
+
+[node name="LeverToggleHideAndSeekRoom" parent="ControlStation" instance=ExtResource("4_hypj4")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12, 2, 5)
+state = true
+
+[node name="Label3D" type="Label3D" parent="ControlStation/LeverToggleHideAndSeekRoom"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, 0.5)
+text = "Hide and Seek"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ControlStation"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ControlStation/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 5)
+mesh = SubResource("BoxMesh_yt841")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ControlStation/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 5)
+shape = SubResource("ConvexPolygonShape3D_ioc64")
+
+[connection signal="changed" from="ControlStation/LeverToggleVideoBenchmarkRoom\\" to="." method="_on_change_video_benchmark_room_state"]
+[connection signal="changed" from="ControlStation/LeverToggleHideAndSeekRoom" to="." method="_on_change_hide_and_seek_room_state"]
