@@ -36,12 +36,13 @@ orientation = 1
 [sub_resource type="ViewportTexture" id="ViewportTexture_ovn3q"]
 viewport_path = NodePath("AI/SubViewport")
 
-[node name="HideAndSeek" type="Node3D" node_paths=PackedStringArray("viewport", "sprite_out", "camera", "camera_anchor")]
+[node name="HideAndSeek" type="Node3D" node_paths=PackedStringArray("viewport", "sprite_out", "camera", "camera_anchor", "found_label")]
 script = ExtResource("1_ovn3q")
 viewport = NodePath("AI/SubViewport")
 sprite_out = NodePath("AI/HideAndSeekProcessed")
 camera = NodePath("AI/SubViewport/Camera3D")
 camera_anchor = NodePath("AI/CameraAnchor")
+found_label = NodePath("Label3D")
 
 [node name="AI" type="StaticBody3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 6)
@@ -88,3 +89,8 @@ texture = SubResource("ViewportTexture_ovn3q")
 [node name="HideAndSeekProcessed" type="Sprite3D" parent="AI"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3.5, 5)
 double_sided = false
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 6)
+pixel_size = 0.01
+text = "Searching.."

@@ -6,6 +6,8 @@ extends Node3D
 @export var camera : Camera3D
 @export var camera_anchor : Node3D
 
+@export var found_label : Label3D
+
 var hide_and_seek : OpenCVHideAndSeek
 
 var processing_fps : float = 5.0
@@ -31,8 +33,12 @@ func _process(delta: float) -> void:
 		if (contoured_image != null):
 			# Something was found!
 			sprite_out.texture = ImageTexture.create_from_image(contoured_image)
+			found_label.text = "Found you!"
+			found_label.modulate = Color.GREEN
 		else:
 			sprite_out.texture = viewport.get_texture()
+			found_label.text = "Searching..."
+			found_label.modulate = Color.WHITE
 	
 func _on_area_slider(new_area : int) -> void:
 	hide_and_seek.set_area_threshold(new_area)

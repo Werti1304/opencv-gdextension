@@ -54,7 +54,7 @@ Ref<Image> OpenCVHideAndSeek::getProcessedViewportTexture() {
 		double area = cv::contourArea(contour);
 		if (area > 500) { // Filter small noise
 				cv::drawContours(mat, std::vector<std::vector<cv::Point>>{contour},
-													-1, cv::Scalar(0, 255, 0), 2);
+													-1, cv::Scalar(0, 255, 0), 5);
 		}
 	}
 
