@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbl45bsjnuvw"]
+[gd_scene load_steps=13 format=3 uid="uid://cbl45bsjnuvw"]
 
 [ext_resource type="Script" uid="uid://7o8cak52658o" path="res://src/world/testing_sprite.gd" id="2_cohlg"]
 [ext_resource type="PackedScene" uid="uid://dtrajbmffube7" path="res://src/character/character.tscn" id="2_uvqrp"]
 [ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_uvqrp"]
 [ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="4_hypj4"]
 [ext_resource type="PackedScene" uid="uid://bykjnkwx3fovi" path="res://src/world/rooms/VideoBenchmarkRoom.tscn" id="5_yt841"]
+[ext_resource type="PackedScene" uid="uid://c86g0wmp2teaw" path="res://src/world/rooms/hide_and_seek.tscn" id="6_ioc64"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lwe28"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -57,7 +58,7 @@ script = ExtResource("2_cohlg")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 4.4579287, -11.094752)
 
 [node name="Button" parent="." instance=ExtResource("3_uvqrp")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.7795725, 1.6435106, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 21.779572, 1.6435106, -7)
 
 [node name="Lever" parent="." instance=ExtResource("4_hypj4")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3, 2, 2)
@@ -66,3 +67,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3, 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29)
 
 [node name="Room" type="Node3D" parent="."]
+
+[node name="HideAndSeek" parent="." instance=ExtResource("6_ioc64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.262398, 0, -21.03358)

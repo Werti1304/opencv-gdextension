@@ -11,10 +11,9 @@ extends Node3D
 
 var viewportTester : OpenCVViewportTester
 
+var processing_fps : float = 60
 var last_processing_time : float = 0.0
 var frame_time : float
-
-var processing_fps : float = 60
 
 var last_label_update_time : float = 0.0
 
