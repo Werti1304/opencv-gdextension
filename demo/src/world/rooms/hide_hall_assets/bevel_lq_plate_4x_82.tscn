@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://do27qprdit5gc"]
+
+[ext_resource type="PackedScene" uid="uid://bdpcaqqecmi07" path="res://res/lib/kenney/brick_kit/bevel-lq-plate-4x8.glb" id="1_x1ny0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgxno"]
+
+[node name="bevel-lq-plate-4x82" instance=ExtResource("1_x1ny0")]
+
+[node name="bevel-lq-plate-4x8" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_qgxno")
