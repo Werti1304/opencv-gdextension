@@ -21,6 +21,9 @@ sky = SubResource("Sky_nm35o")
 tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_depth_begin = 50.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lwe28"]
 size = Vector2(5000, 5000)
@@ -66,6 +69,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
 
 [node name="HideAndSeek" parent="." instance=ExtResource("6_ioc64")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.262398, 0, -18.03358)
+visible = false
 
 [node name="ControlStation" type="Node3D" parent="."]
 
@@ -97,6 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 5)
 shape = SubResource("ConvexPolygonShape3D_ioc64")
 
 [node name="AnimationTest" type="Node3D" parent="."]
+visible = false
 
 [node name="UAL2_Standard" parent="AnimationTest" instance=ExtResource("6_o8prm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, 0)

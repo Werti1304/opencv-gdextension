@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Character
 
+static var current_character : Character
+
 # =========================
 # Movement
 # =========================
@@ -35,6 +37,7 @@ var smoothvel: float = 0.0
 @export var push_raycast_2: RayCast3D
 @export var push_raycast_3: RayCast3D
 @export var body: MeshInstance3D
+@export var gui : Gui
 
 const RAY_LENGTH := 1000.0
 
@@ -44,7 +47,6 @@ var currently_interacting: Object
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-
 # =========================
 # Ready
 # =========================
@@ -52,6 +54,8 @@ func _ready() -> void:
 	center = get_viewport().get_visible_rect().size / 2.0
 	_standard_fov = camera.fov
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	current_character = self
 
 
 # =========================

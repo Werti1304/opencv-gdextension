@@ -214,8 +214,8 @@ String OpenCVViewportTester::timingsToString(const ProcessingTimings &t) const {
 			"%7.3f ms  Image to Mat\n"
 			"%7.3f ms  Processing\n"
 			"%7.3f ms  Processed -> Godot Color Space\n"
-			"%7.3f ms  Mat to Image\n\n"
-			"%7.3f ms  Total",
+			"%7.3f ms  Mat to Image\n"
+			"= %7.3f ms  Total per Frame",
 			t.grab_ms,
 			t.image_to_mat_ms,
 			t.processed_ms,

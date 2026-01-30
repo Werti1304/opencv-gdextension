@@ -1,0 +1,215 @@
+[gd_scene load_steps=11 format=3 uid="uid://bykjnkwx3fovi"]
+
+[ext_resource type="Script" uid="uid://du15aonps2ddm" path="res://src/world/rooms/video_benchmark_room.gd" id="1_r56dq"]
+[ext_resource type="VideoStream" uid="uid://ri13fe2yxago" path="res://res/benchmark/Brompton_MBOX_HDR-Selects_BT2020-ST2084_UHDp60_v2.ogv" id="1_v46jq"]
+[ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="3_5bgxi"]
+[ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_6g5d1"]
+[ext_resource type="Script" uid="uid://bvwr5dkh578nv" path="res://src/world/rooms/viewport_size_settings.gd" id="3_ja6y4"]
+[ext_resource type="Script" uid="uid://dvhffqj2ackc" path="res://src/world/rooms/viewport_fps_setting.gd" id="4_l4x3x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yoe3o"]
+viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l4x3x"]
+viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4x3x"]
+albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l4x3x"]
+material = SubResource("StandardMaterial3D_l4x3x")
+size = Vector3(1, 40, 80)
+
+[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subViewportIn", "videoStreamPlayer", "spriteOut", "stats_label", "stats_label_2")]
+script = ExtResource("1_r56dq")
+subViewportIn = NodePath("VideoBenchmarkOriginal/SubViewport")
+videoStreamPlayer = NodePath("VideoBenchmarkOriginal/SubViewport/VideoStreamPlayer")
+spriteOut = NodePath("VideoBenchmarkProcessed")
+stats_label = NodePath("PerformanceLabel")
+stats_label_2 = NodePath("PerformanceLabel2")
+
+[node name="VideoBenchmarkOriginal" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, -0.5, 0, 0.5, 0.8660254, 4, 16, -7.5)
+double_sided = false
+texture = SubResource("ViewportTexture_yoe3o")
+
+[node name="SubViewport" type="SubViewport" parent="VideoBenchmarkOriginal"]
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1920, 1080)
+render_target_update_mode = 3
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="VideoBenchmarkOriginal/SubViewport"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+stream = ExtResource("1_v46jq")
+volume_db = -10.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="VideoBenchmarkProcessed" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 5, -10)
+double_sided = false
+texture = SubResource("ViewportTexture_l4x3x")
+
+[node name="PerformanceLabel" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.399027, 6.449876, 4.842711)
+visible = false
+pixel_size = 0.02
+text = "Avg. Processing Time
+FPS"
+horizontal_alignment = 0
+
+[node name="PerformanceLabel2" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.685345, 6.801096, 2.8427105)
+visible = false
+pixel_size = 0.02
+modulate = Color(1, 0.5, 0.5, 1)
+text = "Avg. Processing Time
+FPS"
+horizontal_alignment = 0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.371813, 17, 11.845146)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../Operations")
+
+[node name="Wall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.628187, 17, -11.154854)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../Operations")
+
+[node name="Wall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.628187, 17, 49.845146)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../Operations")
+
+[node name="Wall3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.62819, 17, 12.845146)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../Operations")
+
+[node name="Operations" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 2.8451462)
+
+[node name="OperationsLabel" type="Label3D" parent="Operations"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.8953018, 5.547072, -0.60737133)
+pixel_size = 0.02
+text = "Processing Options"
+
+[node name="OperationBlur" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, 0)
+
+[node name="Label" type="Label3D" parent="Operations/OperationBlur"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Blur"
+
+[node name="Lever" parent="Operations/OperationBlur" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationResize" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.3, 0)
+
+[node name="Label" type="Label3D" parent="Operations/OperationResize"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Resize"
+
+[node name="Lever" parent="Operations/OperationResize" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationCvtColor" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.6, 0)
+
+[node name="Label" type="Label3D" parent="Operations/OperationCvtColor"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "GrayScale"
+
+[node name="Lever" parent="Operations/OperationCvtColor" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationContours" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, -4.5911083)
+
+[node name="Label" type="Label3D" parent="Operations/OperationContours"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Contours"
+
+[node name="Lever" parent="Operations/OperationContours" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationDilate" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 3.6, -4.591)
+
+[node name="Label" type="Label3D" parent="Operations/OperationDilate"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Dilate"
+
+[node name="Lever" parent="Operations/OperationDilate" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationEdgeDetection" type="Node3D" parent="Operations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 2.3, -4.591)
+
+[node name="Label" type="Label3D" parent="Operations/OperationEdgeDetection"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Edge"
+
+[node name="Lever" parent="Operations/OperationEdgeDetection" instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="ViewportFPSSetting" type="Node3D" parent="." node_paths=PackedStringArray("fps_label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, 12.989309)
+script = ExtResource("4_l4x3x")
+fps_label = NodePath("FPSLabel")
+
+[node name="Button" parent="ViewportFPSSetting" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(-0.00544881, 0.0028590478, 0.99998116, -0.9999851, -0.00030396847, -0.0054479465, 0.0002883755, -0.99999577, 0.0028606583, 1.2, 1, 0.07411957)
+
+[node name="Button2" parent="ViewportFPSSetting" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(-4.371139e-08, -4.371139e-08, 1, -1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 1.2, 1, -1.9258804)
+
+[node name="FPSLabel" type="Label3D" parent="ViewportFPSSetting"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
+pixel_size = 0.02
+text = "FPS:
+60"
+
+[node name="ViewportSizeSettings" type="Node3D" parent="." node_paths=PackedStringArray("viewport_size_label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, 9)
+script = ExtResource("3_ja6y4")
+viewport_size_label = NodePath("ViewportSizeLabel")
+
+[node name="Button" parent="ViewportSizeSettings" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(-0.0051459055, 0.0043123923, 0.9999775, -0.99998677, 0.00026152798, -0.005147071, -0.00028372646, -0.9999906, 0.004310988, 1.2, 1, 0.07411957)
+
+[node name="Button2" parent="ViewportSizeSettings" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(-4.371139e-08, -4.371139e-08, 1, -1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 1.2, 1, -1.9258804)
+
+[node name="ViewportSizeLabel" type="Label3D" parent="ViewportSizeSettings"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
+pixel_size = 0.02
+text = "Resolution:
+1920 x 1080"
+
+[connection signal="changed" from="Operations/OperationBlur/Lever" to="." method="_on_gaussian_blur_lever_change"]
+[connection signal="changed" from="Operations/OperationResize/Lever" to="." method="_on_resize_lever_change"]
+[connection signal="changed" from="Operations/OperationCvtColor/Lever" to="." method="_on_grayscale_lever_change"]
+[connection signal="changed" from="Operations/OperationContours/Lever" to="." method="_on_find_contours_lever_change"]
+[connection signal="changed" from="Operations/OperationDilate/Lever" to="." method="_on_dilate_lever_change"]
+[connection signal="changed" from="Operations/OperationEdgeDetection/Lever" to="." method="_on_canny_edge_lever_change"]
+[connection signal="fps_changed" from="ViewportFPSSetting" to="." method="_on_viewport_fps_setting_fps_changed"]
+[connection signal="pressed" from="ViewportFPSSetting/Button" to="ViewportFPSSetting" method="_on_button_pressed_smaller"]
+[connection signal="pressed" from="ViewportFPSSetting/Button2" to="ViewportFPSSetting" method="_on_button_pressed_bigger"]
+[connection signal="viewportsize_changed" from="ViewportSizeSettings" to="." method="_on_viewport_size_settings_viewportsize_changed"]
+[connection signal="pressed" from="ViewportSizeSettings/Button" to="ViewportSizeSettings" method="_on_button_pressed_smaller"]
+[connection signal="pressed" from="ViewportSizeSettings/Button2" to="ViewportSizeSettings" method="_on_button_pressed_bigger"]

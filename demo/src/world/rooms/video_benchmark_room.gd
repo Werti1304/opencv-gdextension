@@ -34,8 +34,9 @@ func _process(delta: float) -> void:
 		
 	last_label_update_time += delta
 	if last_label_update_time > label_update_sec:
-		stats_label.text = viewportTester.get_averaged_timings_string().trim_prefix(" ")
-		stats_label_2.text = stats_label.text
+		#stats_label.text = viewportTester.get_averaged_timings_string().trim_prefix(" ")
+		#stats_label_2.text = stats_label.text
+		Character.current_character.gui.top_right_label.text = "OpenCV Video Benchmark:\n" + viewportTester.get_averaged_timings_string().trim_prefix(" ")
 		last_label_update_time = label_update_sec - last_label_update_time
 
 func _on_viewport_size_settings_viewportsize_changed(new_size: Vector2i) -> void:
