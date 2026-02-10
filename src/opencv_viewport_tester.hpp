@@ -28,13 +28,16 @@ private:
 	};
 
 	ProcessingTimings timing_accumulator;
+	ProcessingTimings timing_accumulator_global;
 	uint64_t timing_samples = 0;
+	uint64_t timing_samples_global = 0;
 
 	ProcessingTimings getAveragedTimings();
 	String timingsToString(const ProcessingTimings &t) const;
 
 public:
 	String getAveragedTimingsString();
+	String getAveragedGlobalTimingsString();
 
 	// Timing stuff end
 	OpenCVViewportTester() = default;

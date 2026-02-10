@@ -192,7 +192,16 @@ OpenCVViewportTester::ProcessingTimings OpenCVViewportTester::getAveragedTimings
 	avg.mat_to_image_ms = timing_accumulator.mat_to_image_ms * inv;
 	avg.total_ms = timing_accumulator.total_ms * inv;
 
+	timing_accumulator_global.grab_ms += timing_accumulator.grab_ms;
+	timing_accumulator_global.image_to_mat_ms += timing_accumulator.image_to_mat_ms;
+	timing_accumulator_global.processed_ms += timing_accumulator.processed_ms;
+	timing_accumulator_global.back_to_rgba_ms += timing_accumulator.back_to_rgba_ms;
+	timing_accumulator_global.mat_to_image_ms += timing_accumulator.mat_to_image_ms;
+	timing_accumulator_global.total_ms += timing_accumulator.total_ms;
+
 	timing_accumulator = {};
+	
+	timing_samples_global += timing_samples;
 	timing_samples = 0;
 
 	return avg;
@@ -206,6 +215,21 @@ String OpenCVViewportTester::getAveragedTimingsString() {
 	}
 
 	return timingsToString(t);
+}
+
+String OpenCVViewportTester::getAveragedGlobalTimingsString() {
+	ProcessingTimings avg;
+
+	const double inv = 1.0 / timing_samples_global;
+
+	avg.grab_ms = timing_accumulator_global.grab_ms * inv;
+	avg.image_to_mat_ms = timing_accumulator_global.image_to_mat_ms * inv;
+	avg.processed_ms = timing_accumulator_global.processed_ms * inv;
+	avg.back_to_rgba_ms = timing_accumulator_global.back_to_rgba_ms * inv;
+	avg.mat_to_image_ms = timing_accumulator_global.mat_to_image_ms * inv;
+	avg.total_ms = timing_accumulator_global.total_ms * inv;
+
+	return timingsToString(avg);
 }
 
 String OpenCVViewportTester::timingsToString(const ProcessingTimings &t) const {
