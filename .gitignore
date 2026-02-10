@@ -68,3 +68,5 @@ out/
 # scons build dir
 bin/
 /lib/opencv
+
+.history/
