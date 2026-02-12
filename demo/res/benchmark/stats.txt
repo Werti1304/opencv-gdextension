@@ -1,7 +1,7 @@
-  1.346 ms  Grab from video
-  0.000 ms  Image to Mat
-  5.874 ms  Processing
-  1.015 ms  Processed -> BGRA
+  2.475 ms  Grab from video
+  0.001 ms  Image to Mat
+  9.758 ms  Processing
+  1.624 ms  Processed -> BGRA
   0.001 ms  Mat to Image
-=   8.236 ms  Total per Frame
+=  13.860 ms  Total per Frame
 Samples: 4337

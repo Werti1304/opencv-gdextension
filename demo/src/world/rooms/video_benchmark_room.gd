@@ -8,6 +8,7 @@ extends Node3D
 @export var spriteOut : Sprite3D
 @export var stats_label : Label3D
 @export var stats_label_2 : Label3D
+@export var global_stats_label : Label3D
 
 var viewportTester : OpenCVViewportTester
 
@@ -25,6 +26,9 @@ func _ready() -> void:
 	frame_time = 1.0 / processing_fps
 
 func _process(delta: float) -> void:
+	if(!videoStreamPlayer.is_playing()):
+		return
+		
 	last_processing_time += delta
 
 	if last_processing_time > frame_time:
@@ -37,6 +41,7 @@ func _process(delta: float) -> void:
 		#stats_label.text = viewportTester.get_averaged_timings_string().trim_prefix(" ")
 		#stats_label_2.text = stats_label.text
 		Character.current_character.gui.top_right_label.text = "OpenCV Video Benchmark:\n" + viewportTester.get_averaged_timings_string().trim_prefix(" ")
+		global_stats_label.text = "Global Averaged Stats:\n" + viewportTester.get_global_timings_string()
 		last_label_update_time = label_update_sec - last_label_update_time
 
 func _on_viewport_size_settings_viewportsize_changed(new_size: Vector2i) -> void:
@@ -64,3 +69,9 @@ func _on_dilate_lever_change(change: bool):
 
 func _on_find_contours_lever_change(change: bool):
 	viewportTester.set_find_contours(change)
+
+func _on_start_button_pressed() -> void:
+	videoStreamPlayer.play()
+
+func _on_video_stream_player_finished() -> void:
+	viewportTester.save_global_timings_to_file()

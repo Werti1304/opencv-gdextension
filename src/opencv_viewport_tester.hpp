@@ -38,6 +38,8 @@ private:
 public:
 	String getAveragedTimingsString();
 	String getAveragedGlobalTimingsString();
+	void resetGlobalTimings();
+	void saveGlobalTimingsToFile();
 
 	// Timing stuff end
 	OpenCVViewportTester() = default;
@@ -93,4 +95,5 @@ public:
 
 private:
 	SubViewport* viewport;
+
 };

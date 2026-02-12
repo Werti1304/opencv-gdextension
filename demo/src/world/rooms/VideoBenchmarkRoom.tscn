@@ -20,13 +20,14 @@ albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
 material = SubResource("StandardMaterial3D_l4x3x")
 size = Vector3(1, 40, 80)
 
-[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subViewportIn", "videoStreamPlayer", "spriteOut", "stats_label", "stats_label_2")]
+[node name="VideoBenchmarkRoom" type="Node3D" node_paths=PackedStringArray("subViewportIn", "videoStreamPlayer", "spriteOut", "stats_label", "stats_label_2", "global_stats_label")]
 script = ExtResource("1_r56dq")
 subViewportIn = NodePath("VideoBenchmarkOriginal/SubViewport")
 videoStreamPlayer = NodePath("VideoBenchmarkOriginal/SubViewport/VideoStreamPlayer")
 spriteOut = NodePath("VideoBenchmarkProcessed")
 stats_label = NodePath("PerformanceLabel")
 stats_label_2 = NodePath("PerformanceLabel2")
+global_stats_label = NodePath("GlobalStatsLabel")
 
 [node name="VideoBenchmarkOriginal" type="Sprite3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.299038, -0.75, 0, 0.75, 1.299038, 6, 27, -6.5)
@@ -48,9 +49,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 stream = ExtResource("1_v46jq")
 volume_db = -10.0
-autoplay = true
 expand = true
-loop = true
 
 [node name="VideoBenchmarkProcessed" type="Sprite3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6, 9, -10)
@@ -194,7 +193,7 @@ script = ExtResource("3_ja6y4")
 viewport_size_label = NodePath("ViewportSizeLabel")
 
 [node name="Button" parent="ViewportSizeSettings" instance=ExtResource("3_6g5d1")]
-transform = Transform3D(-0.0051459055, 0.0043123923, 0.9999775, -0.99998677, 0.00026152798, -0.005147071, -0.00028372646, -0.9999906, 0.004310988, 1.2, 1, 0.07411957)
+transform = Transform3D(1.9106855e-15, -4.3711385e-08, 1, -1, -4.3711385e-08, 0, 4.371139e-08, -0.9999999, -4.371139e-08, 1.2, 1, 0.07411957)
 
 [node name="Button2" parent="ViewportSizeSettings" instance=ExtResource("3_6g5d1")]
 transform = Transform3D(-4.371139e-08, -4.371139e-08, 1, -1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 1.2, 1, -1.9258804)
@@ -205,6 +204,25 @@ pixel_size = 0.02
 text = "Resolution:
 1920 x 1080"
 
+[node name="Start" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, -5)
+
+[node name="Button" parent="Start" instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 1.2, 1, 0.07411957)
+
+[node name="Label" type="Label3D" parent="Start"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
+pixel_size = 0.02
+text = "Start"
+
+[node name="GlobalStatsLabel" type="Label3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.771812, 7, 19)
+pixel_size = 0.02
+text = "Global Stats
+displayed after
+video start"
+
+[connection signal="finished" from="VideoBenchmarkOriginal/SubViewport/VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="changed" from="Operations/OperationBlur/Lever" to="." method="_on_gaussian_blur_lever_change"]
 [connection signal="changed" from="Operations/OperationResize/Lever" to="." method="_on_resize_lever_change"]
 [connection signal="changed" from="Operations/OperationCvtColor/Lever" to="." method="_on_grayscale_lever_change"]
@@ -217,3 +235,4 @@ text = "Resolution:
 [connection signal="viewportsize_changed" from="ViewportSizeSettings" to="." method="_on_viewport_size_settings_viewportsize_changed"]
 [connection signal="pressed" from="ViewportSizeSettings/Button" to="ViewportSizeSettings" method="_on_button_pressed_smaller"]
 [connection signal="pressed" from="ViewportSizeSettings/Button2" to="ViewportSizeSettings" method="_on_button_pressed_bigger"]
+[connection signal="pressed" from="Start/Button" to="." method="_on_start_button_pressed"]

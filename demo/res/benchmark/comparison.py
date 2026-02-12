@@ -232,7 +232,7 @@ if __name__ == "__main__":
         now = time.perf_counter()
         if now - last_print >= 1.0:
             avg = tester.consume_second_average()
-            print("\n" + tester.timings_to_string(avg, tester.global_samples))
+            print("=== Averaged Timings ===\n" + tester.timings_to_string(avg, tester.global_samples))
             last_print = now
 
         if cv2.waitKey(1) & 0xFF == 27:

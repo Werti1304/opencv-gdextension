@@ -1,7 +1,13 @@
+#include <fstream>
+
 #include "opencv_viewport_tester.hpp"
 
 #include "godot_cpp/core/class_db.hpp"
 #include <godot_cpp/classes/viewport_texture.hpp>
+#include <godot_cpp/classes/file_access.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/classes/os.hpp>
+#include <godot_cpp/classes/rendering_server.hpp>
 
 #include <opencv2/opencv.hpp>
 
@@ -13,6 +19,9 @@ void OpenCVViewportTester::_bind_methods() {
 	godot::ClassDB::bind_method(D_METHOD("get_processed_viewport_texture"), &OpenCVViewportTester::getProcessedViewportTexture);
 	godot::ClassDB::bind_method(D_METHOD("set_sub_viewport", "sub_viewport"), &OpenCVViewportTester::SetSubViewport);
 	godot::ClassDB::bind_method(D_METHOD("get_averaged_timings_string"), &OpenCVViewportTester::getAveragedTimingsString);
+	godot::ClassDB::bind_method(D_METHOD("get_global_timings_string"), &OpenCVViewportTester::getAveragedGlobalTimingsString);
+	godot::ClassDB::bind_method(D_METHOD("save_global_timings_to_file"), &OpenCVViewportTester::saveGlobalTimingsToFile);
+	godot::ClassDB::bind_method(D_METHOD("reset_global_timings"), &OpenCVViewportTester::resetGlobalTimings);
 
 	// ProcessingArgs Setters
 
@@ -220,6 +229,9 @@ String OpenCVViewportTester::getAveragedTimingsString() {
 String OpenCVViewportTester::getAveragedGlobalTimingsString() {
 	ProcessingTimings avg;
 
+	if (timing_samples_global == 0)
+		return "Error: No global samples recorded!";
+
 	const double inv = 1.0 / timing_samples_global;
 
 	avg.grab_ms = timing_accumulator_global.grab_ms * inv;
@@ -230,6 +242,51 @@ String OpenCVViewportTester::getAveragedGlobalTimingsString() {
 	avg.total_ms = timing_accumulator_global.total_ms * inv;
 
 	return timingsToString(avg);
+}
+
+void OpenCVViewportTester::resetGlobalTimings()
+{
+	timing_samples_global = 0;
+	timing_samples_global = {};
+}
+
+
+static String get_system_info_string()
+{
+	String info;
+
+	OS *os = OS::get_singleton();
+	RenderingServer *rs = RenderingServer::get_singleton();
+
+	info += "OS: " + os->get_name() + " " + os->get_version() + "\n";
+	info += "CPU: " + os->get_processor_name() + "\n";
+	info += "CPU Cores: " + String::num_int64(os->get_processor_count()) + "\n";
+	info += "RAM (MB): " + String::num_int64((int)os->get_memory_info()["physical"] / (1024 * 1024)) + "\n";
+
+	info += "GPU: " + rs->get_video_adapter_name() + "\n";
+	info += "GPU Vendor: " + rs->get_video_adapter_vendor() + "\n";
+
+	return info;
+}
+
+void OpenCVViewportTester::saveGlobalTimingsToFile()
+{
+	const String path = "res://global_timings.txt";
+
+	Ref<FileAccess> file = FileAccess::open(path, FileAccess::WRITE_READ);
+	if (file.is_null()) {
+		UtilityFunctions::printerr("Failed to open timings file: ", path);
+		return;
+	}
+
+	file->store_line("=== Averaged Timings ===");
+	file->store_line(getAveragedGlobalTimingsString());
+
+	file->store_line("\n=== System Info ===");
+	file->store_line(get_system_info_string());
+
+	file->close();
+	UtilityFunctions::prints("Timings have been saved!");
 }
 
 String OpenCVViewportTester::timingsToString(const ProcessingTimings &t) const {
