@@ -62,7 +62,7 @@ skeleton = NodePath("../../..")
 shape = SubResource("ConvexPolygonShape3D_yt841")
 
 [node name="Character" parent="." instance=ExtResource("2_uvqrp")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 11, 2.4579287, 6.9052477)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.693861, 2.4579287, -1.8009634)
 
 [node name="VideoBenchmarkRoom" parent="." instance=ExtResource("5_yt841")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
@@ -72,6 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.262398, 0, -18.03358)
 visible = false
 
 [node name="ControlStation" type="Node3D" parent="."]
+visible = false
 
 [node name="LeverToggleVideoBenchmarkRoom\\" parent="ControlStation" instance=ExtResource("4_hypj4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10, 2, 5)
