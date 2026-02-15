@@ -70,3 +70,5 @@ bin/
 /lib/opencv
 
 .history/
+/build-web
+/export

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c86g0wmp2teaw"]
+[gd_scene format=3 uid="uid://c86g0wmp2teaw"]
 
 [ext_resource type="Script" uid="uid://c3lgw08gk10wx" path="res://src/world/rooms/hide_and_seek.gd" id="1_ovn3q"]
 
@@ -36,7 +36,7 @@ orientation = 1
 [sub_resource type="ViewportTexture" id="ViewportTexture_ovn3q"]
 viewport_path = NodePath("AI/SubViewport")
 
-[node name="HideAndSeek" type="Node3D" node_paths=PackedStringArray("viewport", "sprite_out", "camera", "camera_anchor", "found_label")]
+[node name="HideAndSeek" type="Node3D" unique_id=1628481324 node_paths=PackedStringArray("viewport", "sprite_out", "camera", "camera_anchor", "found_label")]
 script = ExtResource("1_ovn3q")
 viewport = NodePath("AI/SubViewport")
 sprite_out = NodePath("AI/HideAndSeekProcessed")
@@ -44,53 +44,53 @@ camera = NodePath("AI/SubViewport/Camera3D")
 camera_anchor = NodePath("AI/CameraAnchor")
 found_label = NodePath("Label3D")
 
-[node name="AI" type="StaticBody3D" parent="."]
+[node name="AI" type="StaticBody3D" parent="." unique_id=1953950361]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.5, 6)
 
-[node name="CameraAnchor" type="Node3D" parent="AI"]
+[node name="CameraAnchor" type="Node3D" parent="AI" unique_id=1898166505]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.7)
 
-[node name="SubViewport" type="SubViewport" parent="AI"]
+[node name="SubViewport" type="SubViewport" parent="AI" unique_id=120751376]
 size = Vector2i(1024, 1024)
 render_target_update_mode = 3
 
-[node name="Camera3D" type="Camera3D" parent="AI/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="AI/SubViewport" unique_id=1685741371]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.0019426942, 2.5, 6.4291487)
 fov = 90.0
 far = 10.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AI"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AI" unique_id=1099721970]
 shape = SubResource("BoxShape3D_yt841")
 
-[node name="Body" type="MeshInstance3D" parent="AI"]
+[node name="Body" type="MeshInstance3D" parent="AI" unique_id=674640441]
 mesh = SubResource("CapsuleMesh_yt841")
 skeleton = NodePath("../..")
 
-[node name="EyeLeft" type="MeshInstance3D" parent="AI/Body"]
+[node name="EyeLeft" type="MeshInstance3D" parent="AI/Body" unique_id=1639182486]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.9, -0.49)
 mesh = SubResource("CapsuleMesh_ioc64")
 skeleton = NodePath("../../..")
 
-[node name="EyeRight" type="MeshInstance3D" parent="AI/Body"]
+[node name="EyeRight" type="MeshInstance3D" parent="AI/Body" unique_id=1089297952]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.9, -0.49)
 mesh = SubResource("CapsuleMesh_o8prm")
 skeleton = NodePath("../../..")
 
-[node name="VisionCarpet" type="MeshInstance3D" parent="AI"]
+[node name="VisionCarpet" type="MeshInstance3D" parent="AI" unique_id=2016691970]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1.45, -5)
 mesh = SubResource("QuadMesh_ioc64")
 skeleton = NodePath("../..")
 
-[node name="HideAndSeekSeekerView" type="Sprite3D" parent="AI"]
+[node name="HideAndSeekSeekerView" type="Sprite3D" parent="AI" unique_id=323801954]
 transform = Transform3D(-1, -4.371139e-08, -2.505559e-07, 8.742277e-08, 0.8660254, -0.5, 2.3884346e-07, -0.5, -0.8660254, -8.7422904e-08, 12, 4)
 double_sided = false
 texture = SubResource("ViewportTexture_ovn3q")
 
-[node name="HideAndSeekProcessed" type="Sprite3D" parent="AI"]
+[node name="HideAndSeekProcessed" type="Sprite3D" parent="AI" unique_id=1339070139]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 3.5, 5)
 double_sided = false
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=1689125724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 6)
 pixel_size = 0.01
 text = "Searching.."

@@ -32,11 +32,15 @@ func _process(delta: float) -> void:
 		var contoured_image = hide_and_seek.get_processed_texture()
 		if (contoured_image != null):
 			# Something was found!
-			sprite_out.texture = ImageTexture.create_from_image(contoured_image)
+			var new_texture = ImageTexture.create_from_image(contoured_image)
+			sprite_out.texture = new_texture
+			Character.current_character.gui.top_right_sprite.texture = new_texture
 			found_label.text = "Found you!"
 			found_label.modulate = Color.GREEN
 		else:
-			sprite_out.texture = viewport.get_texture()
+			var new_texture = viewport.get_texture()
+			sprite_out.texture = new_texture
+			Character.current_character.gui.top_right_sprite.texture = new_texture
 			found_label.text = "Searching..."
 			found_label.modulate = Color.WHITE
 	
