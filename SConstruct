@@ -37,6 +37,15 @@ Run the following command to download godot-cpp:
 
 env = SConscript("godot-cpp/SConstruct", {"env": env, "customs": customs})
 
+# WEB Build Exclusive Start
+
+if(env['platform'] == "web"):
+    env.Append(CCFLAGS=["-msimd128"])
+    env.Append(LINKFLAGS=["-msimd128"])
+
+# WEB Build End
+
+
 # OPENCV Stuff start
 
 env.Append(CPPPATH=["src/", "include/"])
@@ -70,7 +79,9 @@ copy = env.Install("{}/bin/{}/".format(projectdir, env["platform"]), library)
 
 
 # Copy opencv dll
-if env["target"] in ["editor", "template_debug"]:
+if(env['platform'] == "web"):
+    opencv_dll = "libopencv_world4130.a"
+elif env["target"] in ["editor", "template_debug"]:
     opencv_dll = "opencv_world4130.dll" # We only use release dll from opencv
 else:
     opencv_dll = "opencv_world4130.dll"

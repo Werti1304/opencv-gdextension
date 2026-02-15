@@ -20,12 +20,13 @@ void OpenCVExtension::testOpenCV() {
 	// Draw a blue circle in the center
 	cv::circle(image, cv::Point(200, 200), 100, cv::Scalar(255, 0, 0), -1);
 
-	// Show the image in a window
-	cv::imshow("Test OpenCV", image);
+	// Not included in the opencv build anymore!
+	// // Show the image in a window
+	// cv::imshow("Test OpenCV", image);
 
-	std::cout << "Press any key to close the window..." << std::endl;
-	cv::waitKey(0); // Wait for a key press
-	cv::destroyAllWindows();
+	// std::cout << "Press any key to close the window..." << std::endl;
+	// cv::waitKey(0); // Wait for a key press
+	// cv::destroyAllWindows();
 }
 
 cv::Mat OpenCVExtension::createTestImage()  const{
