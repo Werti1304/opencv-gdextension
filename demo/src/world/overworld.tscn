@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbl45bsjnuvw"]
+[gd_scene format=3 uid="uid://cbl45bsjnuvw"]
 
 [ext_resource type="Script" uid="uid://tygrl2kq0po7" path="res://src/world/overworld.gd" id="1_o8prm"]
 [ext_resource type="PackedScene" uid="uid://dtrajbmffube7" path="res://src/character/character.tscn" id="2_uvqrp"]
 [ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="4_hypj4"]
 [ext_resource type="PackedScene" uid="uid://bykjnkwx3fovi" path="res://src/world/rooms/VideoBenchmarkRoom.tscn" id="5_yt841"]
-[ext_resource type="PackedScene" uid="uid://c86g0wmp2teaw" path="res://src/world/rooms/hide_and_seek.tscn" id="6_ioc64"]
 [ext_resource type="PackedScene" uid="uid://77cpersi3v" path="res://res/lib/universal_animation/UAL2_Standard.glb" id="6_o8prm"]
 [ext_resource type="PackedScene" uid="uid://dcbwev7j1tdu4" path="res://res/lib/universal_animation/UAL1_Standard.glb" id="7_o8prm"]
 
@@ -37,74 +36,70 @@ size = Vector3(7, 2, 2)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ioc64"]
 points = PackedVector3Array(-3.3677616, -1, -1, 3.3677616, 1, 1, 3.3677616, 1, -1, -3.3677616, 1, 1, 3.3677616, -1, 1, 3.3677616, -1, -1, -3.3677616, 1, -1, -3.3677616, -1, 1)
 
-[node name="Overworld" type="Node3D" node_paths=PackedStringArray("video_benchmark_room", "hide_and_seek_room")]
+[node name="Overworld" type="Node3D" unique_id=735128948 node_paths=PackedStringArray("video_benchmark_room", "hide_and_seek_room")]
 script = ExtResource("1_o8prm")
 video_benchmark_room = NodePath("VideoBenchmarkRoom")
-hide_and_seek_room = NodePath("HideAndSeek")
+hide_and_seek_room = NodePath("")
 
-[node name="Environment" type="Node3D" parent="."]
+[node name="Environment" type="Node3D" parent="." unique_id=1121264627]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=360563597]
 environment = SubResource("Environment_cohlg")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=1084940479]
 transform = Transform3D(-0.8660253, -0.4330129, 0.2500001, 0, 0.49999994, 0.86602545, -0.50000024, 0.74999994, -0.43301257, 0, 0, 0)
 light_color = Color(1, 0.9965, 0.93, 1)
 shadow_enabled = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment" unique_id=1946988892]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/StaticBody3D" unique_id=651331903]
 mesh = SubResource("PlaneMesh_lwe28")
 skeleton = NodePath("../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D" unique_id=1726936031]
 shape = SubResource("ConvexPolygonShape3D_yt841")
 
-[node name="Character" parent="." instance=ExtResource("2_uvqrp")]
+[node name="Character" parent="." unique_id=1890054490 instance=ExtResource("2_uvqrp")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 5.693861, 2.4579287, -1.8009634)
 
-[node name="VideoBenchmarkRoom" parent="." instance=ExtResource("5_yt841")]
+[node name="VideoBenchmarkRoom" parent="." unique_id=1274780296 instance=ExtResource("5_yt841")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
 
-[node name="HideAndSeek" parent="." instance=ExtResource("6_ioc64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.262398, 0, -18.03358)
+[node name="ControlStation" type="Node3D" parent="." unique_id=1232609924]
 visible = false
 
-[node name="ControlStation" type="Node3D" parent="."]
-visible = false
-
-[node name="LeverToggleVideoBenchmarkRoom\\" parent="ControlStation" instance=ExtResource("4_hypj4")]
+[node name="LeverToggleVideoBenchmarkRoom\\" parent="ControlStation" unique_id=415570067 instance=ExtResource("4_hypj4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10, 2, 5)
 state = true
 
-[node name="Label3D" type="Label3D" parent="ControlStation/LeverToggleVideoBenchmarkRoom\\"]
+[node name="Label3D" type="Label3D" parent="ControlStation/LeverToggleVideoBenchmarkRoom\\" unique_id=1824292651]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, 0.5)
 text = "Video Benchmark"
 
-[node name="LeverToggleHideAndSeekRoom" parent="ControlStation" instance=ExtResource("4_hypj4")]
+[node name="LeverToggleHideAndSeekRoom" parent="ControlStation" unique_id=633016056 instance=ExtResource("4_hypj4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12, 2, 5)
 state = true
 
-[node name="Label3D" type="Label3D" parent="ControlStation/LeverToggleHideAndSeekRoom"]
+[node name="Label3D" type="Label3D" parent="ControlStation/LeverToggleHideAndSeekRoom" unique_id=630212359]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, 0.5)
 text = "Hide and Seek"
 
-[node name="StaticBody3D" type="StaticBody3D" parent="ControlStation"]
+[node name="StaticBody3D" type="StaticBody3D" parent="ControlStation" unique_id=1954830928]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ControlStation/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ControlStation/StaticBody3D" unique_id=824363322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 5)
 mesh = SubResource("BoxMesh_yt841")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ControlStation/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ControlStation/StaticBody3D" unique_id=164286465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 5)
 shape = SubResource("ConvexPolygonShape3D_ioc64")
 
-[node name="AnimationTest" type="Node3D" parent="."]
+[node name="AnimationTest" type="Node3D" parent="." unique_id=1819458948]
 visible = false
 
-[node name="UAL2_Standard" parent="AnimationTest" instance=ExtResource("6_o8prm")]
+[node name="UAL2_Standard" parent="AnimationTest" unique_id=1232320278 instance=ExtResource("6_o8prm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, 0)
 
 [node name="GeneralSkeleton" parent="AnimationTest/UAL2_Standard/Armature" index="0"]
@@ -167,9 +162,9 @@ bones/62/rotation = Quaternion(0.17156829, 0.646951, -0.74297434, -0.0027946231)
 bones/63/rotation = Quaternion(-6.703263e-08, 1, 8.940697e-08, 2.1454163e-09)
 
 [node name="AnimationPlayer" parent="AnimationTest/UAL2_Standard" index="1"]
-autoplay = "Idle_TalkingPhone"
+autoplay = &"Idle_TalkingPhone"
 
-[node name="UAL1_Standard" parent="AnimationTest" instance=ExtResource("7_o8prm")]
+[node name="UAL1_Standard" parent="AnimationTest" unique_id=645347216 instance=ExtResource("7_o8prm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 2, 0)
 
 [node name="GeneralSkeleton" parent="AnimationTest/UAL1_Standard/Armature" index="0"]
@@ -231,7 +226,7 @@ bones/62/rotation = Quaternion(0.012582682, 0.8253939, -0.5643296, -0.009933969)
 bones/63/rotation = Quaternion(-4.3947555e-08, 1, 8.940697e-08, 2.7381045e-08)
 
 [node name="AnimationPlayer" parent="AnimationTest/UAL1_Standard" index="1"]
-autoplay = "Sprint"
+autoplay = &"Sprint"
 
 [connection signal="changed" from="ControlStation/LeverToggleVideoBenchmarkRoom\\" to="." method="_on_change_video_benchmark_room_state"]
 [connection signal="changed" from="ControlStation/LeverToggleHideAndSeekRoom" to="." method="_on_change_hide_and_seek_room_state"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbrakepqh14vg"]
+[gd_scene format=3 uid="uid://dbrakepqh14vg"]
 
 [ext_resource type="Script" uid="uid://btlvm04gad5cq" path="res://src/ui/main_menu.gd" id="1_qkuje"]
 [ext_resource type="PackedScene" uid="uid://cbl45bsjnuvw" path="res://src/world/overworld.tscn" id="2_5mgu5"]
 [ext_resource type="PackedScene" uid="uid://p4vqp1xt4e38" path="res://src/world/rooms/hide_hall.tscn" id="3_5mgu5"]
 [ext_resource type="PackedScene" uid="uid://dfh1d6tmesu4j" path="res://src/world/rooms/WebcamScene.tscn" id="4_5mgu5"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1811623747]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,16 @@ video_benchmark_scene = ExtResource("2_5mgu5")
 hide_and_seek_scene = ExtResource("3_5mgu5")
 webcam_scene = ExtResource("4_5mgu5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1551307276]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2071849439]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -30,24 +39,35 @@ offset_right = 154.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1152108374]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Choose which demo to play:"
 
-[node name="VideoBenchmarkButton" type="Button" parent="VBoxContainer"]
+[node name="VideoBenchmarkButton" type="Button" parent="VBoxContainer" unique_id=1335453379]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Video Benchmark"
 
-[node name="HideAndSeekButton" type="Button" parent="VBoxContainer"]
+[node name="HideAndSeekButton" type="Button" parent="VBoxContainer" unique_id=114818219]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Hide and Seek"
 
-[node name="WebcamObjDetButton" type="Button" parent="VBoxContainer"]
+[node name="WebcamObjDetButton" type="Button" parent="VBoxContainer" unique_id=2088674873]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Webcam Object Detection"
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1036002413]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer/VideoBenchmarkButton" to="." method="_on_video_benchmark_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HideAndSeekButton" to="." method="_on_hide_and_seek_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/WebcamObjDetButton" to="." method="_on_webcam_obj_det_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

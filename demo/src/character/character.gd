@@ -39,6 +39,8 @@ var smoothvel: float = 0.0
 @export var body: MeshInstance3D
 @export var gui : Gui
 
+@export var disable_movement : bool = false
+
 const RAY_LENGTH := 1000.0
 
 var center: Vector2
@@ -130,6 +132,9 @@ static func get_shortest_rotation(
 # Physics
 # =========================
 func _physics_process(delta: float) -> void:
+	if disable_movement:
+		return
+		
 	var v := velocity
 
 	v = handle_gravity(v, delta)
@@ -177,6 +182,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if disable_movement:
+		return
+		
 	if event is InputEventMouseButton and event.pressed:
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -184,9 +192,14 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("mouse_capture_release"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif event.is_action_pressed("esc"):
+		get_tree().change_scene_to_packed(load("res://src/ui/main_menu.tscn"))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		return
+		
+	if disable_movement:
 		return
 
 	if event is InputEventMouseMotion:

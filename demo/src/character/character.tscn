@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtrajbmffube7"]
+[gd_scene format=3 uid="uid://dtrajbmffube7"]
 
 [ext_resource type="Script" uid="uid://b41njbrlr6pli" path="res://src/character/character.gd" id="1_8mo58"]
 [ext_resource type="Texture2D" uid="uid://vshdvcoef0w5" path="res://res/pixel/Cursor.png" id="2_b5gf6"]
@@ -22,11 +22,12 @@ material = SubResource("ORMMaterial3D_xn63p")
 radius = 0.03
 height = 0.15
 
-[node name="Character" type="CharacterBody3D" node_paths=PackedStringArray("camera", "interact_raycast", "push_raycast_1", "push_raycast_2", "push_raycast_3", "body", "gui") groups=["Moving"]]
+[node name="Character" type="CharacterBody3D" unique_id=1520539656 node_paths=PackedStringArray("camera", "interact_raycast", "push_raycast_1", "push_raycast_2", "push_raycast_3", "body", "gui") groups=["Moving"]]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_8mo58")
+speed = 13.0
 camera = NodePath("Camera3D")
 interact_raycast = NodePath("Camera3D/InteractRaycast")
 push_raycast_1 = NodePath("Body/PushRaycast")
@@ -43,19 +44,19 @@ metadata/_access_modifiers = {
 "camera": 2
 }
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1915957250]
 shape = SubResource("BoxShape3D_aoocb")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1223991751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 cull_mask = 1048573
 current = true
 
-[node name="InteractRaycast" type="RayCast3D" parent="Camera3D"]
+[node name="InteractRaycast" type="RayCast3D" parent="Camera3D" unique_id=202682484]
 target_position = Vector3(0, 0, -10)
 collide_with_areas = true
 
-[node name="TextureRect" type="TextureRect" parent="Camera3D"]
+[node name="TextureRect" type="TextureRect" parent="Camera3D" unique_id=1649168228]
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,34 +72,34 @@ grow_vertical = 2
 texture = ExtResource("2_b5gf6")
 stretch_mode = 5
 
-[node name="Gui" parent="Camera3D" instance=ExtResource("3_8jypr")]
+[node name="Gui" parent="Camera3D" unique_id=342137094 instance=ExtResource("3_8jypr")]
 offset_top = -2.0
 offset_bottom = -2.0
 
-[node name="Body" type="MeshInstance3D" parent="."]
+[node name="Body" type="MeshInstance3D" parent="." unique_id=802174369]
 layers = 2
 mesh = SubResource("CapsuleMesh_ru04e")
 
-[node name="EyeLeft" type="MeshInstance3D" parent="Body"]
+[node name="EyeLeft" type="MeshInstance3D" parent="Body" unique_id=2029250726]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0.9, -0.49)
 layers = 2
 mesh = SubResource("CapsuleMesh_0rrdu")
 skeleton = NodePath("../..")
 
-[node name="EyeRight" type="MeshInstance3D" parent="Body"]
+[node name="EyeRight" type="MeshInstance3D" parent="Body" unique_id=534463728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.9, -0.49)
 layers = 2
 mesh = SubResource("CapsuleMesh_0rrdu")
 skeleton = NodePath("../..")
 
-[node name="PushRaycast" type="RayCast3D" parent="Body"]
+[node name="PushRaycast" type="RayCast3D" parent="Body" unique_id=1156108693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="PushRaycast2" type="RayCast3D" parent="Body"]
+[node name="PushRaycast2" type="RayCast3D" parent="Body" unique_id=1054495571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 target_position = Vector3(0, 0, -1)
 
-[node name="PushRaycast3" type="RayCast3D" parent="Body"]
+[node name="PushRaycast3" type="RayCast3D" parent="Body" unique_id=1040936927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 target_position = Vector3(0, 0, -1)

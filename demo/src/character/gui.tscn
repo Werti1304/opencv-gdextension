@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cesarhqe2hdmw"]
 
 [ext_resource type="Script" uid="uid://bbhjady62n6kt" path="res://src/character/gui.gd" id="1_q3ftd"]
+[ext_resource type="Script" uid="uid://52ufcyrxukws" path="res://src/character/back_to_main_menu.gd" id="2_jvwj6"]
 
-[node name="Gui" type="Control" unique_id=407781718 node_paths=PackedStringArray("top_right_label", "top_left_label", "top_right_sprite")]
+[node name="Gui" type="Control" unique_id=407781718 node_paths=PackedStringArray("top_right_label", "top_left_label", "top_right_sprite", "color_rect", "back_to_main_menu")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,9 +12,29 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_q3ftd")
-top_right_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer2/TopRightLabel")
+top_right_label = NodePath("TopRightLabel")
 top_left_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/TopLeftLabel")
 top_right_sprite = NodePath("MarginContainer/HBoxContainer/VBoxContainer2/Sprite2D")
+color_rect = NodePath("ColorRect")
+back_to_main_menu = NodePath("BackToMainMenu")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=512308482]
+visible = false
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.92941177)
+
+[node name="TopRightLabel" type="Label" parent="." unique_id=690765849]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 19.0
+offset_right = 1888.0
+offset_bottom = 42.0
+theme_override_constants/line_spacing = 1
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1721852592]
 layout_mode = 1
@@ -42,15 +63,42 @@ theme_override_constants/line_spacing = 1
 theme_override_font_sizes/font_size = 16
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1802549028]
-custom_minimum_size = Vector2(320, 0)
+custom_minimum_size = Vector2(480, 0)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TopRightLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=690765849]
+[node name="Sprite2D" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=511277325]
+visible = false
 layout_mode = 2
-theme_override_constants/line_spacing = 1
-theme_override_font_sizes/font_size = 16
+expand_mode = 5
+stretch_mode = 5
 
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=2108743375]
-scale = Vector2(0.5, 0.5)
-centered = false
+[node name="BackToMainMenu" type="CenterContainer" parent="." unique_id=1814916145 node_paths=PackedStringArray("label")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jvwj6")
+label = NodePath("VBoxContainer/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackToMainMenu" unique_id=1310985595]
+top_level = true
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="BackToMainMenu/VBoxContainer" unique_id=1507430636]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Back to main menu"
+
+[node name="Button" type="Button" parent="BackToMainMenu/VBoxContainer" unique_id=103162505]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Back to Main Menu"
+
+[connection signal="pressed" from="BackToMainMenu/VBoxContainer/Button" to="BackToMainMenu" method="_on_button_pressed"]

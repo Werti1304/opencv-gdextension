@@ -23,6 +23,8 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7aqon"]
 albedo_color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+emission_enabled = true
+emission = Color(0.056291588, 0.056291603, 0.056291595, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7aqon"]
 material = SubResource("StandardMaterial3D_7aqon")
@@ -55,14 +57,20 @@ points = PackedVector3Array(25.391855, 0.9404762, 25.391855, -25.391855, -0.6468
 metallic = 0.5
 roughness = 0.5
 emission_enabled = true
-emission = Color(0.12796229, 0.15966469, 0.21472377, 1)
+emission = Color(0.48570347, 0.48570353, 0.48570347, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_41b0i"]
 material = SubResource("StandardMaterial3D_7owda")
 size = Vector3(0.5, 1, 0.2)
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wsess"]
+points = PackedVector3Array(0.26587301, 0.50793654, 0.114263974, -0.23927666, -0.4717477, -0.099999994, -0.25793654, -0.50793654, 0.114263974, 0.26587301, -0.50793654, 0.114263974, -0.25793654, 0.50793654, 0.114263974, 0.24721314, 0.4717477, -0.099999994, 0.24721314, -0.4717477, -0.099999994, -0.23927666, 0.4717477, -0.099999994)
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_7owda"]
 viewport_path = NodePath("AI/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7owda"]
+size = Vector3(30, 10, 1)
 
 [node name="HideHall" type="Node3D" unique_id=2037412880]
 
@@ -120,7 +128,7 @@ shape = SubResource("ConvexPolygonShape3D_41b0i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WallsNRoof/Wall4" unique_id=1150673252]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 mesh = SubResource("BoxMesh_7owda")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WallsNRoof/Wall4" unique_id=454515324]
@@ -1200,38 +1208,80 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 10.7439995)
 [node name="PropsParent" type="Node3D" parent="Floor" unique_id=1533074596]
 
 [node name="HideProp" type="StaticBody3D" parent="Floor/PropsParent" unique_id=24826865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 8)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/PropsParent/HideProp" unique_id=2115345639]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 8)
 mesh = SubResource("BoxMesh_41b0i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/PropsParent/HideProp" unique_id=1378284718]
+shape = SubResource("ConvexPolygonShape3D_wsess")
+
+[node name="HideProp2" type="StaticBody3D" parent="Floor/PropsParent" unique_id=40478257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/PropsParent/HideProp2" unique_id=868620530]
+mesh = SubResource("BoxMesh_41b0i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/PropsParent/HideProp2" unique_id=1830542063]
+shape = SubResource("ConvexPolygonShape3D_wsess")
+
+[node name="HideProp3" type="StaticBody3D" parent="Floor/PropsParent" unique_id=1553558302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/PropsParent/HideProp3" unique_id=89406276]
+mesh = SubResource("BoxMesh_41b0i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/PropsParent/HideProp3" unique_id=1343365597]
+shape = SubResource("ConvexPolygonShape3D_wsess")
 
 [node name="Character" parent="." unique_id=1145805555 instance=ExtResource("1_2u72s")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3, 0.5, 10)
 
-[node name="bevel-hq-brick-1x12" parent="." unique_id=1792743486 instance=ExtResource("4_nniu5")]
+[node name="Seeker_Light" parent="." unique_id=1792743486 instance=ExtResource("4_nniu5")]
 transform = Transform3D(1, 0, 0, 0, 1, -5.563627e-08, 0, 5.563627e-08, 1, 3, 1.87, 10)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="bevel-hq-brick-1x12" unique_id=1899906754]
+[node name="SpotLight3D" type="SpotLight3D" parent="Seeker_Light" unique_id=1899906754]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+spot_angle = 20.0
 
-[node name="HideAndSeek" parent="." unique_id=1601410567 instance=ExtResource("5_7owda")]
+[node name="On_Off_Light" parent="." unique_id=666563008 instance=ExtResource("4_nniu5")]
+transform = Transform3D(1, 0, 0, 0, 1, -5.563627e-08, 0, 5.563627e-08, 1, 3, 1.87, 10)
+
+[node name="RoomLight" type="OmniLight3D" parent="On_Off_Light" unique_id=1960494405]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -3.5762787e-07, -5)
+omni_range = 7.0
+
+[node name="HideAndSeek" parent="." unique_id=1601410567 node_paths=PackedStringArray("room_light") instance=ExtResource("5_7owda")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 3, 0, 0)
+room_light = NodePath("../On_Off_Light/RoomLight")
 
 [node name="Camera3D" parent="HideAndSeek/AI/SubViewport" parent_id_path=PackedInt32Array(1601410567, 120751376) index="0" unique_id=1685741371]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.9980574, 0.5, 6.4291487)
+far = 15.0
 
 [node name="HideAndSeekSeekerView" parent="HideAndSeek/AI" parent_id_path=PackedInt32Array(1601410567, 1953950361) index="5" unique_id=323801954]
 transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 5, 3.5, 3)
+visible = false
 texture = SubResource("ViewportTexture_7owda")
 
 [node name="HideAndSeekProcessed" parent="HideAndSeek/AI" parent_id_path=PackedInt32Array(1601410567, 1953950361) index="6" unique_id=1339070139]
 transform = Transform3D(-0.8, 0, -1.2079664e-07, 0, 0.8, 0, 1.2079664e-07, 0, -0.8, -5, 3.5, 3)
+visible = false
 
 [node name="bevel-hq-brick-1x13" parent="HideAndSeek" unique_id=279170064 instance=ExtResource("4_nniu5")]
 transform = Transform3D(5, 0, 0, 0, 5, -2.7818135e-07, 0, 2.7818135e-07, 5, 0, 9.4, 5.5)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="HideAndSeek/bevel-hq-brick-1x13" unique_id=985844546]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-spot_angle = 30.0
+spot_angle = 20.0
+
+[node name="WinArea" type="Area3D" parent="HideAndSeek" unique_id=1952026259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HideAndSeek/WinArea" unique_id=380152742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 5, 0)
+shape = SubResource("BoxShape3D_7owda")
+
+[connection signal="body_entered" from="HideAndSeek/WinArea" to="HideAndSeek" method="_on_win_area_body_entered"]
 
 [editable path="HideAndSeek"]

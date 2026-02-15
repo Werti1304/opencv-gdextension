@@ -18,51 +18,100 @@ void OpenCVHideAndSeek::_bind_methods() {
 
 Ref<Image> OpenCVHideAndSeek::getProcessedViewportTexture() {
 
-	Ref<ViewportTexture> vp_texture = viewport->get_texture();
-	Ref<Image> image = vp_texture->get_image();
-	cv::Mat mat = OpenCVExtension::image_to_mat(image);
+    Ref<ViewportTexture> vp_texture = viewport->get_texture();
+    Ref<Image> image = vp_texture->get_image();
+    cv::Mat mat = OpenCVExtension::image_to_mat(image);
 
-	cv::cvtColor(mat, mat, cv::COLOR_BGR2HSV);
+    cv::Mat original = mat.clone();
 
-	// We need 2 range since red goes from around hue 0-10 and 170-180
-	cv::Scalar lower_red_1(0, 120, 70);
-	cv::Scalar upper_red_1(10, 255, 255);
-	cv::Scalar lower_red_2(170, 120, 70);
-	cv::Scalar upper_red_2(180, 255, 255);
+    cv::cvtColor(mat, mat, cv::COLOR_BGR2HSV);
 
-	// Threshold HSV image
-	cv::Mat mask1;
-	cv::Mat mask2;
-	cv::Mat mask;
-	cv::inRange(mat, lower_red_1, upper_red_1, mask1);
-	cv::inRange(mat, lower_red_2, upper_red_2, mask2);
-	mask = mask1 | mask2;
+    // Red ranges
+    cv::Scalar lower_red_1(0, 120, 70);
+    cv::Scalar upper_red_1(10, 255, 255);
+    cv::Scalar lower_red_2(170, 120, 70);
+    cv::Scalar upper_red_2(180, 255, 255);
 
-	 // Optional: reduce noise
-	cv::erode(mask, mask, cv::Mat(), cv::Point(-1,-1), 1);
-	cv::dilate(mask, mask, cv::Mat(), cv::Point(-1,-1), 2);
+    cv::Mat mask1, mask2, mask;
+    cv::inRange(mat, lower_red_1, upper_red_1, mask1);
+    cv::inRange(mat, lower_red_2, upper_red_2, mask2);
+    mask = mask1 | mask2;
 
-	// Find contours
-	std::vector<std::vector<cv::Point>> contours;
-	cv::findContours(mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+    cv::erode(mask, mask, cv::Mat(), cv::Point(-1,-1), 1);
+    cv::dilate(mask, mask, cv::Mat(), cv::Point(-1,-1), 2);
 
-	if(contours.empty()) {
-		return nullptr;
-	}
+    std::vector<std::vector<cv::Point>> contours;
+    cv::findContours(mask, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
-	for (const auto& contour : contours) {
-		double area = cv::contourArea(contour);
-		if (area > 500) { // Filter small noise
-				cv::drawContours(mat, std::vector<std::vector<cv::Point>>{contour},
-													-1, cv::Scalar(0, 255, 0), 5);
-		}
-	}
+    if (contours.empty())
+        return nullptr;
 
-	cv::cvtColor(mat, mat, cv::COLOR_HSV2BGR);
-	Ref<Image> result = OpenCVExtension::mat_to_image(mat);
-	
-	return result;
+    // Find largest contour
+    double max_area = 0;
+    std::vector<cv::Point> largest_contour;
+
+    for (const auto& contour : contours) {
+        double area = cv::contourArea(contour);
+        if (area > 10 && area > max_area) {
+            max_area = area;
+            largest_contour = contour;
+        }
+    }
+
+    if (largest_contour.empty())
+        return nullptr;
+
+    cv::Rect box = cv::boundingRect(largest_contour);
+
+    // ✅ Add small padding
+    int padding = 20;
+    box.x -= padding;
+    box.y -= padding;
+    box.width += padding * 2;
+    box.height += padding * 2;
+
+    // Clamp inside image
+    box.x = std::max(0, box.x);
+    box.y = std::max(0, box.y);
+    box.width = std::min(original.cols - box.x, box.width);
+    box.height = std::min(original.rows - box.y, box.height);
+
+    // ✅ Maintain aspect ratio
+    float target_aspect = (float)original.cols / (float)original.rows;
+    float box_aspect = (float)box.width / (float)box.height;
+
+    if (box_aspect > target_aspect) {
+        // Too wide → increase height
+        int new_height = static_cast<int>(box.width / target_aspect);
+        int diff = new_height - box.height;
+        box.y -= diff / 2;
+        box.height = new_height;
+    } else {
+        // Too tall → increase width
+        int new_width = static_cast<int>(box.height * target_aspect);
+        int diff = new_width - box.width;
+        box.x -= diff / 2;
+        box.width = new_width;
+    }
+
+    // Clamp again after aspect correction
+    box.x = std::max(0, box.x);
+    box.y = std::max(0, box.y);
+    box.width = std::min(original.cols - box.x, box.width);
+    box.height = std::min(original.rows - box.y, box.height);
+
+    // Crop
+    cv::Mat cropped = original(box);
+
+    // Resize to full viewport (no stretching now)
+    cv::Mat zoomed;
+    cv::resize(cropped, zoomed, original.size(), 0, 0, cv::INTER_CUBIC);
+
+    Ref<Image> result = OpenCVExtension::mat_to_image(zoomed);
+    return result;
 }
+
+
 
 void OpenCVHideAndSeek::setAreaThreshold(int threshold) {
 	area_threshold = threshold;

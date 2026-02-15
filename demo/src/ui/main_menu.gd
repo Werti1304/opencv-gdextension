@@ -4,6 +4,8 @@ extends Control
 @export var hide_and_seek_scene : PackedScene
 @export var webcam_scene : PackedScene
 
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_video_benchmark_button_pressed() -> void:
 	get_tree().change_scene_to_packed(video_benchmark_scene)
@@ -15,3 +17,7 @@ func _on_hide_and_seek_button_pressed() -> void:
 
 func _on_webcam_obj_det_button_pressed() -> void:
 	get_tree().change_scene_to_packed(webcam_scene)
+
+
+func _on_button_pressed() -> void:
+	get_tree().quit(0)
