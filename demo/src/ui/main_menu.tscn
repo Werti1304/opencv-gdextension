@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://btlvm04gad5cq" path="res://src/ui/main_menu.gd" id="1_qkuje"]
 [ext_resource type="PackedScene" uid="uid://cbl45bsjnuvw" path="res://src/world/overworld.tscn" id="2_5mgu5"]
-[ext_resource type="PackedScene" uid="uid://p4vqp1xt4e38" path="res://src/world/rooms/hide_hall.tscn" id="3_5mgu5"]
-[ext_resource type="PackedScene" uid="uid://dfh1d6tmesu4j" path="res://src/world/rooms/WebcamScene.tscn" id="4_5mgu5"]
+[ext_resource type="PackedScene" uid="uid://p4vqp1xt4e38" path="res://src/world/hide/hide_hall.tscn" id="3_5mgu5"]
+[ext_resource type="PackedScene" uid="uid://dfh1d6tmesu4j" path="res://src/world/webcam/webcam.tscn" id="4_5mgu5"]
 
 [node name="MainMenu" type="Control" unique_id=1811623747]
 layout_mode = 3

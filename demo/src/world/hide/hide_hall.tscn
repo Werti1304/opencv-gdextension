@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://p4vqp1xt4e38"]
 
 [ext_resource type="PackedScene" uid="uid://dtrajbmffube7" path="res://src/character/character.tscn" id="1_2u72s"]
-[ext_resource type="Script" uid="uid://dvvmweocnxbci" path="res://src/world/rooms/bevel_parent.gd" id="1_7aqon"]
-[ext_resource type="PackedScene" uid="uid://do27qprdit5gc" path="res://src/world/rooms/hide_hall_assets/bevel_lq_plate_4x_82.tscn" id="2_41b0i"]
-[ext_resource type="PackedScene" uid="uid://cm41a3mvv6kvq" path="res://src/world/rooms/hide_hall_assets/bevel_hq_brick_1x_12_illuminated.tscn" id="4_nniu5"]
-[ext_resource type="PackedScene" uid="uid://c86g0wmp2teaw" path="res://src/world/rooms/hide_and_seek.tscn" id="5_7owda"]
+[ext_resource type="Script" uid="uid://dvvmweocnxbci" path="res://src/world/hide/bevel_parent.gd" id="1_7aqon"]
+[ext_resource type="PackedScene" uid="uid://do27qprdit5gc" path="res://src/world/hide_hall_assets/bevel_lq_plate_4x_82.tscn" id="2_41b0i"]
+[ext_resource type="PackedScene" uid="uid://cm41a3mvv6kvq" path="res://src/world/hide_hall_assets/bevel_hq_brick_1x_12_illuminated.tscn" id="4_nniu5"]
+[ext_resource type="PackedScene" uid="uid://c86g0wmp2teaw" path="res://src/world/hide/hide_and_seek.tscn" id="5_7owda"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7owda"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -66,7 +66,7 @@ size = Vector3(0.5, 1, 0.2)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wsess"]
 points = PackedVector3Array(0.26587301, 0.50793654, 0.114263974, -0.23927666, -0.4717477, -0.099999994, -0.25793654, -0.50793654, 0.114263974, 0.26587301, -0.50793654, 0.114263974, -0.25793654, 0.50793654, 0.114263974, 0.24721314, 0.4717477, -0.099999994, 0.24721314, -0.4717477, -0.099999994, -0.23927666, 0.4717477, -0.099999994)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7owda"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_j1rxl"]
 viewport_path = NodePath("AI/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7owda"]
@@ -1262,7 +1262,7 @@ far = 15.0
 [node name="HideAndSeekSeekerView" parent="HideAndSeek/AI" parent_id_path=PackedInt32Array(1601410567, 1953950361) index="5" unique_id=323801954]
 transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 5, 3.5, 3)
 visible = false
-texture = SubResource("ViewportTexture_7owda")
+texture = SubResource("ViewportTexture_j1rxl")
 
 [node name="HideAndSeekProcessed" parent="HideAndSeek/AI" parent_id_path=PackedInt32Array(1601410567, 1953950361) index="6" unique_id=1339070139]
 transform = Transform3D(-0.8, 0, -1.2079664e-07, 0, 0.8, 0, 1.2079664e-07, 0, -0.8, -5, 3.5, 3)

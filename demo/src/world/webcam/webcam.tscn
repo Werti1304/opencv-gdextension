@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dfh1d6tmesu4j"]
+
+[ext_resource type="Script" uid="uid://h6n681ypc46p" path="res://src/world/webcam/webcam.gd" id="1_1bhr3"]
+
+[node name="WebcamScene" type="Control" unique_id=1143138984 node_paths=PackedStringArray("camera_canvas", "overlay_canvas", "threshold_slider", "mode_button", "overlay_button", "rectangle_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1bhr3")
+camera_canvas = NodePath("VBoxContainer/HBoxContainer/CameraInput")
+overlay_canvas = NodePath("VBoxContainer/HBoxContainer/CameraProcessed")
+threshold_slider = NodePath("VBoxContainer/HSlider")
+mode_button = NodePath("VBoxContainer/HBoxContainer2/OptionButton")
+overlay_button = NodePath("VBoxContainer/HBoxContainer2/CheckButton")
+rectangle_label = NodePath("VBoxContainer/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=657126020]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=783139313]
+layout_mode = 2
+
+[node name="CameraInput" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=446776094]
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 5
+
+[node name="CameraProcessed" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1217741222]
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=258951763]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2" unique_id=1257207328]
+layout_mode = 2
+text = "Overlay"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2" unique_id=1013098341]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Color"
+popup/item_0/id = 0
+popup/item_1/text = "Gray"
+popup/item_1/id = 1
+popup/item_2/text = "Threshold"
+popup/item_2/id = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=17605384]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer" unique_id=1364877965]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+max_value = 255.0
+value = 100.0
