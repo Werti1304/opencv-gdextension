@@ -22,6 +22,9 @@ void OpenCVCamera::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_threshold"), &OpenCVCamera::set_threshold);
 	ClassDB::bind_method(D_METHOD("get_threshold_image"), &OpenCVCamera::get_threshold_image);
 
+	ClassDB::bind_method(D_METHOD("get_hands", "processing state"), &OpenCVCamera::get_hands_image, DEFVAL(0));
+	ClassDB::bind_method(D_METHOD("set_skin_color_ranges", "lower skin color", "upper skin color"), &OpenCVCamera::set_skin_color_ranges);
+
 	ClassDB::bind_method(D_METHOD("find_rectangles"), &OpenCVCamera::find_rectangles);
 }
 
@@ -55,6 +58,93 @@ void OpenCVCamera::open_file(String path) {
 
 void OpenCVCamera::close() {
 	capture.release();
+}
+
+Ref<Image> OpenCVCamera::get_hands_image(int state) {
+	/*
+	State:
+	0 -> binary mask
+	
+	*/ 
+
+	// BINARY MASK
+	// Snippet from https://medium.com/@muehler.v/simple-hand-gesture-recognition-using-opencv-and-javascript-eb3d6ced28a0
+
+	update_frame();
+
+	cv::Mat processed;
+	cv::cvtColor(frame_rgb, processed, cv::COLOR_BGR2HLS);
+	if(state == 0)
+	{
+		return mat_to_image(processed);
+	}
+
+	cv::Mat range_img;
+	cv::inRange(processed, skin_color_lower, skin_color_upper, processed);
+
+	if(state == 1)
+	{
+		return mat_to_image(processed);
+	}
+
+	const cv::Size2d blur_kernel = cv::Size2d(10, 10);
+	cv::blur(processed, processed, blur_kernel);
+	cv::threshold(processed, processed, 200, 255, cv::THRESH_BINARY);
+
+	if(state == 2)
+	{
+		return mat_to_image(processed);
+	}
+
+	// const makeHandMask = (img) => {
+	// // filter by skin color
+	// const imgHLS = img.cvtColor(cv.COLOR_BGR2HLS);
+	// const rangeMask = imgHLS.inRange(skinColorLower(0), skinColorUpper(15));
+
+	// // remove noise
+	// const blurred = rangeMask.blur(new cv.Size(10, 10));
+	// const thresholded = blurred.threshold(
+	// 	200,
+	// 	255,
+	// 	cv.THRESH_BINARY
+	// );
+
+	// return mat_to_image(thresholded);
+	// };
+}
+
+void OpenCVCamera::set_skin_color_ranges(Color skin_color_lower, Color skin_color_upper)
+{
+	this->skin_color_lower = cv::Scalar(skin_color_lower.get_h() * 180.0f, skin_color_lower.get_s() * 255.0f, skin_color_lower.get_v() * 255.0f);
+	this->skin_color_upper = cv::Scalar(skin_color_upper.get_h() * 180.0f, skin_color_upper.get_s() * 255.0f, skin_color_upper.get_v() * 255.0f);
+
+	UtilityFunctions::print(
+		"Godot Lower HSV: ",
+		skin_color_lower.get_h(), ", ",
+		skin_color_lower.get_s(), ", ",
+		skin_color_lower.get_v()
+	);
+
+	UtilityFunctions::print(
+		"OpenCV Lower HSV: ",
+		this->skin_color_lower[0], ", ",
+		this->skin_color_lower[1], ", ",
+		this->skin_color_lower[2]
+	);
+
+	UtilityFunctions::print(
+		"Godot Upper HSV: ",
+		skin_color_upper.get_h(), ", ",
+		skin_color_upper.get_s(), ", ",
+		skin_color_upper.get_v()
+	);
+
+	UtilityFunctions::print(
+		"OpenCV Upper HSV: ",
+		this->skin_color_upper[0], ", ",
+		this->skin_color_upper[1], ", ",
+		this->skin_color_upper[2]
+	);
 }
 
 void OpenCVCamera::update_frame() {

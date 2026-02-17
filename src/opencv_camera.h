@@ -35,6 +35,15 @@ class OpenCVCamera : public RefCounted {
 	bool flip_lr, flip_ud;
 	double threshold;
 
+	// Hand Detection
+	cv::Scalar skin_color_lower;
+	cv::Scalar skin_color_upper;
+
+	void set_skin_color_ranges(Color skin_color_lower, Color skin_color_upper);
+	Ref<Image> get_hands_image(int state);
+
+	// Hand Detection End
+
 	void update_frame();
 	Ref<Image> mat_to_image(cv::Mat mat);
 	cv::Mat calculateStripDimensions(double dx, double dy, StripDimensions &st, bool drawOnOverlay);
