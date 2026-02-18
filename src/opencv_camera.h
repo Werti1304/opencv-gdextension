@@ -62,7 +62,7 @@ public:
 	OpenCVCamera();
 	~OpenCVCamera();
 
-	void open(int device, int width, int height);
+	bool open(int device, int width, int height);
 	void open_file(String path);
 	void close();
 	Ref<Image> get_image();

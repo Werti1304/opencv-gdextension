@@ -16,13 +16,18 @@ var camera : OpenCVCamera = OpenCVCamera.new();
 @export var color_picker_higher : ColorPickerButton
 
 @export var ball_game : BallGame
+@export var error_dialog : AcceptDialog
 
 var texture : ImageTexture;
 var overlay_texture : ImageTexture;
 
+var error_state : bool = false
+
 func _ready():
-	camera.open(0, 1920, 1080);
-	# camera.open_file("C:/Users/Leo/Downloads/MarkerCube.mp4");
+	if(!camera.open(0, 1920, 1080)):
+		error_dialog.popup_centered()
+		error_state = true
+		return
 	camera.flip(false, false);
 	texture = ImageTexture.new();
 	overlay_texture = ImageTexture.new();
@@ -34,6 +39,9 @@ func _input(event: InputEvent) -> void:
 		get_tree().change_scene_to_packed(load("res://src/ui/main_menu.tscn"))
 
 func _process(_delta):    
+	if error_state == true:
+		return
+		
 	match mode_button.selected:
 		0: # Color
 			texture.set_image(camera.get_image());
@@ -71,3 +79,11 @@ func _on_lower_skin_color_picker_color_changed(_color: Color) -> void:
 
 func _on_upper_skin_color_picker_color_changed(_color: Color) -> void:
 	camera.set_skin_color_ranges(color_picker_lower.color, color_picker_higher.color)
+
+
+func _on_accept_dialog_canceled() -> void:
+	get_tree().change_scene_to_packed(load("res://src/ui/main_menu.tscn"))
+
+
+func _on_accept_dialog_confirmed() -> void:
+	get_tree().change_scene_to_packed(load("res://src/ui/main_menu.tscn"))

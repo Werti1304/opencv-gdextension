@@ -44,14 +44,16 @@ OpenCVCamera::~OpenCVCamera() {
 	close();
 }
 
-void OpenCVCamera::open(int device, int width = 1920, int height = 1080) {
+bool OpenCVCamera::open(int device, int width = 1920, int height = 1080) {
 	capture.open(device);
 	capture.set(cv::CAP_PROP_FRAME_WIDTH, width);
 	capture.set(cv::CAP_PROP_FRAME_HEIGHT, height);
 	if (!capture.isOpened()) {
 		capture.release();
 		UtilityFunctions::push_error("Couldn't open camera.");
+		return false;
 	}
+	return true;
 }
 
 void OpenCVCamera::open_file(String path) {
@@ -230,7 +232,6 @@ Ref<Image> OpenCVCamera::get_hands_image(int state) {
 								2);
 
 				hand_direction = godot::Vector2i(direction.x, direction.y);
-				UtilityFunctions::print(hand_direction, "\n");
 			}
 			else
 			{
@@ -713,7 +714,7 @@ std::array<cv::Point2f, 4> OpenCVCamera::calculateSubpixCorners(float subpix_lin
 		// c -> Determinant = 0 -> linear dependent -> the direction vectors are parallel -> No division with 0
 		double c = v1 * u0 - v0 * u1;
 		if (fabs(c) < 0.001) {
-			std::cout << "lines parallel" << std::endl;
+			// std::cout << "lines parallel" << std::endl;
 			continue;
 		}
 
