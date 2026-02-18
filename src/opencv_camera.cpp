@@ -30,6 +30,7 @@ void OpenCVCamera::_bind_methods() {
 
 	ClassDB::bind_method(D_METHOD("get_hands", "processing state"), &OpenCVCamera::get_hands_image, DEFVAL(0));
 	ClassDB::bind_method(D_METHOD("set_skin_color_ranges", "lower skin color", "upper skin color"), &OpenCVCamera::set_skin_color_ranges);
+	ClassDB::bind_method(D_METHOD("get_hand_direction"), &OpenCVCamera::get_hand_direction);
 
 	ClassDB::bind_method(D_METHOD("find_rectangles"), &OpenCVCamera::find_rectangles);
 }
@@ -115,11 +116,15 @@ bool calculateFingers(std::vector<cv::Point>& contour, cv::Mat& drawing, int& fi
 Ref<Image> OpenCVCamera::get_hands_image(int state) {
 	
 	update_frame();
-	
-	cv::Mat processed;
 
 	// Pre-Processing
-	cv::bilateralFilter(frame_rgb, processed, 5, 50, 100);
+	cv::Mat resized;
+	cv::resize(frame_rgb, resized, cv::Size(960, 540), cv::INTER_AREA);
+	cv::Rect crop_rect(0, 0, resized.rows, resized.rows);
+	cv::Mat cropped = resized(crop_rect);
+	cv::Mat processed;
+	cv::bilateralFilter(cropped, processed, 5, 50, 100);
+	//cv::GaussianBlur(cropped, processed, cv::Size(5,5), 0);
 	cv::flip(processed, processed, 1);
 
 	if(state == 0)
@@ -137,14 +142,18 @@ Ref<Image> OpenCVCamera::get_hands_image(int state) {
 	cv::Mat img;
 	cv::bitwise_and(processed, processed, img, fg_mask);
 
-	if(state == 1)
-	{
-		return mat_to_image(img);
-	}
-
 	cv::cvtColor(img, img, cv::COLOR_BGR2HSV);
 	cv::Mat skin_mask;
 	cv::inRange(img, skin_color_lower, skin_color_upper, skin_mask);
+
+	if(state == 1)
+	{
+		return mat_to_image(skin_mask);
+	}
+
+	// cv::Mat kernel_morph = cv::getStructuringElement(cv::MORPH_ELLIPSE, {5,5});
+	// cv::morphologyEx(skin_mask, skin_mask, cv::MORPH_OPEN, kernel_morph);
+	// cv::morphologyEx(skin_mask, skin_mask, cv::MORPH_CLOSE, kernel_morph);
 
 	if(state == 2)
 	{
@@ -173,73 +182,75 @@ Ref<Image> OpenCVCamera::get_hands_image(int state) {
 			}
 		}
 
-		std::vector<cv::Point> res = contours[maxAreaIdx];
+		if(maxArea > processed.total() * 0.01)
+		{
+			std::vector<cv::Point> res = contours[maxAreaIdx];
 
-		std::vector<cv::Point> hull;
-		convexHull(res, hull);
+			std::vector<cv::Point> hull;
+			convexHull(res, hull);
 
-		cv::Mat drawing = cv::Mat::zeros(img.size(), CV_8UC3);
-		drawContours(drawing, contours, maxAreaIdx, cv::Scalar(0,255,0), 2);
-		drawContours(drawing, std::vector<std::vector<cv::Point>>{hull}, 0, cv::Scalar(0,0,255), 3);
+			cv::Mat drawing = cv::Mat::zeros(img.size(), CV_8UC3);
+			drawContours(drawing, contours, maxAreaIdx, cv::Scalar(0,255,0), 2);
+			drawContours(drawing, std::vector<std::vector<cv::Point>>{hull}, 0, cv::Scalar(0,0,255), 3);
 
-		int fingerCount = 0;
-		bool isFinishCal = calculateFingers(res, drawing, fingerCount);
+			// int fingerCount = 0;
+			// bool isFinishCal = calculateFingers(res, drawing, fingerCount);
 
-		UtilityFunctions::print("Fingers: ", fingerCount, '\n');
+			// UtilityFunctions::print("Fingers: ", fingerCount, '\n');
 
-		return mat_to_image(drawing);
+			// ---- Compute image center ----
+			cv::Point2f image_center(
+				processed.cols / 2.0f,
+				processed.rows / 2.0f
+			);
+
+			// ---- Compute hull center using moments ----
+			cv::Moments m = cv::moments(hull);
+
+			if (m.m00 != 0)   // avoid division by zero
+			{
+				cv::Point2f hull_center(
+					static_cast<float>(m.m10 / m.m00),
+					static_cast<float>(m.m01 / m.m00)
+				);
+
+				// ---- Compute vector from image center to hull center ----
+				cv::Point2f direction = hull_center - image_center;
+
+				// Print vector
+				std::cout << "Vector (dx, dy): "
+						<< direction.x << ", "
+						<< direction.y << std::endl;
+
+				// ---- Optional: Draw it ----
+				cv::arrowedLine(drawing,
+								image_center,
+								hull_center,
+								cv::Scalar(255, 0, 0),
+								2);
+
+				hand_direction = godot::Vector2i(direction.x, direction.y);
+				UtilityFunctions::print(hand_direction, "\n");
+			}
+			else
+			{
+				hand_direction = godot::Vector2i(0, 0);
+			}
+			return mat_to_image(drawing);
+		}
+		else
+		{
+			hand_direction = godot::Vector2i(0, 0);
+		}
+
+		return mat_to_image(skin_mask);
+	}
+	else
+	{
+		hand_direction = godot::Vector2i(0, 0);
 	}
 
 	return mat_to_image(skin_mask);
-
-	/*
-	State:
-	0 -> binary mask
-	
-	*/ 
-
-	// BINARY MASK
-	// Snippet from https://medium.com/@muehler.v/simple-hand-gesture-recognition-using-opencv-and-javascript-eb3d6ced28a0
-
-	// cv::Mat processed;
-	// cv::cvtColor(frame_rgb, processed, cv::COLOR_BGR2HLS);
-	// if(state == 0)
-	// {
-	// 	return mat_to_image(processed);
-	// }
-
-	// cv::Mat range_img;
-	// cv::inRange(processed, skin_color_lower, skin_color_upper, processed);
-
-	// if(state == 1)
-	// {
-	// 	return mat_to_image(processed);
-	// }
-
-	// const cv::Size2d blur_kernel = cv::Size2d(10, 10);
-	// cv::blur(processed, processed, blur_kernel);
-	// cv::threshold(processed, processed, 200, 255, cv::THRESH_BINARY);
-
-	// if(state == 2)
-	// {
-	// 	return mat_to_image(processed);
-	// }
-
-	// const makeHandMask = (img) => {
-	// // filter by skin color
-	// const imgHLS = img.cvtColor(cv.COLOR_BGR2HLS);
-	// const rangeMask = imgHLS.inRange(skinColorLower(0), skinColorUpper(15));
-
-	// // remove noise
-	// const blurred = rangeMask.blur(new cv.Size(10, 10));
-	// const thresholded = blurred.threshold(
-	// 	200,
-	// 	255,
-	// 	cv.THRESH_BINARY
-	// );
-
-	// return mat_to_image(thresholded);
-	// };
 }
 
 void OpenCVCamera::set_skin_color_ranges(Color skin_color_lower, Color skin_color_upper)
@@ -274,6 +285,11 @@ void OpenCVCamera::set_skin_color_ranges(Color skin_color_lower, Color skin_colo
 		this->skin_color_upper[1], ", ",
 		this->skin_color_upper[2]
 	);
+}
+
+godot::Vector2i OpenCVCamera::get_hand_direction()
+{
+	return hand_direction;
 }
 
 void OpenCVCamera::update_frame() {

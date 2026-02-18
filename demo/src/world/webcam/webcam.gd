@@ -14,6 +14,9 @@ var camera : OpenCVCamera = OpenCVCamera.new();
 @export_group("Hand Detection")
 @export var color_picker_lower : ColorPickerButton
 @export var color_picker_higher : ColorPickerButton
+
+@export var ball_game : BallGame
+
 var texture : ImageTexture;
 var overlay_texture : ImageTexture;
 
@@ -25,6 +28,10 @@ func _ready():
 	overlay_texture = ImageTexture.new();
 	threshold_slider.value_changed.connect(_on_threshold_changed);
 	camera.set_skin_color_ranges(color_picker_lower.color, color_picker_higher.color)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("esc"):
+		get_tree().change_scene_to_packed(load("res://src/ui/main_menu.tscn"))
 
 func _process(_delta):    
 	match mode_button.selected:
@@ -44,6 +51,7 @@ func _process(_delta):
 			texture.set_image(camera.get_hands(2));
 		6: # Hand Detection - Blurred Range
 			texture.set_image(camera.get_hands(3));
+			ball_game._on_direction_change(camera.get_hand_direction())
 	rectangle_label.text = str(camera.find_rectangles(overlay_button.button_pressed));
 	
 	if overlay_button.button_pressed:

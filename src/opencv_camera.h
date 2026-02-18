@@ -38,9 +38,11 @@ class OpenCVCamera : public RefCounted {
 	// Hand Detection
 	cv::Scalar skin_color_lower;
 	cv::Scalar skin_color_upper;
+	godot::Vector2i hand_direction;
 
 	void set_skin_color_ranges(Color skin_color_lower, Color skin_color_upper);
 	Ref<Image> get_hands_image(int state);
+	godot::Vector2i get_hand_direction();
 
 	// Hand Detection End
 
