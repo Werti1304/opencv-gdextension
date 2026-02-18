@@ -24,6 +24,7 @@ func _ready():
 	texture = ImageTexture.new();
 	overlay_texture = ImageTexture.new();
 	threshold_slider.value_changed.connect(_on_threshold_changed);
+	camera.set_skin_color_ranges(color_picker_lower.color, color_picker_higher.color)
 
 func _process(_delta):    
 	match mode_button.selected:
@@ -41,6 +42,8 @@ func _process(_delta):
 			texture.set_image(camera.get_hands(1));
 		5: # Hand Detection - Blurred Range
 			texture.set_image(camera.get_hands(2));
+		6: # Hand Detection - Blurred Range
+			texture.set_image(camera.get_hands(3));
 	rectangle_label.text = str(camera.find_rectangles(overlay_button.button_pressed));
 	
 	if overlay_button.button_pressed:

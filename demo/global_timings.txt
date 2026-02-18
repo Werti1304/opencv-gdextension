@@ -1,16 +1,16 @@
 === Averaged Timings ===
- 20.227 ms  Grab from viewport/gpu
-  3.115 ms  Image to Mat
-  8.908 ms  Processing
-  1.852 ms  Processed -> Godot Color Space
-  3.935 ms  Mat to Image
-=  38.037 ms  Total per Frame
+ 16.199 ms  Grab from viewport/gpu
+  3.040 ms  Image to Mat
+  5.668 ms  Processing
+  2.117 ms  Processed -> Godot Color Space
+  3.971 ms  Mat to Image
+=  30.996 ms  Total per Frame
 
 === System Info ===
 OS: Windows 10.0.22621
 CPU: 13th Gen Intel(R) Core(TM) i7-1355U
 CPU Cores: 12
-RAM (MB): -338
+RAM (MB): -336
 GPU: Intel(R) Iris(R) Xe Graphics
 GPU Vendor: Intel
 

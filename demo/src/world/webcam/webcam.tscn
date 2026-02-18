@@ -52,7 +52,7 @@ text = "Overlay"
 [node name="OptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2" unique_id=1013098341]
 layout_mode = 2
 selected = 0
-item_count = 6
+item_count = 7
 popup/item_0/text = "Color"
 popup/item_0/id = 0
 popup/item_1/text = "Gray"
@@ -65,6 +65,8 @@ popup/item_4/text = "Hands Mask"
 popup/item_4/id = 4
 popup/item_5/text = "Mask blurred"
 popup/item_5/id = 5
+popup/item_6/text = "Hand"
+popup/item_6/id = 6
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1878173803]
 layout_mode = 2
@@ -73,7 +75,7 @@ text = "Lower Skin Tone:"
 [node name="LowerSkinColorPicker" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer2" unique_id=2022390588]
 layout_mode = 2
 text = "Lorem "
-color = Color(0.35, 0.27708334, 0.2625, 1)
+color = Color(0.5146, 0.54270667, 0.62, 1)
 edit_alpha = false
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1039202166]
@@ -83,7 +85,7 @@ text = "Upper Skin Tone:"
 [node name="UpperSkinColorPicker" type="ColorPickerButton" parent="VBoxContainer/HBoxContainer2" unique_id=2056043395]
 layout_mode = 2
 text = "Lorem "
-color = Color(1, 0.6458334, 0.14999998, 1)
+color = Color(0.60350025, 0.39, 1, 1)
 edit_alpha = false
 
 [node name="Label" type="Label" parent="VBoxContainer" unique_id=17605384]
@@ -95,6 +97,9 @@ custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 max_value = 255.0
 value = 100.0
+
+[node name="Node2D" type="Node2D" parent="." unique_id=283366860]
+position = Vector2(0, 500)
 
 [connection signal="color_changed" from="VBoxContainer/HBoxContainer2/LowerSkinColorPicker" to="." method="_on_lower_skin_color_picker_color_changed"]
 [connection signal="color_changed" from="VBoxContainer/HBoxContainer2/UpperSkinColorPicker" to="." method="_on_upper_skin_color_picker_color_changed"]
