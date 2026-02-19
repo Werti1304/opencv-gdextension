@@ -24,6 +24,7 @@ var overlay_texture : ImageTexture;
 var error_state : bool = false
 
 func _ready():
+	camera.set_cascade_qualifier("res://res/haar_cascades/palm.xml")
 	if(!camera.open(0, 1920, 1080)):
 		error_dialog.popup_centered()
 		error_state = true
@@ -33,7 +34,6 @@ func _ready():
 	overlay_texture = ImageTexture.new();
 	threshold_slider.value_changed.connect(_on_threshold_changed);
 	camera.set_skin_color_ranges(color_picker_lower.color, color_picker_higher.color)
-	camera.set_cascade_qualifier("res://res/haar_cascades/aGest.xml")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("esc"):
@@ -61,8 +61,9 @@ func _process(_delta):
 		6: # Hand Detection - Final
 			texture.set_image(camera.get_hands(3));
 			ball_game._on_direction_change(camera.get_hand_direction())
-		6: # Hand Detection - Haar Cascade Method
+		7: # Hand Detection - Haar Cascade Method
 			texture.set_image(camera.get_hands_image_through_cascade());
+			ball_game._on_direction_change(camera.get_hand_direction())
 			
 	rectangle_label.text = str(camera.find_rectangles(overlay_button.button_pressed));
 	

@@ -6,6 +6,8 @@
 
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/classes/project_settings.hpp>
+#include <godot_cpp/classes/file_access.hpp>
 
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/video/background_segm.hpp>
@@ -296,22 +298,41 @@ godot::Vector2i OpenCVCamera::get_hand_direction()
 	return hand_direction;
 }
 
-void OpenCVCamera::set_cascade_qualifier(godot::String haar_cascade_xml_path) {
-	std::string path = haar_cascade_xml_path.ascii();
-	hand_cascade.load(path);
-	if(hand_cascade.empty())
+void OpenCVCamera::set_cascade_qualifier(godot::String haar_cascade_xml_path) 
+{
+ 	Ref<FileAccess> file = FileAccess::open(haar_cascade_xml_path, FileAccess::READ);
+	if (file.is_null())
 	{
-		UtilityFunctions::push_error("Haar Cascade File not loaded!");
+			UtilityFunctions::push_error("Could not open cascade in PCK");
+			return;
 	}
+
+	PackedByteArray data = file->get_buffer(file->get_length());
+
+	String user_path = "user://temp_cascade.xml";
+	Ref<FileAccess> out = FileAccess::open(user_path, FileAccess::WRITE);
+	out->store_buffer(data);
+	out->close();
+
+	String global_path = ProjectSettings::get_singleton()->globalize_path(user_path);
+
+	hand_cascade.load(global_path.utf8().get_data());
+
+	if (hand_cascade.empty())
+			UtilityFunctions::push_error("Failed to load cascade from extracted file");
+
 }
 
 Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
+	update_frame();
+
 	if(hand_cascade.empty())
 	{
+		UtilityFunctions::push_error("Cascade missing!");
 		return mat_to_image(frame_rgb);
 	}
 
- cv::Mat img;
+ 	cv::Mat img;
 	cv::flip(frame_rgb, img, 1);  // Flip horizontally
 
 	int x = img.cols;
@@ -320,16 +341,24 @@ Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
 	// Convert to grayscale
 	cv::Mat gray;
 	cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+	// cv::equalizeHist(gray, gray);
 
 	// Detect hands
 	std::vector<cv::Rect> hands;
-	hand_cascade.detectMultiScale(gray, hands, 1.6, 5);
+	hand_cascade.detectMultiScale(gray, hands, 1.3, 5);
 
 	// Draw grid
 	cv::line(img, cv::Point(x/2, 0), cv::Point(x/2, y), cv::Scalar(0,0,0), 1);
 	cv::line(img, cv::Point(0, y/2), cv::Point(x, y/2), cv::Scalar(0,0,0), 1);
 
 	// If hands detected
+	UtilityFunctions::print("Hands detected: ", hands.size());
+
+	if(hands.size() == 0)
+	{
+		hand_direction = godot::Vector2i(0, 0);	
+	}
+
 	for (const auto& rect : hands)
 	{
 			int a = rect.x;
@@ -373,9 +402,27 @@ Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
 			cv::rectangle(img, rect, cv::Scalar(255,0,0), 1);
 
 			// Draw line from center of frame to hand center
-			cv::line(img, cv::Point(x/2, y/2), cv::Point(x2, y2), cv::Scalar(0,255,0), 1);
-	}
+			cv::Point img_center = cv::Point(x/2, y/2);
+			cv::Point hand_center = cv::Point(x2, y2);
+			cv::line(img, img_center, hand_center, cv::Scalar(0,255,0), 1);
 
+				// ---- Compute vector from image center to hull center ----
+				cv::Point2f direction = hand_center - img_center;
+
+				// Print vector
+				std::cout << "Vector (dx, dy): "
+						<< direction.x << ", "
+						<< direction.y << std::endl;
+
+				// ---- Optional: Draw it ----
+				cv::arrowedLine(img,
+								img_center,
+								hand_center,
+								cv::Scalar(255, 0, 0),
+								2);
+
+				hand_direction = godot::Vector2i(direction.x, direction.y);
+	}
 	return mat_to_image(img);
 }
 
