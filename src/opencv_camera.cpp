@@ -336,7 +336,7 @@ Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
 	
 	// Pre-Processing
 	cv::Mat resized;
-	cv::resize(frame_rgb, resized, cv::Size(960, 540), cv::INTER_AREA);
+	cv::resize(frame_rgb, resized, cv::Size(1920, 1080), cv::INTER_AREA);
 	cv::Rect crop_rect(0, 0, resized.rows, resized.rows);
 	cv::Mat cropped = resized(crop_rect);
 	cv::bilateralFilter(cropped, img, 5, 50, 100);

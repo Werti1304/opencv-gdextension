@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://be4l0cnpplnql" path="res://src/world/webcam/ball_game.gd" id="2_t1ppm"]
 [ext_resource type="Texture2D" uid="uid://bnt00ktspproh" path="res://res/ball_game/rollingBall_sheet.png" id="2_umjor"]
 
+[sub_resource type="Gradient" id="Gradient_t1ppm"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mcyxw"]
+gradient = SubResource("Gradient_t1ppm")
+fill_from = Vector2(1, 0)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_umjor"]
 texture = ExtResource("2_umjor")
 24:26/size_in_atlas = Vector2i(8, 8)
@@ -87,6 +93,7 @@ layout_mode = 2
 [node name="CameraInput" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=446776094]
 layout_mode = 2
 size_flags_horizontal = 3
+texture = SubResource("GradientTexture2D_mcyxw")
 expand_mode = 1
 stretch_mode = 5
 
