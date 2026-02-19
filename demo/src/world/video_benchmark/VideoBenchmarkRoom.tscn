@@ -7,12 +7,6 @@
 [ext_resource type="Script" uid="uid://bvwr5dkh578nv" path="res://src/world/video_benchmark/viewport_size_settings.gd" id="3_ja6y4"]
 [ext_resource type="Script" uid="uid://dvhffqj2ackc" path="res://src/world/video_benchmark/viewport_fps_setting.gd" id="4_l4x3x"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yoe3o"]
-viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_l4x3x"]
-viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4x3x"]
 albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
 
@@ -20,14 +14,42 @@ albedo_color = Color(0.26293245, 0.26293245, 0.26293245, 1)
 material = SubResource("StandardMaterial3D_l4x3x")
 size = Vector3(1, 40, 80)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_yoe3o"]
+viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l4x3x"]
+viewport_path = NodePath("VideoBenchmarkOriginal/SubViewport")
+
 [node name="VideoBenchmarkRoom" type="Node3D" unique_id=622861206 node_paths=PackedStringArray("subViewportIn", "videoStreamPlayer", "spriteOut", "stats_label", "stats_label_2", "global_stats_label")]
 script = ExtResource("1_r56dq")
 subViewportIn = NodePath("VideoBenchmarkOriginal/SubViewport")
 videoStreamPlayer = NodePath("VideoBenchmarkOriginal/SubViewport/VideoStreamPlayer")
 spriteOut = NodePath("VideoBenchmarkProcessed")
-stats_label = NodePath("PerformanceLabel")
-stats_label_2 = NodePath("PerformanceLabel2")
-global_stats_label = NodePath("GlobalStatsLabel")
+stats_label = NodePath("Labels/PerformanceLabel")
+stats_label_2 = NodePath("Labels/PerformanceLabel2")
+global_stats_label = NodePath("Labels/GlobalStatsLabel")
+
+[node name="Environment" type="Node3D" parent="." unique_id=1779292191]
+
+[node name="Wall" type="MeshInstance3D" parent="Environment" unique_id=157114536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.371813, 17, 11.845146)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../../Interactables/Operations")
+
+[node name="Wall2" type="MeshInstance3D" parent="Environment" unique_id=1906396178]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.628187, 17, -11.154854)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../../Interactables/Operations")
+
+[node name="Wall4" type="MeshInstance3D" parent="Environment" unique_id=1014994761]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.628187, 17, 49.845146)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../../Interactables/Operations")
+
+[node name="Wall3" type="MeshInstance3D" parent="Environment" unique_id=301456857]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.62819, 17, 12.845146)
+mesh = SubResource("BoxMesh_l4x3x")
+skeleton = NodePath("../../Interactables/Operations")
 
 [node name="VideoBenchmarkOriginal" type="Sprite3D" parent="." unique_id=1817285724]
 transform = Transform3D(1.5, 0, 0, 0, 1.299038, -0.75, 0, 0.75, 1.299038, 6, 27, -6.5)
@@ -59,7 +81,12 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6, 9, -10)
 double_sided = false
 texture = SubResource("ViewportTexture_l4x3x")
 
-[node name="PerformanceLabel" type="Label3D" parent="." unique_id=1947393841]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1846529962]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)
+
+[node name="Labels" type="Node3D" parent="." unique_id=1969928163]
+
+[node name="PerformanceLabel" type="Label3D" parent="Labels" unique_id=1947393841]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.399027, 6.449876, 4.842711)
 visible = false
 pixel_size = 0.02
@@ -67,7 +94,7 @@ text = "Avg. Processing Time
 FPS"
 horizontal_alignment = 0
 
-[node name="PerformanceLabel2" type="Label3D" parent="." unique_id=132624251]
+[node name="PerformanceLabel2" type="Label3D" parent="Labels" unique_id=132624251]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.685345, 6.801096, 2.8427105)
 visible = false
 pixel_size = 0.02
@@ -76,166 +103,145 @@ text = "Avg. Processing Time
 FPS"
 horizontal_alignment = 0
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1846529962]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 16)
-
-[node name="Wall" type="MeshInstance3D" parent="." unique_id=157114536]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.371813, 17, 11.845146)
-mesh = SubResource("BoxMesh_l4x3x")
-skeleton = NodePath("../Operations")
-
-[node name="Wall2" type="MeshInstance3D" parent="." unique_id=1906396178]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.628187, 17, -11.154854)
-mesh = SubResource("BoxMesh_l4x3x")
-skeleton = NodePath("../Operations")
-
-[node name="Wall4" type="MeshInstance3D" parent="." unique_id=1014994761]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.628187, 17, 49.845146)
-mesh = SubResource("BoxMesh_l4x3x")
-skeleton = NodePath("../Operations")
-
-[node name="Wall3" type="MeshInstance3D" parent="." unique_id=301456857]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.62819, 17, 12.845146)
-mesh = SubResource("BoxMesh_l4x3x")
-skeleton = NodePath("../Operations")
-
-[node name="Operations" type="Node3D" parent="." unique_id=786188968]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 2.8451462)
-
-[node name="OperationsLabel" type="Label3D" parent="Operations" unique_id=81737883]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.8953018, 5.547072, -0.60737133)
-pixel_size = 0.02
-text = "Processing Options"
-
-[node name="OperationBlur" type="Node3D" parent="Operations" unique_id=209167045]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, 0)
-
-[node name="Label" type="Label3D" parent="Operations/OperationBlur" unique_id=962021814]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.02
-text = "Blur"
-
-[node name="Lever" parent="Operations/OperationBlur" unique_id=1607229286 instance=ExtResource("3_5bgxi")]
-transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
-
-[node name="OperationResize" type="Node3D" parent="Operations" unique_id=1071381491]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.3, 0)
-
-[node name="Label" type="Label3D" parent="Operations/OperationResize" unique_id=1044855975]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.02
-text = "Resize"
-
-[node name="Lever" parent="Operations/OperationResize" unique_id=1455032966 instance=ExtResource("3_5bgxi")]
-transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
-
-[node name="OperationCvtColor" type="Node3D" parent="Operations" unique_id=541898979]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.6, 0)
-
-[node name="Label" type="Label3D" parent="Operations/OperationCvtColor" unique_id=1134134331]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.02
-text = "GrayScale"
-
-[node name="Lever" parent="Operations/OperationCvtColor" unique_id=1663540775 instance=ExtResource("3_5bgxi")]
-transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
-
-[node name="OperationContours" type="Node3D" parent="Operations" unique_id=16985762]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, -4.5911083)
-
-[node name="Label" type="Label3D" parent="Operations/OperationContours" unique_id=543619782]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.02
-text = "Contours"
-
-[node name="Lever" parent="Operations/OperationContours" unique_id=997640970 instance=ExtResource("3_5bgxi")]
-transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
-
-[node name="OperationDilate" type="Node3D" parent="Operations" unique_id=284706605]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 3.6, -4.591)
-
-[node name="Label" type="Label3D" parent="Operations/OperationDilate" unique_id=254161012]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.02
-text = "Dilate"
-
-[node name="Lever" parent="Operations/OperationDilate" unique_id=1759237705 instance=ExtResource("3_5bgxi")]
-transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
-
-[node name="OperationEdgeDetection" type="Node3D" parent="Operations" unique_id=658280422]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 2.3, -4.591)
-
-[node name="Label" type="Label3D" parent="Operations/OperationEdgeDetection" unique_id=358908229]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.02
-text = "Edge"
-
-[node name="Lever" parent="Operations/OperationEdgeDetection" unique_id=329977354 instance=ExtResource("3_5bgxi")]
-transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
-
-[node name="ViewportFPSSetting" type="Node3D" parent="." unique_id=1860359357 node_paths=PackedStringArray("fps_label")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, 12.989309)
-script = ExtResource("4_l4x3x")
-fps_label = NodePath("FPSLabel")
-
-[node name="Button" parent="ViewportFPSSetting" unique_id=924598189 instance=ExtResource("3_6g5d1")]
-transform = Transform3D(-0.00544881, 0.0028590478, 0.99998116, -0.9999851, -0.00030396847, -0.0054479465, 0.0002883755, -0.99999577, 0.0028606583, 1.2, 1, 0.07411957)
-
-[node name="Button2" parent="ViewportFPSSetting" unique_id=1781135286 instance=ExtResource("3_6g5d1")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, 1, -1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 1.2, 1, -1.9258804)
-
-[node name="FPSLabel" type="Label3D" parent="ViewportFPSSetting" unique_id=199653558]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
-pixel_size = 0.02
-text = "FPS:
-60"
-
-[node name="ViewportSizeSettings" type="Node3D" parent="." unique_id=664214208 node_paths=PackedStringArray("viewport_size_label")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, 9)
-script = ExtResource("3_ja6y4")
-viewport_size_label = NodePath("ViewportSizeLabel")
-
-[node name="Button" parent="ViewportSizeSettings" unique_id=574943630 instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.3711385e-08, 1, -1, -4.3711385e-08, 0, 4.371139e-08, -0.9999999, -4.371139e-08, 1.2, 1, 0.07411957)
-
-[node name="Button2" parent="ViewportSizeSettings" unique_id=515043856 instance=ExtResource("3_6g5d1")]
-transform = Transform3D(-4.371139e-08, -4.371139e-08, 1, -1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 1.2, 1, -1.9258804)
-
-[node name="ViewportSizeLabel" type="Label3D" parent="ViewportSizeSettings" unique_id=1497612430]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
-pixel_size = 0.02
-text = "Resolution:
-1920 x 1080"
-
-[node name="Start" type="Node3D" parent="." unique_id=260401667]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, -5)
-
-[node name="Button" parent="Start" unique_id=5785607 instance=ExtResource("3_6g5d1")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 1.2, 1, 0.07411957)
-
-[node name="Label" type="Label3D" parent="Start" unique_id=79226941]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
-pixel_size = 0.02
-text = "Start"
-
-[node name="GlobalStatsLabel" type="Label3D" parent="." unique_id=195684851]
+[node name="GlobalStatsLabel" type="Label3D" parent="Labels" unique_id=195684851]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -11.771812, 7, 19)
 pixel_size = 0.02
 text = "Global Stats
 displayed after
 video start"
 
+[node name="Interactables" type="Node3D" parent="." unique_id=1585875568]
+
+[node name="Operations" type="Node3D" parent="Interactables" unique_id=786188968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 0, 2.8451462)
+
+[node name="OperationsLabel" type="Label3D" parent="Interactables/Operations" unique_id=81737883]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.8953018, 5.547072, -0.60737133)
+pixel_size = 0.02
+text = "Processing Options"
+
+[node name="OperationBlur" type="Node3D" parent="Interactables/Operations" unique_id=209167045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, 0)
+
+[node name="Label" type="Label3D" parent="Interactables/Operations/OperationBlur" unique_id=962021814]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Blur"
+
+[node name="Lever" parent="Interactables/Operations/OperationBlur" unique_id=1607229286 instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationResize" type="Node3D" parent="Interactables/Operations" unique_id=1071381491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 2.3, 0)
+
+[node name="Label" type="Label3D" parent="Interactables/Operations/OperationResize" unique_id=1044855975]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Resize"
+
+[node name="Lever" parent="Interactables/Operations/OperationResize" unique_id=1455032966 instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationCvtColor" type="Node3D" parent="Interactables/Operations" unique_id=541898979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 3.6, 0)
+
+[node name="Label" type="Label3D" parent="Interactables/Operations/OperationCvtColor" unique_id=1134134331]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "GrayScale"
+
+[node name="Lever" parent="Interactables/Operations/OperationCvtColor" unique_id=1663540775 instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationContours" type="Node3D" parent="Interactables/Operations" unique_id=16985762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047623, 1, -4.5911083)
+
+[node name="Label" type="Label3D" parent="Interactables/Operations/OperationContours" unique_id=543619782]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Contours"
+
+[node name="Lever" parent="Interactables/Operations/OperationContours" unique_id=997640970 instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationDilate" type="Node3D" parent="Interactables/Operations" unique_id=284706605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 3.6, -4.591)
+
+[node name="Label" type="Label3D" parent="Interactables/Operations/OperationDilate" unique_id=254161012]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Dilate"
+
+[node name="Lever" parent="Interactables/Operations/OperationDilate" unique_id=1759237705 instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="OperationEdgeDetection" type="Node3D" parent="Interactables/Operations" unique_id=658280422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.905, 2.3, -4.591)
+
+[node name="Label" type="Label3D" parent="Interactables/Operations/OperationEdgeDetection" unique_id=358908229]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.02
+text = "Edge"
+
+[node name="Lever" parent="Interactables/Operations/OperationEdgeDetection" unique_id=329977354 instance=ExtResource("3_5bgxi")]
+transform = Transform3D(-4.371139e-08, 1, 0, 1, 4.371139e-08, 8.742278e-08, 8.742278e-08, 3.821371e-15, -1, 0, 0, 2.151122)
+
+[node name="ViewportFPSSetting" type="Node3D" parent="Interactables" unique_id=1860359357 node_paths=PackedStringArray("fps_label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, 12.989309)
+script = ExtResource("4_l4x3x")
+fps_label = NodePath("FPSLabel")
+
+[node name="Button" parent="Interactables/ViewportFPSSetting" unique_id=924598189 instance=ExtResource("3_6g5d1")]
+transform = Transform3D(-0.00544881, 0.0028590478, 0.99998116, -0.9999851, -0.00030396847, -0.0054479465, 0.0002883755, -0.99999577, 0.0028606583, 1.2, 1, 0.07411957)
+
+[node name="Button2" parent="Interactables/ViewportFPSSetting" unique_id=1781135286 instance=ExtResource("3_6g5d1")]
+transform = Transform3D(-4.371139e-08, -4.371139e-08, 1, -1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 1.2, 1, -1.9258804)
+
+[node name="FPSLabel" type="Label3D" parent="Interactables/ViewportFPSSetting" unique_id=199653558]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
+pixel_size = 0.02
+text = "FPS:
+60"
+
+[node name="ViewportSizeSettings" type="Node3D" parent="Interactables" unique_id=664214208 node_paths=PackedStringArray("viewport_size_label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, 9)
+script = ExtResource("3_ja6y4")
+viewport_size_label = NodePath("ViewportSizeLabel")
+
+[node name="Button" parent="Interactables/ViewportSizeSettings" unique_id=574943630 instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.3711385e-08, 1, -1, -4.3711385e-08, 0, 4.371139e-08, -0.9999999, -4.371139e-08, 1.2, 1, 0.07411957)
+
+[node name="Button2" parent="Interactables/ViewportSizeSettings" unique_id=515043856 instance=ExtResource("3_6g5d1")]
+transform = Transform3D(-4.371139e-08, -4.371139e-08, 1, -1, 1.9106855e-15, -4.371139e-08, 0, -1, -4.371139e-08, 1.2, 1, -1.9258804)
+
+[node name="ViewportSizeLabel" type="Label3D" parent="Interactables/ViewportSizeSettings" unique_id=1497612430]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
+pixel_size = 0.02
+text = "Resolution:
+1920 x 1080"
+
+[node name="Start" type="Node3D" parent="Interactables" unique_id=260401667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.371813, 1, -5)
+
+[node name="Button" parent="Interactables/Start" unique_id=5785607 instance=ExtResource("3_6g5d1")]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 1.2, 1, 0.07411957)
+
+[node name="Label" type="Label3D" parent="Interactables/Start" unique_id=79226941]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3, -1)
+pixel_size = 0.02
+text = "Start"
+
 [connection signal="finished" from="VideoBenchmarkOriginal/SubViewport/VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
-[connection signal="changed" from="Operations/OperationBlur/Lever" to="." method="_on_gaussian_blur_lever_change"]
-[connection signal="changed" from="Operations/OperationResize/Lever" to="." method="_on_resize_lever_change"]
-[connection signal="changed" from="Operations/OperationCvtColor/Lever" to="." method="_on_grayscale_lever_change"]
-[connection signal="changed" from="Operations/OperationContours/Lever" to="." method="_on_find_contours_lever_change"]
-[connection signal="changed" from="Operations/OperationDilate/Lever" to="." method="_on_dilate_lever_change"]
-[connection signal="changed" from="Operations/OperationEdgeDetection/Lever" to="." method="_on_canny_edge_lever_change"]
-[connection signal="fps_changed" from="ViewportFPSSetting" to="." method="_on_viewport_fps_setting_fps_changed"]
-[connection signal="pressed" from="ViewportFPSSetting/Button" to="ViewportFPSSetting" method="_on_button_pressed_smaller"]
-[connection signal="pressed" from="ViewportFPSSetting/Button2" to="ViewportFPSSetting" method="_on_button_pressed_bigger"]
-[connection signal="viewportsize_changed" from="ViewportSizeSettings" to="." method="_on_viewport_size_settings_viewportsize_changed"]
-[connection signal="pressed" from="ViewportSizeSettings/Button" to="ViewportSizeSettings" method="_on_button_pressed_smaller"]
-[connection signal="pressed" from="ViewportSizeSettings/Button2" to="ViewportSizeSettings" method="_on_button_pressed_bigger"]
-[connection signal="pressed" from="Start/Button" to="." method="_on_start_button_pressed"]
+[connection signal="changed" from="Interactables/Operations/OperationBlur/Lever" to="." method="_on_gaussian_blur_lever_change"]
+[connection signal="changed" from="Interactables/Operations/OperationResize/Lever" to="." method="_on_resize_lever_change"]
+[connection signal="changed" from="Interactables/Operations/OperationCvtColor/Lever" to="." method="_on_grayscale_lever_change"]
+[connection signal="changed" from="Interactables/Operations/OperationContours/Lever" to="." method="_on_find_contours_lever_change"]
+[connection signal="changed" from="Interactables/Operations/OperationDilate/Lever" to="." method="_on_dilate_lever_change"]
+[connection signal="changed" from="Interactables/Operations/OperationEdgeDetection/Lever" to="." method="_on_canny_edge_lever_change"]
+[connection signal="fps_changed" from="Interactables/ViewportFPSSetting" to="." method="_on_viewport_fps_setting_fps_changed"]
+[connection signal="pressed" from="Interactables/ViewportFPSSetting/Button" to="Interactables/ViewportFPSSetting" method="_on_button_pressed_smaller"]
+[connection signal="pressed" from="Interactables/ViewportFPSSetting/Button2" to="Interactables/ViewportFPSSetting" method="_on_button_pressed_bigger"]
+[connection signal="viewportsize_changed" from="Interactables/ViewportSizeSettings" to="." method="_on_viewport_size_settings_viewportsize_changed"]
+[connection signal="pressed" from="Interactables/ViewportSizeSettings/Button" to="Interactables/ViewportSizeSettings" method="_on_button_pressed_smaller"]
+[connection signal="pressed" from="Interactables/ViewportSizeSettings/Button2" to="Interactables/ViewportSizeSettings" method="_on_button_pressed_bigger"]
+[connection signal="pressed" from="Interactables/Start/Button" to="." method="_on_start_button_pressed"]

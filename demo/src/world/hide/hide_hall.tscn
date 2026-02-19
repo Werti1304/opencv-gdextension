@@ -66,13 +66,13 @@ size = Vector3(0.5, 1, 0.2)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wsess"]
 points = PackedVector3Array(0.26587301, 0.50793654, 0.114263974, -0.23927666, -0.4717477, -0.099999994, -0.25793654, -0.50793654, 0.114263974, 0.26587301, -0.50793654, 0.114263974, -0.25793654, 0.50793654, 0.114263974, 0.24721314, 0.4717477, -0.099999994, 0.24721314, -0.4717477, -0.099999994, -0.23927666, 0.4717477, -0.099999994)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_j1rxl"]
-viewport_path = NodePath("AI/SubViewport")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_7owda"]
 size = Vector3(30, 10, 1)
 
-[node name="HideHall" type="Node3D" unique_id=2037412880]
+[sub_resource type="ViewportTexture" id="ViewportTexture_j1rxl"]
+viewport_path = NodePath("AI/SubViewport")
+
+[node name="HideAndSeekWorld" type="Node3D" unique_id=2037412880]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=448169275]
 environment = SubResource("Environment_wsess")
@@ -81,1179 +81,1195 @@ environment = SubResource("Environment_wsess")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WallsNRoof" type="Node3D" parent="." unique_id=608557042]
+[node name="Room" type="Node3D" parent="." unique_id=608557042]
 
-[node name="Roof" type="StaticBody3D" parent="WallsNRoof" unique_id=677458014]
+[node name="Roof" type="StaticBody3D" parent="Room" unique_id=677458014]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallsNRoof/Roof" unique_id=1485149453]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Roof" unique_id=1485149453]
 mesh = SubResource("BoxMesh_7aqon")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallsNRoof/Roof" unique_id=1995710715]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Roof" unique_id=1995710715]
 shape = SubResource("ConvexPolygonShape3D_7aqon")
 
-[node name="Wall1" type="StaticBody3D" parent="WallsNRoof" unique_id=1251625510]
+[node name="Wall1" type="StaticBody3D" parent="Room" unique_id=1251625510]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallsNRoof/Wall1" unique_id=1734343780]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall1" unique_id=1734343780]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
 mesh = SubResource("BoxMesh_nniu5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallsNRoof/Wall1" unique_id=704045887]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall1" unique_id=704045887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
 shape = SubResource("ConvexPolygonShape3D_7owda")
 
-[node name="Wall2" type="StaticBody3D" parent="WallsNRoof" unique_id=1669750398]
+[node name="Wall2" type="StaticBody3D" parent="Room" unique_id=1669750398]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallsNRoof/Wall2" unique_id=351913911]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall2" unique_id=351913911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
 mesh = SubResource("BoxMesh_nniu5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallsNRoof/Wall2" unique_id=609293952]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall2" unique_id=609293952]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
 shape = SubResource("ConvexPolygonShape3D_7owda")
 
-[node name="Wall3" type="StaticBody3D" parent="WallsNRoof" unique_id=1894384280]
+[node name="Wall3" type="StaticBody3D" parent="Room" unique_id=1894384280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallsNRoof/Wall3" unique_id=1254376031]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall3" unique_id=1254376031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 0)
 mesh = SubResource("BoxMesh_7owda")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallsNRoof/Wall3" unique_id=20828972]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall3" unique_id=20828972]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 0)
 shape = SubResource("ConvexPolygonShape3D_41b0i")
 
-[node name="Wall4" type="StaticBody3D" parent="WallsNRoof" unique_id=1197135667]
+[node name="Wall4" type="StaticBody3D" parent="Room" unique_id=1197135667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 11)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallsNRoof/Wall4" unique_id=1150673252]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Wall4" unique_id=1150673252]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 mesh = SubResource("BoxMesh_7owda")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallsNRoof/Wall4" unique_id=454515324]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Wall4" unique_id=454515324]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 0)
 shape = SubResource("ConvexPolygonShape3D_41b0i")
 
-[node name="Floor" type="Node3D" parent="." unique_id=1560636680]
+[node name="Floor" type="Node3D" parent="Room" unique_id=1560636680]
 
-[node name="FloorCollision" type="StaticBody3D" parent="Floor" unique_id=248771094]
+[node name="FloorCollision" type="StaticBody3D" parent="Room/Floor" unique_id=248771094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/FloorCollision" unique_id=722650535]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/FloorCollision" unique_id=722650535]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 visible = false
 mesh = SubResource("BoxMesh_8wmmo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/FloorCollision" unique_id=964641869]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/FloorCollision" unique_id=964641869]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 visible = false
 shape = SubResource("ConvexPolygonShape3D_2u72s")
 
-[node name="BevelParent" type="Node3D" parent="Floor" unique_id=386881467]
+[node name="BevelParent" type="Node3D" parent="Room/Floor" unique_id=386881467]
 script = ExtResource("1_7aqon")
 tile_scene = ExtResource("2_41b0i")
 tiles_x = 10
 tiles_y = 35
 
-[node name="bevel-lq-plate-4x82" parent="Floor/BevelParent" unique_id=926970655 instance=ExtResource("2_41b0i")]
+[node name="bevel-lq-plate-4x82" parent="Room/Floor/BevelParent" unique_id=926970655 instance=ExtResource("2_41b0i")]
 
-[node name="@Node3D@82549" parent="Floor/BevelParent" unique_id=2105344422 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82549" parent="Room/Floor/BevelParent" unique_id=2105344422 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.31599998)
 
-[node name="@Node3D@82550" parent="Floor/BevelParent" unique_id=1265255657 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82550" parent="Room/Floor/BevelParent" unique_id=1265255657 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.63199997)
 
-[node name="@Node3D@82551" parent="Floor/BevelParent" unique_id=2052231685 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82551" parent="Room/Floor/BevelParent" unique_id=2052231685 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.94799995)
 
-[node name="@Node3D@82552" parent="Floor/BevelParent" unique_id=1358005134 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82552" parent="Room/Floor/BevelParent" unique_id=1358005134 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2639999)
 
-[node name="@Node3D@82553" parent="Floor/BevelParent" unique_id=272411422 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82553" parent="Room/Floor/BevelParent" unique_id=272411422 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5799999)
 
-[node name="@Node3D@82554" parent="Floor/BevelParent" unique_id=476075342 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82554" parent="Room/Floor/BevelParent" unique_id=476075342 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8959999)
 
-[node name="@Node3D@82555" parent="Floor/BevelParent" unique_id=929390011 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82555" parent="Room/Floor/BevelParent" unique_id=929390011 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.212)
 
-[node name="@Node3D@82556" parent="Floor/BevelParent" unique_id=1760311017 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82556" parent="Room/Floor/BevelParent" unique_id=1760311017 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5279999)
 
-[node name="@Node3D@82557" parent="Floor/BevelParent" unique_id=1573636409 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82557" parent="Room/Floor/BevelParent" unique_id=1573636409 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.8439999)
 
-[node name="@Node3D@82558" parent="Floor/BevelParent" unique_id=1276691852 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82558" parent="Room/Floor/BevelParent" unique_id=1276691852 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1599998)
 
-[node name="@Node3D@82559" parent="Floor/BevelParent" unique_id=1641134944 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82559" parent="Room/Floor/BevelParent" unique_id=1641134944 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.4759998)
 
-[node name="@Node3D@82560" parent="Floor/BevelParent" unique_id=1314407731 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82560" parent="Room/Floor/BevelParent" unique_id=1314407731 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.7919998)
 
-[node name="@Node3D@82561" parent="Floor/BevelParent" unique_id=1494127357 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82561" parent="Room/Floor/BevelParent" unique_id=1494127357 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.108)
 
-[node name="@Node3D@82562" parent="Floor/BevelParent" unique_id=1845833278 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82562" parent="Room/Floor/BevelParent" unique_id=1845833278 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.424)
 
-[node name="@Node3D@82563" parent="Floor/BevelParent" unique_id=82316377 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82563" parent="Room/Floor/BevelParent" unique_id=82316377 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.74)
 
-[node name="@Node3D@82564" parent="Floor/BevelParent" unique_id=130488870 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82564" parent="Room/Floor/BevelParent" unique_id=130488870 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.0559998)
 
-[node name="@Node3D@82565" parent="Floor/BevelParent" unique_id=2038873371 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82565" parent="Room/Floor/BevelParent" unique_id=2038873371 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.3719997)
 
-[node name="@Node3D@82566" parent="Floor/BevelParent" unique_id=1075873508 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82566" parent="Room/Floor/BevelParent" unique_id=1075873508 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.6879997)
 
-[node name="@Node3D@82567" parent="Floor/BevelParent" unique_id=1259783782 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82567" parent="Room/Floor/BevelParent" unique_id=1259783782 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.0039997)
 
-[node name="@Node3D@82568" parent="Floor/BevelParent" unique_id=609192885 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82568" parent="Room/Floor/BevelParent" unique_id=609192885 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.3199997)
 
-[node name="@Node3D@82569" parent="Floor/BevelParent" unique_id=512263087 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82569" parent="Room/Floor/BevelParent" unique_id=512263087 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.6359997)
 
-[node name="@Node3D@82570" parent="Floor/BevelParent" unique_id=635058758 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82570" parent="Room/Floor/BevelParent" unique_id=635058758 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.9519997)
 
-[node name="@Node3D@82571" parent="Floor/BevelParent" unique_id=1958438303 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82571" parent="Room/Floor/BevelParent" unique_id=1958438303 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.2679996)
 
-[node name="@Node3D@82572" parent="Floor/BevelParent" unique_id=149537640 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82572" parent="Room/Floor/BevelParent" unique_id=149537640 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.5839996)
 
-[node name="@Node3D@82573" parent="Floor/BevelParent" unique_id=1567752647 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82573" parent="Room/Floor/BevelParent" unique_id=1567752647 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.8999996)
 
-[node name="@Node3D@82574" parent="Floor/BevelParent" unique_id=2122393554 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82574" parent="Room/Floor/BevelParent" unique_id=2122393554 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.216)
 
-[node name="@Node3D@82575" parent="Floor/BevelParent" unique_id=902695893 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82575" parent="Room/Floor/BevelParent" unique_id=902695893 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.532)
 
-[node name="@Node3D@82576" parent="Floor/BevelParent" unique_id=1043892260 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82576" parent="Room/Floor/BevelParent" unique_id=1043892260 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.848)
 
-[node name="@Node3D@82577" parent="Floor/BevelParent" unique_id=493118753 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82577" parent="Room/Floor/BevelParent" unique_id=493118753 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.164)
 
-[node name="@Node3D@82578" parent="Floor/BevelParent" unique_id=1894159631 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82578" parent="Room/Floor/BevelParent" unique_id=1894159631 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.48)
 
-[node name="@Node3D@82579" parent="Floor/BevelParent" unique_id=31847846 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82579" parent="Room/Floor/BevelParent" unique_id=31847846 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.796)
 
-[node name="@Node3D@82580" parent="Floor/BevelParent" unique_id=1117909688 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82580" parent="Room/Floor/BevelParent" unique_id=1117909688 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.1119995)
 
-[node name="@Node3D@82581" parent="Floor/BevelParent" unique_id=1276485644 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82581" parent="Room/Floor/BevelParent" unique_id=1276485644 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.4279995)
 
-[node name="@Node3D@82582" parent="Floor/BevelParent" unique_id=86344726 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82582" parent="Room/Floor/BevelParent" unique_id=86344726 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7439995)
 
-[node name="@Node3D@82583" parent="Floor/BevelParent" unique_id=1105070397 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82583" parent="Room/Floor/BevelParent" unique_id=1105070397 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 0)
 
-[node name="@Node3D@82584" parent="Floor/BevelParent" unique_id=913570237 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82584" parent="Room/Floor/BevelParent" unique_id=913570237 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 0.31599998)
 
-[node name="@Node3D@82585" parent="Floor/BevelParent" unique_id=1513244789 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82585" parent="Room/Floor/BevelParent" unique_id=1513244789 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 0.63199997)
 
-[node name="@Node3D@82586" parent="Floor/BevelParent" unique_id=1710290856 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82586" parent="Room/Floor/BevelParent" unique_id=1710290856 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 0.94799995)
 
-[node name="@Node3D@82587" parent="Floor/BevelParent" unique_id=1098232669 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82587" parent="Room/Floor/BevelParent" unique_id=1098232669 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 1.2639999)
 
-[node name="@Node3D@82588" parent="Floor/BevelParent" unique_id=420773188 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82588" parent="Room/Floor/BevelParent" unique_id=420773188 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 1.5799999)
 
-[node name="@Node3D@82589" parent="Floor/BevelParent" unique_id=1347699122 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82589" parent="Room/Floor/BevelParent" unique_id=1347699122 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 1.8959999)
 
-[node name="@Node3D@82590" parent="Floor/BevelParent" unique_id=1867502341 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82590" parent="Room/Floor/BevelParent" unique_id=1867502341 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 2.212)
 
-[node name="@Node3D@82591" parent="Floor/BevelParent" unique_id=629513311 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82591" parent="Room/Floor/BevelParent" unique_id=629513311 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 2.5279999)
 
-[node name="@Node3D@82592" parent="Floor/BevelParent" unique_id=1850453491 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82592" parent="Room/Floor/BevelParent" unique_id=1850453491 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 2.8439999)
 
-[node name="@Node3D@82593" parent="Floor/BevelParent" unique_id=1235396262 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82593" parent="Room/Floor/BevelParent" unique_id=1235396262 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 3.1599998)
 
-[node name="@Node3D@82594" parent="Floor/BevelParent" unique_id=1422986384 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82594" parent="Room/Floor/BevelParent" unique_id=1422986384 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 3.4759998)
 
-[node name="@Node3D@82595" parent="Floor/BevelParent" unique_id=540518188 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82595" parent="Room/Floor/BevelParent" unique_id=540518188 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 3.7919998)
 
-[node name="@Node3D@82596" parent="Floor/BevelParent" unique_id=382629294 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82596" parent="Room/Floor/BevelParent" unique_id=382629294 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 4.108)
 
-[node name="@Node3D@82597" parent="Floor/BevelParent" unique_id=1594395398 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82597" parent="Room/Floor/BevelParent" unique_id=1594395398 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 4.424)
 
-[node name="@Node3D@82598" parent="Floor/BevelParent" unique_id=1219975960 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82598" parent="Room/Floor/BevelParent" unique_id=1219975960 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 4.74)
 
-[node name="@Node3D@82599" parent="Floor/BevelParent" unique_id=1616896769 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82599" parent="Room/Floor/BevelParent" unique_id=1616896769 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 5.0559998)
 
-[node name="@Node3D@82600" parent="Floor/BevelParent" unique_id=1076353499 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82600" parent="Room/Floor/BevelParent" unique_id=1076353499 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 5.3719997)
 
-[node name="@Node3D@82601" parent="Floor/BevelParent" unique_id=160396283 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82601" parent="Room/Floor/BevelParent" unique_id=160396283 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 5.6879997)
 
-[node name="@Node3D@82602" parent="Floor/BevelParent" unique_id=2132558065 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82602" parent="Room/Floor/BevelParent" unique_id=2132558065 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 6.0039997)
 
-[node name="@Node3D@82603" parent="Floor/BevelParent" unique_id=1601441501 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82603" parent="Room/Floor/BevelParent" unique_id=1601441501 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 6.3199997)
 
-[node name="@Node3D@82604" parent="Floor/BevelParent" unique_id=648572508 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82604" parent="Room/Floor/BevelParent" unique_id=648572508 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 6.6359997)
 
-[node name="@Node3D@82605" parent="Floor/BevelParent" unique_id=657934950 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82605" parent="Room/Floor/BevelParent" unique_id=657934950 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 6.9519997)
 
-[node name="@Node3D@82606" parent="Floor/BevelParent" unique_id=834816030 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82606" parent="Room/Floor/BevelParent" unique_id=834816030 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 7.2679996)
 
-[node name="@Node3D@82607" parent="Floor/BevelParent" unique_id=1776601666 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82607" parent="Room/Floor/BevelParent" unique_id=1776601666 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 7.5839996)
 
-[node name="@Node3D@82608" parent="Floor/BevelParent" unique_id=1828506885 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82608" parent="Room/Floor/BevelParent" unique_id=1828506885 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 7.8999996)
 
-[node name="@Node3D@82609" parent="Floor/BevelParent" unique_id=962139952 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82609" parent="Room/Floor/BevelParent" unique_id=962139952 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 8.216)
 
-[node name="@Node3D@82610" parent="Floor/BevelParent" unique_id=1046550572 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82610" parent="Room/Floor/BevelParent" unique_id=1046550572 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 8.532)
 
-[node name="@Node3D@82611" parent="Floor/BevelParent" unique_id=1242038855 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82611" parent="Room/Floor/BevelParent" unique_id=1242038855 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 8.848)
 
-[node name="@Node3D@82612" parent="Floor/BevelParent" unique_id=350608273 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82612" parent="Room/Floor/BevelParent" unique_id=350608273 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 9.164)
 
-[node name="@Node3D@82613" parent="Floor/BevelParent" unique_id=251861887 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82613" parent="Room/Floor/BevelParent" unique_id=251861887 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 9.48)
 
-[node name="@Node3D@82614" parent="Floor/BevelParent" unique_id=368963871 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82614" parent="Room/Floor/BevelParent" unique_id=368963871 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 9.796)
 
-[node name="@Node3D@82615" parent="Floor/BevelParent" unique_id=256063798 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82615" parent="Room/Floor/BevelParent" unique_id=256063798 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 10.1119995)
 
-[node name="@Node3D@82616" parent="Floor/BevelParent" unique_id=399722822 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82616" parent="Room/Floor/BevelParent" unique_id=399722822 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 10.4279995)
 
-[node name="@Node3D@82617" parent="Floor/BevelParent" unique_id=8947156 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82617" parent="Room/Floor/BevelParent" unique_id=8947156 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636, 0, 10.7439995)
 
-[node name="@Node3D@82618" parent="Floor/BevelParent" unique_id=1325024387 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82618" parent="Room/Floor/BevelParent" unique_id=1325024387 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 0)
 
-[node name="@Node3D@82619" parent="Floor/BevelParent" unique_id=2115881417 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82619" parent="Room/Floor/BevelParent" unique_id=2115881417 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 0.31599998)
 
-[node name="@Node3D@82620" parent="Floor/BevelParent" unique_id=728121266 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82620" parent="Room/Floor/BevelParent" unique_id=728121266 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 0.63199997)
 
-[node name="@Node3D@82621" parent="Floor/BevelParent" unique_id=329232096 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82621" parent="Room/Floor/BevelParent" unique_id=329232096 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 0.94799995)
 
-[node name="@Node3D@82622" parent="Floor/BevelParent" unique_id=1825916418 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82622" parent="Room/Floor/BevelParent" unique_id=1825916418 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 1.2639999)
 
-[node name="@Node3D@82623" parent="Floor/BevelParent" unique_id=134718525 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82623" parent="Room/Floor/BevelParent" unique_id=134718525 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 1.5799999)
 
-[node name="@Node3D@82624" parent="Floor/BevelParent" unique_id=1492380985 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82624" parent="Room/Floor/BevelParent" unique_id=1492380985 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 1.8959999)
 
-[node name="@Node3D@82625" parent="Floor/BevelParent" unique_id=1301504607 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82625" parent="Room/Floor/BevelParent" unique_id=1301504607 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 2.212)
 
-[node name="@Node3D@82626" parent="Floor/BevelParent" unique_id=304669963 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82626" parent="Room/Floor/BevelParent" unique_id=304669963 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 2.5279999)
 
-[node name="@Node3D@82627" parent="Floor/BevelParent" unique_id=1691891253 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82627" parent="Room/Floor/BevelParent" unique_id=1691891253 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 2.8439999)
 
-[node name="@Node3D@82628" parent="Floor/BevelParent" unique_id=1843848219 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82628" parent="Room/Floor/BevelParent" unique_id=1843848219 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 3.1599998)
 
-[node name="@Node3D@82629" parent="Floor/BevelParent" unique_id=617286291 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82629" parent="Room/Floor/BevelParent" unique_id=617286291 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 3.4759998)
 
-[node name="@Node3D@82630" parent="Floor/BevelParent" unique_id=1596746801 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82630" parent="Room/Floor/BevelParent" unique_id=1596746801 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 3.7919998)
 
-[node name="@Node3D@82631" parent="Floor/BevelParent" unique_id=504223410 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82631" parent="Room/Floor/BevelParent" unique_id=504223410 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 4.108)
 
-[node name="@Node3D@82632" parent="Floor/BevelParent" unique_id=1323218393 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82632" parent="Room/Floor/BevelParent" unique_id=1323218393 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 4.424)
 
-[node name="@Node3D@82633" parent="Floor/BevelParent" unique_id=56366278 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82633" parent="Room/Floor/BevelParent" unique_id=56366278 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 4.74)
 
-[node name="@Node3D@82634" parent="Floor/BevelParent" unique_id=1885762394 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82634" parent="Room/Floor/BevelParent" unique_id=1885762394 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 5.0559998)
 
-[node name="@Node3D@82635" parent="Floor/BevelParent" unique_id=541734574 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82635" parent="Room/Floor/BevelParent" unique_id=541734574 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 5.3719997)
 
-[node name="@Node3D@82636" parent="Floor/BevelParent" unique_id=955417214 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82636" parent="Room/Floor/BevelParent" unique_id=955417214 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 5.6879997)
 
-[node name="@Node3D@82637" parent="Floor/BevelParent" unique_id=1738426756 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82637" parent="Room/Floor/BevelParent" unique_id=1738426756 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 6.0039997)
 
-[node name="@Node3D@82638" parent="Floor/BevelParent" unique_id=433917804 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82638" parent="Room/Floor/BevelParent" unique_id=433917804 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 6.3199997)
 
-[node name="@Node3D@82639" parent="Floor/BevelParent" unique_id=1944152418 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82639" parent="Room/Floor/BevelParent" unique_id=1944152418 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 6.6359997)
 
-[node name="@Node3D@82640" parent="Floor/BevelParent" unique_id=1679131809 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82640" parent="Room/Floor/BevelParent" unique_id=1679131809 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 6.9519997)
 
-[node name="@Node3D@82641" parent="Floor/BevelParent" unique_id=1962395651 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82641" parent="Room/Floor/BevelParent" unique_id=1962395651 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 7.2679996)
 
-[node name="@Node3D@82642" parent="Floor/BevelParent" unique_id=274923201 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82642" parent="Room/Floor/BevelParent" unique_id=274923201 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 7.5839996)
 
-[node name="@Node3D@82643" parent="Floor/BevelParent" unique_id=1988950391 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82643" parent="Room/Floor/BevelParent" unique_id=1988950391 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 7.8999996)
 
-[node name="@Node3D@82644" parent="Floor/BevelParent" unique_id=289450488 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82644" parent="Room/Floor/BevelParent" unique_id=289450488 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 8.216)
 
-[node name="@Node3D@82645" parent="Floor/BevelParent" unique_id=1662696599 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82645" parent="Room/Floor/BevelParent" unique_id=1662696599 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 8.532)
 
-[node name="@Node3D@82646" parent="Floor/BevelParent" unique_id=596531399 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82646" parent="Room/Floor/BevelParent" unique_id=596531399 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 8.848)
 
-[node name="@Node3D@82647" parent="Floor/BevelParent" unique_id=1470928740 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82647" parent="Room/Floor/BevelParent" unique_id=1470928740 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 9.164)
 
-[node name="@Node3D@82648" parent="Floor/BevelParent" unique_id=1012966899 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82648" parent="Room/Floor/BevelParent" unique_id=1012966899 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 9.48)
 
-[node name="@Node3D@82649" parent="Floor/BevelParent" unique_id=358982218 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82649" parent="Room/Floor/BevelParent" unique_id=358982218 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 9.796)
 
-[node name="@Node3D@82650" parent="Floor/BevelParent" unique_id=212184110 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82650" parent="Room/Floor/BevelParent" unique_id=212184110 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 10.1119995)
 
-[node name="@Node3D@82651" parent="Floor/BevelParent" unique_id=1224812352 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82651" parent="Room/Floor/BevelParent" unique_id=1224812352 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 10.4279995)
 
-[node name="@Node3D@82652" parent="Floor/BevelParent" unique_id=2003840550 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82652" parent="Room/Floor/BevelParent" unique_id=2003840550 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.272, 0, 10.7439995)
 
-[node name="@Node3D@82653" parent="Floor/BevelParent" unique_id=796428461 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82653" parent="Room/Floor/BevelParent" unique_id=796428461 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 0)
 
-[node name="@Node3D@82654" parent="Floor/BevelParent" unique_id=369103612 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82654" parent="Room/Floor/BevelParent" unique_id=369103612 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 0.31599998)
 
-[node name="@Node3D@82655" parent="Floor/BevelParent" unique_id=1806081273 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82655" parent="Room/Floor/BevelParent" unique_id=1806081273 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 0.63199997)
 
-[node name="@Node3D@82656" parent="Floor/BevelParent" unique_id=1819398576 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82656" parent="Room/Floor/BevelParent" unique_id=1819398576 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 0.94799995)
 
-[node name="@Node3D@82657" parent="Floor/BevelParent" unique_id=820597930 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82657" parent="Room/Floor/BevelParent" unique_id=820597930 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 1.2639999)
 
-[node name="@Node3D@82658" parent="Floor/BevelParent" unique_id=544757038 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82658" parent="Room/Floor/BevelParent" unique_id=544757038 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 1.5799999)
 
-[node name="@Node3D@82659" parent="Floor/BevelParent" unique_id=248459859 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82659" parent="Room/Floor/BevelParent" unique_id=248459859 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 1.8959999)
 
-[node name="@Node3D@82660" parent="Floor/BevelParent" unique_id=284304881 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82660" parent="Room/Floor/BevelParent" unique_id=284304881 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 2.212)
 
-[node name="@Node3D@82661" parent="Floor/BevelParent" unique_id=593447146 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82661" parent="Room/Floor/BevelParent" unique_id=593447146 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 2.5279999)
 
-[node name="@Node3D@82662" parent="Floor/BevelParent" unique_id=1191766131 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82662" parent="Room/Floor/BevelParent" unique_id=1191766131 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 2.8439999)
 
-[node name="@Node3D@82663" parent="Floor/BevelParent" unique_id=1638015098 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82663" parent="Room/Floor/BevelParent" unique_id=1638015098 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 3.1599998)
 
-[node name="@Node3D@82664" parent="Floor/BevelParent" unique_id=1193670262 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82664" parent="Room/Floor/BevelParent" unique_id=1193670262 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 3.4759998)
 
-[node name="@Node3D@82665" parent="Floor/BevelParent" unique_id=572331169 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82665" parent="Room/Floor/BevelParent" unique_id=572331169 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 3.7919998)
 
-[node name="@Node3D@82666" parent="Floor/BevelParent" unique_id=840412630 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82666" parent="Room/Floor/BevelParent" unique_id=840412630 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 4.108)
 
-[node name="@Node3D@82667" parent="Floor/BevelParent" unique_id=1292739144 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82667" parent="Room/Floor/BevelParent" unique_id=1292739144 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 4.424)
 
-[node name="@Node3D@82668" parent="Floor/BevelParent" unique_id=837917001 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82668" parent="Room/Floor/BevelParent" unique_id=837917001 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 4.74)
 
-[node name="@Node3D@82669" parent="Floor/BevelParent" unique_id=1358880239 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82669" parent="Room/Floor/BevelParent" unique_id=1358880239 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 5.0559998)
 
-[node name="@Node3D@82670" parent="Floor/BevelParent" unique_id=1315884492 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82670" parent="Room/Floor/BevelParent" unique_id=1315884492 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 5.3719997)
 
-[node name="@Node3D@82671" parent="Floor/BevelParent" unique_id=1898672082 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82671" parent="Room/Floor/BevelParent" unique_id=1898672082 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 5.6879997)
 
-[node name="@Node3D@82672" parent="Floor/BevelParent" unique_id=1606792082 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82672" parent="Room/Floor/BevelParent" unique_id=1606792082 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 6.0039997)
 
-[node name="@Node3D@82673" parent="Floor/BevelParent" unique_id=2031330392 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82673" parent="Room/Floor/BevelParent" unique_id=2031330392 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 6.3199997)
 
-[node name="@Node3D@82674" parent="Floor/BevelParent" unique_id=2125979304 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82674" parent="Room/Floor/BevelParent" unique_id=2125979304 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 6.6359997)
 
-[node name="@Node3D@82675" parent="Floor/BevelParent" unique_id=2103310100 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82675" parent="Room/Floor/BevelParent" unique_id=2103310100 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 6.9519997)
 
-[node name="@Node3D@82676" parent="Floor/BevelParent" unique_id=1871615473 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82676" parent="Room/Floor/BevelParent" unique_id=1871615473 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 7.2679996)
 
-[node name="@Node3D@82677" parent="Floor/BevelParent" unique_id=291365484 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82677" parent="Room/Floor/BevelParent" unique_id=291365484 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 7.5839996)
 
-[node name="@Node3D@82678" parent="Floor/BevelParent" unique_id=94433445 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82678" parent="Room/Floor/BevelParent" unique_id=94433445 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 7.8999996)
 
-[node name="@Node3D@82679" parent="Floor/BevelParent" unique_id=529223487 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82679" parent="Room/Floor/BevelParent" unique_id=529223487 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 8.216)
 
-[node name="@Node3D@82680" parent="Floor/BevelParent" unique_id=1471872789 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82680" parent="Room/Floor/BevelParent" unique_id=1471872789 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 8.532)
 
-[node name="@Node3D@82681" parent="Floor/BevelParent" unique_id=736947952 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82681" parent="Room/Floor/BevelParent" unique_id=736947952 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 8.848)
 
-[node name="@Node3D@82682" parent="Floor/BevelParent" unique_id=679514283 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82682" parent="Room/Floor/BevelParent" unique_id=679514283 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 9.164)
 
-[node name="@Node3D@82683" parent="Floor/BevelParent" unique_id=294682735 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82683" parent="Room/Floor/BevelParent" unique_id=294682735 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 9.48)
 
-[node name="@Node3D@82684" parent="Floor/BevelParent" unique_id=1705255908 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82684" parent="Room/Floor/BevelParent" unique_id=1705255908 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 9.796)
 
-[node name="@Node3D@82685" parent="Floor/BevelParent" unique_id=603821227 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82685" parent="Room/Floor/BevelParent" unique_id=603821227 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 10.1119995)
 
-[node name="@Node3D@82686" parent="Floor/BevelParent" unique_id=438781769 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82686" parent="Room/Floor/BevelParent" unique_id=438781769 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 10.4279995)
 
-[node name="@Node3D@82687" parent="Floor/BevelParent" unique_id=2000742922 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82687" parent="Room/Floor/BevelParent" unique_id=2000742922 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.908, 0, 10.7439995)
 
-[node name="@Node3D@82688" parent="Floor/BevelParent" unique_id=2067104560 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82688" parent="Room/Floor/BevelParent" unique_id=2067104560 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 0)
 
-[node name="@Node3D@82689" parent="Floor/BevelParent" unique_id=757006840 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82689" parent="Room/Floor/BevelParent" unique_id=757006840 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 0.31599998)
 
-[node name="@Node3D@82690" parent="Floor/BevelParent" unique_id=1331870840 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82690" parent="Room/Floor/BevelParent" unique_id=1331870840 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 0.63199997)
 
-[node name="@Node3D@82691" parent="Floor/BevelParent" unique_id=415280226 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82691" parent="Room/Floor/BevelParent" unique_id=415280226 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 0.94799995)
 
-[node name="@Node3D@82692" parent="Floor/BevelParent" unique_id=852532343 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82692" parent="Room/Floor/BevelParent" unique_id=852532343 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 1.2639999)
 
-[node name="@Node3D@82693" parent="Floor/BevelParent" unique_id=1767371388 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82693" parent="Room/Floor/BevelParent" unique_id=1767371388 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 1.5799999)
 
-[node name="@Node3D@82694" parent="Floor/BevelParent" unique_id=528106289 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82694" parent="Room/Floor/BevelParent" unique_id=528106289 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 1.8959999)
 
-[node name="@Node3D@82695" parent="Floor/BevelParent" unique_id=227715371 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82695" parent="Room/Floor/BevelParent" unique_id=227715371 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 2.212)
 
-[node name="@Node3D@82696" parent="Floor/BevelParent" unique_id=996696124 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82696" parent="Room/Floor/BevelParent" unique_id=996696124 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 2.5279999)
 
-[node name="@Node3D@82697" parent="Floor/BevelParent" unique_id=2126936817 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82697" parent="Room/Floor/BevelParent" unique_id=2126936817 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 2.8439999)
 
-[node name="@Node3D@82698" parent="Floor/BevelParent" unique_id=1034900736 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82698" parent="Room/Floor/BevelParent" unique_id=1034900736 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 3.1599998)
 
-[node name="@Node3D@82699" parent="Floor/BevelParent" unique_id=1125058936 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82699" parent="Room/Floor/BevelParent" unique_id=1125058936 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 3.4759998)
 
-[node name="@Node3D@82700" parent="Floor/BevelParent" unique_id=976928680 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82700" parent="Room/Floor/BevelParent" unique_id=976928680 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 3.7919998)
 
-[node name="@Node3D@82701" parent="Floor/BevelParent" unique_id=332896453 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82701" parent="Room/Floor/BevelParent" unique_id=332896453 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 4.108)
 
-[node name="@Node3D@82702" parent="Floor/BevelParent" unique_id=1280824453 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82702" parent="Room/Floor/BevelParent" unique_id=1280824453 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 4.424)
 
-[node name="@Node3D@82703" parent="Floor/BevelParent" unique_id=152373260 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82703" parent="Room/Floor/BevelParent" unique_id=152373260 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 4.74)
 
-[node name="@Node3D@82704" parent="Floor/BevelParent" unique_id=1161527056 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82704" parent="Room/Floor/BevelParent" unique_id=1161527056 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 5.0559998)
 
-[node name="@Node3D@82705" parent="Floor/BevelParent" unique_id=1808926312 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82705" parent="Room/Floor/BevelParent" unique_id=1808926312 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 5.3719997)
 
-[node name="@Node3D@82706" parent="Floor/BevelParent" unique_id=17090252 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82706" parent="Room/Floor/BevelParent" unique_id=17090252 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 5.6879997)
 
-[node name="@Node3D@82707" parent="Floor/BevelParent" unique_id=353447108 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82707" parent="Room/Floor/BevelParent" unique_id=353447108 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 6.0039997)
 
-[node name="@Node3D@82708" parent="Floor/BevelParent" unique_id=334768661 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82708" parent="Room/Floor/BevelParent" unique_id=334768661 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 6.3199997)
 
-[node name="@Node3D@82709" parent="Floor/BevelParent" unique_id=498890235 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82709" parent="Room/Floor/BevelParent" unique_id=498890235 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 6.6359997)
 
-[node name="@Node3D@82710" parent="Floor/BevelParent" unique_id=1757697827 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82710" parent="Room/Floor/BevelParent" unique_id=1757697827 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 6.9519997)
 
-[node name="@Node3D@82711" parent="Floor/BevelParent" unique_id=1910831700 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82711" parent="Room/Floor/BevelParent" unique_id=1910831700 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 7.2679996)
 
-[node name="@Node3D@82712" parent="Floor/BevelParent" unique_id=567583358 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82712" parent="Room/Floor/BevelParent" unique_id=567583358 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 7.5839996)
 
-[node name="@Node3D@82713" parent="Floor/BevelParent" unique_id=1936996505 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82713" parent="Room/Floor/BevelParent" unique_id=1936996505 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 7.8999996)
 
-[node name="@Node3D@82714" parent="Floor/BevelParent" unique_id=532206962 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82714" parent="Room/Floor/BevelParent" unique_id=532206962 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 8.216)
 
-[node name="@Node3D@82715" parent="Floor/BevelParent" unique_id=2143537038 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82715" parent="Room/Floor/BevelParent" unique_id=2143537038 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 8.532)
 
-[node name="@Node3D@82716" parent="Floor/BevelParent" unique_id=1435053753 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82716" parent="Room/Floor/BevelParent" unique_id=1435053753 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 8.848)
 
-[node name="@Node3D@82717" parent="Floor/BevelParent" unique_id=1040778777 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82717" parent="Room/Floor/BevelParent" unique_id=1040778777 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 9.164)
 
-[node name="@Node3D@82718" parent="Floor/BevelParent" unique_id=174115657 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82718" parent="Room/Floor/BevelParent" unique_id=174115657 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 9.48)
 
-[node name="@Node3D@82719" parent="Floor/BevelParent" unique_id=948235044 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82719" parent="Room/Floor/BevelParent" unique_id=948235044 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 9.796)
 
-[node name="@Node3D@82720" parent="Floor/BevelParent" unique_id=662839769 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82720" parent="Room/Floor/BevelParent" unique_id=662839769 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 10.1119995)
 
-[node name="@Node3D@82721" parent="Floor/BevelParent" unique_id=1559226064 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82721" parent="Room/Floor/BevelParent" unique_id=1559226064 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 10.4279995)
 
-[node name="@Node3D@82722" parent="Floor/BevelParent" unique_id=1061974208 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82722" parent="Room/Floor/BevelParent" unique_id=1061974208 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.544, 0, 10.7439995)
 
-[node name="@Node3D@82723" parent="Floor/BevelParent" unique_id=1705260649 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82723" parent="Room/Floor/BevelParent" unique_id=1705260649 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 0)
 
-[node name="@Node3D@82724" parent="Floor/BevelParent" unique_id=1483935824 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82724" parent="Room/Floor/BevelParent" unique_id=1483935824 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 0.31599998)
 
-[node name="@Node3D@82725" parent="Floor/BevelParent" unique_id=109118273 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82725" parent="Room/Floor/BevelParent" unique_id=109118273 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 0.63199997)
 
-[node name="@Node3D@82726" parent="Floor/BevelParent" unique_id=13722421 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82726" parent="Room/Floor/BevelParent" unique_id=13722421 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 0.94799995)
 
-[node name="@Node3D@82727" parent="Floor/BevelParent" unique_id=2084248678 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82727" parent="Room/Floor/BevelParent" unique_id=2084248678 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 1.2639999)
 
-[node name="@Node3D@82728" parent="Floor/BevelParent" unique_id=638461153 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82728" parent="Room/Floor/BevelParent" unique_id=638461153 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 1.5799999)
 
-[node name="@Node3D@82729" parent="Floor/BevelParent" unique_id=2069158099 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82729" parent="Room/Floor/BevelParent" unique_id=2069158099 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 1.8959999)
 
-[node name="@Node3D@82730" parent="Floor/BevelParent" unique_id=1856481862 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82730" parent="Room/Floor/BevelParent" unique_id=1856481862 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 2.212)
 
-[node name="@Node3D@82731" parent="Floor/BevelParent" unique_id=629576891 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82731" parent="Room/Floor/BevelParent" unique_id=629576891 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 2.5279999)
 
-[node name="@Node3D@82732" parent="Floor/BevelParent" unique_id=1482564383 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82732" parent="Room/Floor/BevelParent" unique_id=1482564383 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 2.8439999)
 
-[node name="@Node3D@82733" parent="Floor/BevelParent" unique_id=1220049269 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82733" parent="Room/Floor/BevelParent" unique_id=1220049269 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 3.1599998)
 
-[node name="@Node3D@82734" parent="Floor/BevelParent" unique_id=1170772516 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82734" parent="Room/Floor/BevelParent" unique_id=1170772516 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 3.4759998)
 
-[node name="@Node3D@82735" parent="Floor/BevelParent" unique_id=1895197449 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82735" parent="Room/Floor/BevelParent" unique_id=1895197449 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 3.7919998)
 
-[node name="@Node3D@82736" parent="Floor/BevelParent" unique_id=521107669 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82736" parent="Room/Floor/BevelParent" unique_id=521107669 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 4.108)
 
-[node name="@Node3D@82737" parent="Floor/BevelParent" unique_id=583894984 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82737" parent="Room/Floor/BevelParent" unique_id=583894984 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 4.424)
 
-[node name="@Node3D@82738" parent="Floor/BevelParent" unique_id=171761516 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82738" parent="Room/Floor/BevelParent" unique_id=171761516 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 4.74)
 
-[node name="@Node3D@82739" parent="Floor/BevelParent" unique_id=1366642101 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82739" parent="Room/Floor/BevelParent" unique_id=1366642101 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 5.0559998)
 
-[node name="@Node3D@82740" parent="Floor/BevelParent" unique_id=1757024939 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82740" parent="Room/Floor/BevelParent" unique_id=1757024939 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 5.3719997)
 
-[node name="@Node3D@82741" parent="Floor/BevelParent" unique_id=2104068280 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82741" parent="Room/Floor/BevelParent" unique_id=2104068280 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 5.6879997)
 
-[node name="@Node3D@82742" parent="Floor/BevelParent" unique_id=1358875708 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82742" parent="Room/Floor/BevelParent" unique_id=1358875708 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 6.0039997)
 
-[node name="@Node3D@82743" parent="Floor/BevelParent" unique_id=1232884453 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82743" parent="Room/Floor/BevelParent" unique_id=1232884453 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 6.3199997)
 
-[node name="@Node3D@82744" parent="Floor/BevelParent" unique_id=870053328 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82744" parent="Room/Floor/BevelParent" unique_id=870053328 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 6.6359997)
 
-[node name="@Node3D@82745" parent="Floor/BevelParent" unique_id=1766991553 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82745" parent="Room/Floor/BevelParent" unique_id=1766991553 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 6.9519997)
 
-[node name="@Node3D@82746" parent="Floor/BevelParent" unique_id=1051777983 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82746" parent="Room/Floor/BevelParent" unique_id=1051777983 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 7.2679996)
 
-[node name="@Node3D@82747" parent="Floor/BevelParent" unique_id=1169049614 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82747" parent="Room/Floor/BevelParent" unique_id=1169049614 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 7.5839996)
 
-[node name="@Node3D@82748" parent="Floor/BevelParent" unique_id=338011018 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82748" parent="Room/Floor/BevelParent" unique_id=338011018 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 7.8999996)
 
-[node name="@Node3D@82749" parent="Floor/BevelParent" unique_id=1814158643 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82749" parent="Room/Floor/BevelParent" unique_id=1814158643 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 8.216)
 
-[node name="@Node3D@82750" parent="Floor/BevelParent" unique_id=112418846 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82750" parent="Room/Floor/BevelParent" unique_id=112418846 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 8.532)
 
-[node name="@Node3D@82751" parent="Floor/BevelParent" unique_id=634364976 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82751" parent="Room/Floor/BevelParent" unique_id=634364976 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 8.848)
 
-[node name="@Node3D@82752" parent="Floor/BevelParent" unique_id=570279966 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82752" parent="Room/Floor/BevelParent" unique_id=570279966 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 9.164)
 
-[node name="@Node3D@82753" parent="Floor/BevelParent" unique_id=759464876 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82753" parent="Room/Floor/BevelParent" unique_id=759464876 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 9.48)
 
-[node name="@Node3D@82754" parent="Floor/BevelParent" unique_id=399517634 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82754" parent="Room/Floor/BevelParent" unique_id=399517634 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 9.796)
 
-[node name="@Node3D@82755" parent="Floor/BevelParent" unique_id=1139417292 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82755" parent="Room/Floor/BevelParent" unique_id=1139417292 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 10.1119995)
 
-[node name="@Node3D@82756" parent="Floor/BevelParent" unique_id=1947800149 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82756" parent="Room/Floor/BevelParent" unique_id=1947800149 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 10.4279995)
 
-[node name="@Node3D@82757" parent="Floor/BevelParent" unique_id=737410299 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82757" parent="Room/Floor/BevelParent" unique_id=737410299 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1799998, 0, 10.7439995)
 
-[node name="@Node3D@82758" parent="Floor/BevelParent" unique_id=632351673 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82758" parent="Room/Floor/BevelParent" unique_id=632351673 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 0)
 
-[node name="@Node3D@82759" parent="Floor/BevelParent" unique_id=900777101 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82759" parent="Room/Floor/BevelParent" unique_id=900777101 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 0.31599998)
 
-[node name="@Node3D@82760" parent="Floor/BevelParent" unique_id=27251853 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82760" parent="Room/Floor/BevelParent" unique_id=27251853 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 0.63199997)
 
-[node name="@Node3D@82761" parent="Floor/BevelParent" unique_id=247868409 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82761" parent="Room/Floor/BevelParent" unique_id=247868409 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 0.94799995)
 
-[node name="@Node3D@82762" parent="Floor/BevelParent" unique_id=1589643864 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82762" parent="Room/Floor/BevelParent" unique_id=1589643864 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 1.2639999)
 
-[node name="@Node3D@82763" parent="Floor/BevelParent" unique_id=799044609 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82763" parent="Room/Floor/BevelParent" unique_id=799044609 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 1.5799999)
 
-[node name="@Node3D@82764" parent="Floor/BevelParent" unique_id=702627572 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82764" parent="Room/Floor/BevelParent" unique_id=702627572 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 1.8959999)
 
-[node name="@Node3D@82765" parent="Floor/BevelParent" unique_id=207915377 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82765" parent="Room/Floor/BevelParent" unique_id=207915377 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 2.212)
 
-[node name="@Node3D@82766" parent="Floor/BevelParent" unique_id=1391466853 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82766" parent="Room/Floor/BevelParent" unique_id=1391466853 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 2.5279999)
 
-[node name="@Node3D@82767" parent="Floor/BevelParent" unique_id=1586004603 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82767" parent="Room/Floor/BevelParent" unique_id=1586004603 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 2.8439999)
 
-[node name="@Node3D@82768" parent="Floor/BevelParent" unique_id=885135529 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82768" parent="Room/Floor/BevelParent" unique_id=885135529 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 3.1599998)
 
-[node name="@Node3D@82769" parent="Floor/BevelParent" unique_id=101544152 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82769" parent="Room/Floor/BevelParent" unique_id=101544152 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 3.4759998)
 
-[node name="@Node3D@82770" parent="Floor/BevelParent" unique_id=310939480 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82770" parent="Room/Floor/BevelParent" unique_id=310939480 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 3.7919998)
 
-[node name="@Node3D@82771" parent="Floor/BevelParent" unique_id=1740086877 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82771" parent="Room/Floor/BevelParent" unique_id=1740086877 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 4.108)
 
-[node name="@Node3D@82772" parent="Floor/BevelParent" unique_id=1904072575 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82772" parent="Room/Floor/BevelParent" unique_id=1904072575 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 4.424)
 
-[node name="@Node3D@82773" parent="Floor/BevelParent" unique_id=1196411546 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82773" parent="Room/Floor/BevelParent" unique_id=1196411546 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 4.74)
 
-[node name="@Node3D@82774" parent="Floor/BevelParent" unique_id=440461475 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82774" parent="Room/Floor/BevelParent" unique_id=440461475 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 5.0559998)
 
-[node name="@Node3D@82775" parent="Floor/BevelParent" unique_id=768833807 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82775" parent="Room/Floor/BevelParent" unique_id=768833807 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 5.3719997)
 
-[node name="@Node3D@82776" parent="Floor/BevelParent" unique_id=276967831 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82776" parent="Room/Floor/BevelParent" unique_id=276967831 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 5.6879997)
 
-[node name="@Node3D@82777" parent="Floor/BevelParent" unique_id=1519926182 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82777" parent="Room/Floor/BevelParent" unique_id=1519926182 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 6.0039997)
 
-[node name="@Node3D@82778" parent="Floor/BevelParent" unique_id=75191794 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82778" parent="Room/Floor/BevelParent" unique_id=75191794 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 6.3199997)
 
-[node name="@Node3D@82779" parent="Floor/BevelParent" unique_id=2074113812 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82779" parent="Room/Floor/BevelParent" unique_id=2074113812 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 6.6359997)
 
-[node name="@Node3D@82780" parent="Floor/BevelParent" unique_id=1830637692 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82780" parent="Room/Floor/BevelParent" unique_id=1830637692 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 6.9519997)
 
-[node name="@Node3D@82781" parent="Floor/BevelParent" unique_id=457404304 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82781" parent="Room/Floor/BevelParent" unique_id=457404304 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 7.2679996)
 
-[node name="@Node3D@82782" parent="Floor/BevelParent" unique_id=680017440 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82782" parent="Room/Floor/BevelParent" unique_id=680017440 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 7.5839996)
 
-[node name="@Node3D@82783" parent="Floor/BevelParent" unique_id=1800689980 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82783" parent="Room/Floor/BevelParent" unique_id=1800689980 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 7.8999996)
 
-[node name="@Node3D@82784" parent="Floor/BevelParent" unique_id=569302984 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82784" parent="Room/Floor/BevelParent" unique_id=569302984 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 8.216)
 
-[node name="@Node3D@82785" parent="Floor/BevelParent" unique_id=1952515482 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82785" parent="Room/Floor/BevelParent" unique_id=1952515482 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 8.532)
 
-[node name="@Node3D@82786" parent="Floor/BevelParent" unique_id=702914076 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82786" parent="Room/Floor/BevelParent" unique_id=702914076 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 8.848)
 
-[node name="@Node3D@82787" parent="Floor/BevelParent" unique_id=1798058620 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82787" parent="Room/Floor/BevelParent" unique_id=1798058620 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 9.164)
 
-[node name="@Node3D@82788" parent="Floor/BevelParent" unique_id=1587576924 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82788" parent="Room/Floor/BevelParent" unique_id=1587576924 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 9.48)
 
-[node name="@Node3D@82789" parent="Floor/BevelParent" unique_id=2130542981 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82789" parent="Room/Floor/BevelParent" unique_id=2130542981 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 9.796)
 
-[node name="@Node3D@82790" parent="Floor/BevelParent" unique_id=2036970513 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82790" parent="Room/Floor/BevelParent" unique_id=2036970513 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 10.1119995)
 
-[node name="@Node3D@82791" parent="Floor/BevelParent" unique_id=759203350 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82791" parent="Room/Floor/BevelParent" unique_id=759203350 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 10.4279995)
 
-[node name="@Node3D@82792" parent="Floor/BevelParent" unique_id=1406152526 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82792" parent="Room/Floor/BevelParent" unique_id=1406152526 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.816, 0, 10.7439995)
 
-[node name="@Node3D@82793" parent="Floor/BevelParent" unique_id=436588036 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82793" parent="Room/Floor/BevelParent" unique_id=436588036 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 0)
 
-[node name="@Node3D@82794" parent="Floor/BevelParent" unique_id=846870840 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82794" parent="Room/Floor/BevelParent" unique_id=846870840 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 0.31599998)
 
-[node name="@Node3D@82795" parent="Floor/BevelParent" unique_id=443890278 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82795" parent="Room/Floor/BevelParent" unique_id=443890278 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 0.63199997)
 
-[node name="@Node3D@82796" parent="Floor/BevelParent" unique_id=1417289505 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82796" parent="Room/Floor/BevelParent" unique_id=1417289505 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 0.94799995)
 
-[node name="@Node3D@82797" parent="Floor/BevelParent" unique_id=1982121037 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82797" parent="Room/Floor/BevelParent" unique_id=1982121037 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 1.2639999)
 
-[node name="@Node3D@82798" parent="Floor/BevelParent" unique_id=1453447028 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82798" parent="Room/Floor/BevelParent" unique_id=1453447028 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 1.5799999)
 
-[node name="@Node3D@82799" parent="Floor/BevelParent" unique_id=1538522945 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82799" parent="Room/Floor/BevelParent" unique_id=1538522945 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 1.8959999)
 
-[node name="@Node3D@82800" parent="Floor/BevelParent" unique_id=175828786 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82800" parent="Room/Floor/BevelParent" unique_id=175828786 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 2.212)
 
-[node name="@Node3D@82801" parent="Floor/BevelParent" unique_id=1736229288 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82801" parent="Room/Floor/BevelParent" unique_id=1736229288 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 2.5279999)
 
-[node name="@Node3D@82802" parent="Floor/BevelParent" unique_id=1077839877 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82802" parent="Room/Floor/BevelParent" unique_id=1077839877 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 2.8439999)
 
-[node name="@Node3D@82803" parent="Floor/BevelParent" unique_id=492362079 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82803" parent="Room/Floor/BevelParent" unique_id=492362079 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 3.1599998)
 
-[node name="@Node3D@82804" parent="Floor/BevelParent" unique_id=1933452192 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82804" parent="Room/Floor/BevelParent" unique_id=1933452192 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 3.4759998)
 
-[node name="@Node3D@82805" parent="Floor/BevelParent" unique_id=144731315 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82805" parent="Room/Floor/BevelParent" unique_id=144731315 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 3.7919998)
 
-[node name="@Node3D@82806" parent="Floor/BevelParent" unique_id=171227159 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82806" parent="Room/Floor/BevelParent" unique_id=171227159 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 4.108)
 
-[node name="@Node3D@82807" parent="Floor/BevelParent" unique_id=1349740053 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82807" parent="Room/Floor/BevelParent" unique_id=1349740053 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 4.424)
 
-[node name="@Node3D@82808" parent="Floor/BevelParent" unique_id=2040657524 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82808" parent="Room/Floor/BevelParent" unique_id=2040657524 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 4.74)
 
-[node name="@Node3D@82809" parent="Floor/BevelParent" unique_id=89924430 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82809" parent="Room/Floor/BevelParent" unique_id=89924430 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 5.0559998)
 
-[node name="@Node3D@82810" parent="Floor/BevelParent" unique_id=1216218791 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82810" parent="Room/Floor/BevelParent" unique_id=1216218791 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 5.3719997)
 
-[node name="@Node3D@82811" parent="Floor/BevelParent" unique_id=1213394807 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82811" parent="Room/Floor/BevelParent" unique_id=1213394807 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 5.6879997)
 
-[node name="@Node3D@82812" parent="Floor/BevelParent" unique_id=528522394 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82812" parent="Room/Floor/BevelParent" unique_id=528522394 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 6.0039997)
 
-[node name="@Node3D@82813" parent="Floor/BevelParent" unique_id=248290297 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82813" parent="Room/Floor/BevelParent" unique_id=248290297 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 6.3199997)
 
-[node name="@Node3D@82814" parent="Floor/BevelParent" unique_id=2133372260 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82814" parent="Room/Floor/BevelParent" unique_id=2133372260 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 6.6359997)
 
-[node name="@Node3D@82815" parent="Floor/BevelParent" unique_id=1252298220 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82815" parent="Room/Floor/BevelParent" unique_id=1252298220 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 6.9519997)
 
-[node name="@Node3D@82816" parent="Floor/BevelParent" unique_id=2085304349 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82816" parent="Room/Floor/BevelParent" unique_id=2085304349 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 7.2679996)
 
-[node name="@Node3D@82817" parent="Floor/BevelParent" unique_id=1746337300 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82817" parent="Room/Floor/BevelParent" unique_id=1746337300 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 7.5839996)
 
-[node name="@Node3D@82818" parent="Floor/BevelParent" unique_id=1254866987 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82818" parent="Room/Floor/BevelParent" unique_id=1254866987 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 7.8999996)
 
-[node name="@Node3D@82819" parent="Floor/BevelParent" unique_id=1436389649 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82819" parent="Room/Floor/BevelParent" unique_id=1436389649 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 8.216)
 
-[node name="@Node3D@82820" parent="Floor/BevelParent" unique_id=295876035 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82820" parent="Room/Floor/BevelParent" unique_id=295876035 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 8.532)
 
-[node name="@Node3D@82821" parent="Floor/BevelParent" unique_id=653563746 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82821" parent="Room/Floor/BevelParent" unique_id=653563746 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 8.848)
 
-[node name="@Node3D@82822" parent="Floor/BevelParent" unique_id=968950607 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82822" parent="Room/Floor/BevelParent" unique_id=968950607 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 9.164)
 
-[node name="@Node3D@82823" parent="Floor/BevelParent" unique_id=1119666634 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82823" parent="Room/Floor/BevelParent" unique_id=1119666634 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 9.48)
 
-[node name="@Node3D@82824" parent="Floor/BevelParent" unique_id=146991682 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82824" parent="Room/Floor/BevelParent" unique_id=146991682 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 9.796)
 
-[node name="@Node3D@82825" parent="Floor/BevelParent" unique_id=1715749637 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82825" parent="Room/Floor/BevelParent" unique_id=1715749637 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 10.1119995)
 
-[node name="@Node3D@82826" parent="Floor/BevelParent" unique_id=1743429658 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82826" parent="Room/Floor/BevelParent" unique_id=1743429658 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 10.4279995)
 
-[node name="@Node3D@82827" parent="Floor/BevelParent" unique_id=629158465 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82827" parent="Room/Floor/BevelParent" unique_id=629158465 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4519997, 0, 10.7439995)
 
-[node name="@Node3D@82828" parent="Floor/BevelParent" unique_id=1015086103 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82828" parent="Room/Floor/BevelParent" unique_id=1015086103 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 0)
 
-[node name="@Node3D@82829" parent="Floor/BevelParent" unique_id=1654353435 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82829" parent="Room/Floor/BevelParent" unique_id=1654353435 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 0.31599998)
 
-[node name="@Node3D@82830" parent="Floor/BevelParent" unique_id=2144168967 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82830" parent="Room/Floor/BevelParent" unique_id=2144168967 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 0.63199997)
 
-[node name="@Node3D@82831" parent="Floor/BevelParent" unique_id=310698474 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82831" parent="Room/Floor/BevelParent" unique_id=310698474 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 0.94799995)
 
-[node name="@Node3D@82832" parent="Floor/BevelParent" unique_id=569309483 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82832" parent="Room/Floor/BevelParent" unique_id=569309483 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 1.2639999)
 
-[node name="@Node3D@82833" parent="Floor/BevelParent" unique_id=298472651 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82833" parent="Room/Floor/BevelParent" unique_id=298472651 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 1.5799999)
 
-[node name="@Node3D@82834" parent="Floor/BevelParent" unique_id=1089894125 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82834" parent="Room/Floor/BevelParent" unique_id=1089894125 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 1.8959999)
 
-[node name="@Node3D@82835" parent="Floor/BevelParent" unique_id=576813458 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82835" parent="Room/Floor/BevelParent" unique_id=576813458 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 2.212)
 
-[node name="@Node3D@82836" parent="Floor/BevelParent" unique_id=1462021453 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82836" parent="Room/Floor/BevelParent" unique_id=1462021453 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 2.5279999)
 
-[node name="@Node3D@82837" parent="Floor/BevelParent" unique_id=157885098 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82837" parent="Room/Floor/BevelParent" unique_id=157885098 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 2.8439999)
 
-[node name="@Node3D@82838" parent="Floor/BevelParent" unique_id=1939799040 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82838" parent="Room/Floor/BevelParent" unique_id=1939799040 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 3.1599998)
 
-[node name="@Node3D@82839" parent="Floor/BevelParent" unique_id=2103347775 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82839" parent="Room/Floor/BevelParent" unique_id=2103347775 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 3.4759998)
 
-[node name="@Node3D@82840" parent="Floor/BevelParent" unique_id=768688638 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82840" parent="Room/Floor/BevelParent" unique_id=768688638 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 3.7919998)
 
-[node name="@Node3D@82841" parent="Floor/BevelParent" unique_id=1366036204 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82841" parent="Room/Floor/BevelParent" unique_id=1366036204 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 4.108)
 
-[node name="@Node3D@82842" parent="Floor/BevelParent" unique_id=263322278 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82842" parent="Room/Floor/BevelParent" unique_id=263322278 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 4.424)
 
-[node name="@Node3D@82843" parent="Floor/BevelParent" unique_id=1271722090 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82843" parent="Room/Floor/BevelParent" unique_id=1271722090 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 4.74)
 
-[node name="@Node3D@82844" parent="Floor/BevelParent" unique_id=1786378135 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82844" parent="Room/Floor/BevelParent" unique_id=1786378135 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 5.0559998)
 
-[node name="@Node3D@82845" parent="Floor/BevelParent" unique_id=2085507989 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82845" parent="Room/Floor/BevelParent" unique_id=2085507989 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 5.3719997)
 
-[node name="@Node3D@82846" parent="Floor/BevelParent" unique_id=1455147993 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82846" parent="Room/Floor/BevelParent" unique_id=1455147993 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 5.6879997)
 
-[node name="@Node3D@82847" parent="Floor/BevelParent" unique_id=1017962924 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82847" parent="Room/Floor/BevelParent" unique_id=1017962924 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 6.0039997)
 
-[node name="@Node3D@82848" parent="Floor/BevelParent" unique_id=1450762500 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82848" parent="Room/Floor/BevelParent" unique_id=1450762500 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 6.3199997)
 
-[node name="@Node3D@82849" parent="Floor/BevelParent" unique_id=1522613365 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82849" parent="Room/Floor/BevelParent" unique_id=1522613365 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 6.6359997)
 
-[node name="@Node3D@82850" parent="Floor/BevelParent" unique_id=358597552 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82850" parent="Room/Floor/BevelParent" unique_id=358597552 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 6.9519997)
 
-[node name="@Node3D@82851" parent="Floor/BevelParent" unique_id=2069551297 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82851" parent="Room/Floor/BevelParent" unique_id=2069551297 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 7.2679996)
 
-[node name="@Node3D@82852" parent="Floor/BevelParent" unique_id=895401681 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82852" parent="Room/Floor/BevelParent" unique_id=895401681 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 7.5839996)
 
-[node name="@Node3D@82853" parent="Floor/BevelParent" unique_id=1652499152 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82853" parent="Room/Floor/BevelParent" unique_id=1652499152 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 7.8999996)
 
-[node name="@Node3D@82854" parent="Floor/BevelParent" unique_id=2067013095 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82854" parent="Room/Floor/BevelParent" unique_id=2067013095 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 8.216)
 
-[node name="@Node3D@82855" parent="Floor/BevelParent" unique_id=1541182955 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82855" parent="Room/Floor/BevelParent" unique_id=1541182955 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 8.532)
 
-[node name="@Node3D@82856" parent="Floor/BevelParent" unique_id=2075872960 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82856" parent="Room/Floor/BevelParent" unique_id=2075872960 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 8.848)
 
-[node name="@Node3D@82857" parent="Floor/BevelParent" unique_id=564510640 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82857" parent="Room/Floor/BevelParent" unique_id=564510640 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 9.164)
 
-[node name="@Node3D@82858" parent="Floor/BevelParent" unique_id=1560111903 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82858" parent="Room/Floor/BevelParent" unique_id=1560111903 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 9.48)
 
-[node name="@Node3D@82859" parent="Floor/BevelParent" unique_id=643361988 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82859" parent="Room/Floor/BevelParent" unique_id=643361988 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 9.796)
 
-[node name="@Node3D@82860" parent="Floor/BevelParent" unique_id=1163587321 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82860" parent="Room/Floor/BevelParent" unique_id=1163587321 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 10.1119995)
 
-[node name="@Node3D@82861" parent="Floor/BevelParent" unique_id=553308917 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82861" parent="Room/Floor/BevelParent" unique_id=553308917 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 10.4279995)
 
-[node name="@Node3D@82862" parent="Floor/BevelParent" unique_id=1125194396 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82862" parent="Room/Floor/BevelParent" unique_id=1125194396 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.088, 0, 10.7439995)
 
-[node name="@Node3D@82863" parent="Floor/BevelParent" unique_id=620910344 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82863" parent="Room/Floor/BevelParent" unique_id=620910344 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 0)
 
-[node name="@Node3D@82864" parent="Floor/BevelParent" unique_id=692459562 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82864" parent="Room/Floor/BevelParent" unique_id=692459562 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 0.31599998)
 
-[node name="@Node3D@82865" parent="Floor/BevelParent" unique_id=857729686 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82865" parent="Room/Floor/BevelParent" unique_id=857729686 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 0.63199997)
 
-[node name="@Node3D@82866" parent="Floor/BevelParent" unique_id=1979913529 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82866" parent="Room/Floor/BevelParent" unique_id=1979913529 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 0.94799995)
 
-[node name="@Node3D@82867" parent="Floor/BevelParent" unique_id=1707810896 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82867" parent="Room/Floor/BevelParent" unique_id=1707810896 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 1.2639999)
 
-[node name="@Node3D@82868" parent="Floor/BevelParent" unique_id=173937639 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82868" parent="Room/Floor/BevelParent" unique_id=173937639 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 1.5799999)
 
-[node name="@Node3D@82869" parent="Floor/BevelParent" unique_id=1771247666 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82869" parent="Room/Floor/BevelParent" unique_id=1771247666 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 1.8959999)
 
-[node name="@Node3D@82870" parent="Floor/BevelParent" unique_id=743226242 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82870" parent="Room/Floor/BevelParent" unique_id=743226242 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 2.212)
 
-[node name="@Node3D@82871" parent="Floor/BevelParent" unique_id=1152616457 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82871" parent="Room/Floor/BevelParent" unique_id=1152616457 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 2.5279999)
 
-[node name="@Node3D@82872" parent="Floor/BevelParent" unique_id=1840906865 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82872" parent="Room/Floor/BevelParent" unique_id=1840906865 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 2.8439999)
 
-[node name="@Node3D@82873" parent="Floor/BevelParent" unique_id=111453162 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82873" parent="Room/Floor/BevelParent" unique_id=111453162 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 3.1599998)
 
-[node name="@Node3D@82874" parent="Floor/BevelParent" unique_id=1881391796 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82874" parent="Room/Floor/BevelParent" unique_id=1881391796 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 3.4759998)
 
-[node name="@Node3D@82875" parent="Floor/BevelParent" unique_id=706862175 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82875" parent="Room/Floor/BevelParent" unique_id=706862175 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 3.7919998)
 
-[node name="@Node3D@82876" parent="Floor/BevelParent" unique_id=1636419537 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82876" parent="Room/Floor/BevelParent" unique_id=1636419537 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 4.108)
 
-[node name="@Node3D@82877" parent="Floor/BevelParent" unique_id=1292161200 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82877" parent="Room/Floor/BevelParent" unique_id=1292161200 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 4.424)
 
-[node name="@Node3D@82878" parent="Floor/BevelParent" unique_id=749800828 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82878" parent="Room/Floor/BevelParent" unique_id=749800828 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 4.74)
 
-[node name="@Node3D@82879" parent="Floor/BevelParent" unique_id=1192436637 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82879" parent="Room/Floor/BevelParent" unique_id=1192436637 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 5.0559998)
 
-[node name="@Node3D@82880" parent="Floor/BevelParent" unique_id=25098277 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82880" parent="Room/Floor/BevelParent" unique_id=25098277 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 5.3719997)
 
-[node name="@Node3D@82881" parent="Floor/BevelParent" unique_id=1534535978 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82881" parent="Room/Floor/BevelParent" unique_id=1534535978 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 5.6879997)
 
-[node name="@Node3D@82882" parent="Floor/BevelParent" unique_id=1341473422 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82882" parent="Room/Floor/BevelParent" unique_id=1341473422 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 6.0039997)
 
-[node name="@Node3D@82883" parent="Floor/BevelParent" unique_id=730886027 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82883" parent="Room/Floor/BevelParent" unique_id=730886027 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 6.3199997)
 
-[node name="@Node3D@82884" parent="Floor/BevelParent" unique_id=166929233 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82884" parent="Room/Floor/BevelParent" unique_id=166929233 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 6.6359997)
 
-[node name="@Node3D@82885" parent="Floor/BevelParent" unique_id=19000123 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82885" parent="Room/Floor/BevelParent" unique_id=19000123 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 6.9519997)
 
-[node name="@Node3D@82886" parent="Floor/BevelParent" unique_id=1526691578 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82886" parent="Room/Floor/BevelParent" unique_id=1526691578 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 7.2679996)
 
-[node name="@Node3D@82887" parent="Floor/BevelParent" unique_id=1498601183 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82887" parent="Room/Floor/BevelParent" unique_id=1498601183 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 7.5839996)
 
-[node name="@Node3D@82888" parent="Floor/BevelParent" unique_id=71688481 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82888" parent="Room/Floor/BevelParent" unique_id=71688481 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 7.8999996)
 
-[node name="@Node3D@82889" parent="Floor/BevelParent" unique_id=829820692 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82889" parent="Room/Floor/BevelParent" unique_id=829820692 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 8.216)
 
-[node name="@Node3D@82890" parent="Floor/BevelParent" unique_id=314261863 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82890" parent="Room/Floor/BevelParent" unique_id=314261863 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 8.532)
 
-[node name="@Node3D@82891" parent="Floor/BevelParent" unique_id=697394450 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82891" parent="Room/Floor/BevelParent" unique_id=697394450 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 8.848)
 
-[node name="@Node3D@82892" parent="Floor/BevelParent" unique_id=1081631615 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82892" parent="Room/Floor/BevelParent" unique_id=1081631615 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 9.164)
 
-[node name="@Node3D@82893" parent="Floor/BevelParent" unique_id=258020409 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82893" parent="Room/Floor/BevelParent" unique_id=258020409 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 9.48)
 
-[node name="@Node3D@82894" parent="Floor/BevelParent" unique_id=1658683844 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82894" parent="Room/Floor/BevelParent" unique_id=1658683844 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 9.796)
 
-[node name="@Node3D@82895" parent="Floor/BevelParent" unique_id=467936678 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82895" parent="Room/Floor/BevelParent" unique_id=467936678 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 10.1119995)
 
-[node name="@Node3D@82896" parent="Floor/BevelParent" unique_id=2036166886 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82896" parent="Room/Floor/BevelParent" unique_id=2036166886 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 10.4279995)
 
-[node name="@Node3D@82897" parent="Floor/BevelParent" unique_id=1932224120 instance=ExtResource("2_41b0i")]
+[node name="@Node3D@82897" parent="Room/Floor/BevelParent" unique_id=1932224120 instance=ExtResource("2_41b0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 10.7439995)
 
-[node name="PropsParent" type="Node3D" parent="Floor" unique_id=1533074596]
+[node name="PropsParent" type="Node3D" parent="Room/Floor" unique_id=1533074596]
 
-[node name="HideProp" type="StaticBody3D" parent="Floor/PropsParent" unique_id=24826865]
+[node name="HideProp" type="StaticBody3D" parent="Room/Floor/PropsParent" unique_id=24826865]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 8)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/PropsParent/HideProp" unique_id=2115345639]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/PropsParent/HideProp" unique_id=2115345639]
 mesh = SubResource("BoxMesh_41b0i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/PropsParent/HideProp" unique_id=1378284718]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/PropsParent/HideProp" unique_id=1378284718]
 shape = SubResource("ConvexPolygonShape3D_wsess")
 
-[node name="HideProp2" type="StaticBody3D" parent="Floor/PropsParent" unique_id=40478257]
+[node name="HideProp2" type="StaticBody3D" parent="Room/Floor/PropsParent" unique_id=40478257]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 6)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/PropsParent/HideProp2" unique_id=868620530]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/PropsParent/HideProp2" unique_id=868620530]
 mesh = SubResource("BoxMesh_41b0i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/PropsParent/HideProp2" unique_id=1830542063]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/PropsParent/HideProp2" unique_id=1830542063]
 shape = SubResource("ConvexPolygonShape3D_wsess")
 
-[node name="HideProp3" type="StaticBody3D" parent="Floor/PropsParent" unique_id=1553558302]
+[node name="HideProp3" type="StaticBody3D" parent="Room/Floor/PropsParent" unique_id=1553558302]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 4)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/PropsParent/HideProp3" unique_id=89406276]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/PropsParent/HideProp3" unique_id=89406276]
 mesh = SubResource("BoxMesh_41b0i")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/PropsParent/HideProp3" unique_id=1343365597]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/PropsParent/HideProp3" unique_id=1343365597]
 shape = SubResource("ConvexPolygonShape3D_wsess")
+
+[node name="Lights" type="Node3D" parent="." unique_id=754268390]
+
+[node name="PlayerSpotLight" parent="Lights" unique_id=1792743486 instance=ExtResource("4_nniu5")]
+transform = Transform3D(1, 0, 0, 0, 1, -5.563627e-08, 0, 5.563627e-08, 1, 3, 1.87, 10)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/PlayerSpotLight" unique_id=1899906754]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+spot_angle = 20.0
+
+[node name="CenterOmniLight" parent="Lights" unique_id=666563008 instance=ExtResource("4_nniu5")]
+transform = Transform3D(1, 0, 0, 0, 1, -5.563627e-08, 0, 5.563627e-08, 1, 3, 1.87, 10)
+
+[node name="RoomLight" type="OmniLight3D" parent="Lights/CenterOmniLight" unique_id=1960494405]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -3.5762787e-07, -5)
+omni_range = 7.0
+
+[node name="SeekerSpotLight" parent="Lights" unique_id=279170064 instance=ExtResource("4_nniu5")]
+transform = Transform3D(1, 0, 0, 0, 1, -5.563627e-08, 0, 5.563627e-08, 1, 3, 1.88, 1.3000001)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/SeekerSpotLight" unique_id=985844546]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+spot_angle = 20.0
 
 [node name="Character" parent="." unique_id=1145805555 instance=ExtResource("1_2u72s")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3, 0.5, 10)
 
-[node name="Seeker_Light" parent="." unique_id=1792743486 instance=ExtResource("4_nniu5")]
-transform = Transform3D(1, 0, 0, 0, 1, -5.563627e-08, 0, 5.563627e-08, 1, 3, 1.87, 10)
+[node name="WinArea" type="Area3D" parent="." unique_id=1952026259]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 1)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Seeker_Light" unique_id=1899906754]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-spot_angle = 20.0
-
-[node name="On_Off_Light" parent="." unique_id=666563008 instance=ExtResource("4_nniu5")]
-transform = Transform3D(1, 0, 0, 0, 1, -5.563627e-08, 0, 5.563627e-08, 1, 3, 1.87, 10)
-
-[node name="RoomLight" type="OmniLight3D" parent="On_Off_Light" unique_id=1960494405]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -3.5762787e-07, -5)
-omni_range = 7.0
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WinArea" unique_id=380152742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 5, 0)
+shape = SubResource("BoxShape3D_7owda")
 
 [node name="HideAndSeek" parent="." unique_id=1601410567 node_paths=PackedStringArray("room_light") instance=ExtResource("5_7owda")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 3, 0, 0)
-room_light = NodePath("../On_Off_Light/RoomLight")
+room_light = NodePath("../Lights/CenterOmniLight/RoomLight")
 
 [node name="Camera3D" parent="HideAndSeek/AI/SubViewport" parent_id_path=PackedInt32Array(1601410567, 120751376) index="0" unique_id=1685741371]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.9980574, 0.5, 6.4291487)
@@ -1268,20 +1284,6 @@ texture = SubResource("ViewportTexture_j1rxl")
 transform = Transform3D(-0.8, 0, -1.2079664e-07, 0, 0.8, 0, 1.2079664e-07, 0, -0.8, -5, 3.5, 3)
 visible = false
 
-[node name="bevel-hq-brick-1x13" parent="HideAndSeek" unique_id=279170064 instance=ExtResource("4_nniu5")]
-transform = Transform3D(5, 0, 0, 0, 5, -2.7818135e-07, 0, 2.7818135e-07, 5, 0, 9.4, 6.5)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="HideAndSeek/bevel-hq-brick-1x13" unique_id=985844546]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-spot_angle = 20.0
-
-[node name="WinArea" type="Area3D" parent="HideAndSeek" unique_id=1952026259]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HideAndSeek/WinArea" unique_id=380152742]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 5, 0)
-shape = SubResource("BoxShape3D_7owda")
-
-[connection signal="body_entered" from="HideAndSeek/WinArea" to="HideAndSeek" method="_on_win_area_body_entered"]
+[connection signal="body_entered" from="WinArea" to="HideAndSeek" method="_on_win_area_body_entered"]
 
 [editable path="HideAndSeek"]

@@ -63,7 +63,6 @@ Ref<Image> OpenCVHideAndSeek::getProcessedViewportTexture() {
 
     cv::Rect box = cv::boundingRect(largest_contour);
 
-    // ✅ Add small padding
     int padding = 20;
     box.x -= padding;
     box.y -= padding;
@@ -76,7 +75,6 @@ Ref<Image> OpenCVHideAndSeek::getProcessedViewportTexture() {
     box.width = std::min(original.cols - box.x, box.width);
     box.height = std::min(original.rows - box.y, box.height);
 
-    // ✅ Maintain aspect ratio
     float target_aspect = (float)original.cols / (float)original.rows;
     float box_aspect = (float)box.width / (float)box.height;
 

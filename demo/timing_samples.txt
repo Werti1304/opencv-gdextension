@@ -1,0 +1,30 @@
+Resolution: 1920x1080
+Enabled Filters:
+- GrayScale
+- Blur
+- Dilate
+- Canny Edge
+- Find Contours
+
+=== Averaged Timings (Godot) ===
+ 16.199 ms  Grab from viewport/gpu
+  3.040 ms  Image to Mat
+  5.668 ms  Processing
+  2.117 ms  Processed -> Godot Color Space
+  3.971 ms  Mat to Image
+=  30.996 ms  Total per Frame
+
+=== Averaged Timings (Python) ===
+  2.475 ms  Grab from video
+  0.001 ms  Image Conversion
+  9.758 ms  Processing
+  1.624 ms  Processed -> BGRA
+  0.001 ms  Mat to Image
+=  13.860 ms  Total per Frame
+
+=== System Info ===
+OS: Windows 10.0.22621
+CPU: 13th Gen Intel(R) Core(TM) i7-1355U
+CPU Cores: 12
+RAM (MB): 8096MB
+GPU: Intel(R) Iris(R) Xe Graphics

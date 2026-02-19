@@ -333,7 +333,14 @@ Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
 	}
 
  	cv::Mat img;
-	cv::flip(frame_rgb, img, 1);  // Flip horizontally
+	
+	// Pre-Processing
+	cv::Mat resized;
+	cv::resize(frame_rgb, resized, cv::Size(960, 540), cv::INTER_AREA);
+	cv::Rect crop_rect(0, 0, resized.rows, resized.rows);
+	cv::Mat cropped = resized(crop_rect);
+	cv::bilateralFilter(cropped, img, 5, 50, 100);
+	cv::flip(img, img, 1);
 
 	int x = img.cols;
 	int y = img.rows;
@@ -351,8 +358,8 @@ Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
 	cv::line(img, cv::Point(x/2, 0), cv::Point(x/2, y), cv::Scalar(0,0,0), 1);
 	cv::line(img, cv::Point(0, y/2), cv::Point(x, y/2), cv::Scalar(0,0,0), 1);
 
-	// If hands detected
-	UtilityFunctions::print("Hands detected: ", hands.size());
+	// // If hands detected
+	// UtilityFunctions::print("Hands detected: ", hands.size());
 
 	if(hands.size() == 0)
 	{
@@ -361,67 +368,67 @@ Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
 
 	for (const auto& rect : hands)
 	{
-			int a = rect.x;
-			int b = rect.y;
-			int w = rect.width;
-			int h = rect.height;
+		int a = rect.x;
+		int b = rect.y;
+		int w = rect.width;
+		int h = rect.height;
 
-			int x2 = a + w/2;
-			int y2 = b + h/2;
+		int x2 = a + w/2;
+		int y2 = b + h/2;
 
-			// ----- Angle calculation -----
-			cv::Point a1(x2, y2);
-			cv::Point a2(x2, y/2);
-			cv::Point a3(x/2, y/2);
+		// ----- Angle calculation -----
+		cv::Point a1(x2, y2);
+		cv::Point a2(x2, y/2);
+		cv::Point a3(x/2, y/2);
 
-			double hypotVal = std::hypot(a1.x - a3.x, a1.y - a3.y);
-			double ydistance = std::hypot(a1.x - a2.x, a1.y - a2.y);
+		double hypotVal = std::hypot(a1.x - a3.x, a1.y - a3.y);
+		double ydistance = std::hypot(a1.x - a2.x, a1.y - a2.y);
 
-			double ref_angle = 0.0;
-			if (hypotVal > 0.0)
-					ref_angle = std::asin(ydistance / hypotVal) * 180.0 / CV_PI;
+		double ref_angle = 0.0;
+		if (hypotVal > 0.0)
+				ref_angle = std::asin(ydistance / hypotVal) * 180.0 / CV_PI;
 
-			double plane_angle = 0.0;
+		double plane_angle = 0.0;
 
-			if (y2 < y/2)
-			{
-					if (x2 > x/2)
-							plane_angle = ref_angle;
-					else if (x2 < x/2)
-							plane_angle = 180 - ref_angle;
-			}
-			else if (y2 > y/2)
-			{
-					if (x2 < x/2)
-							plane_angle = 180 + ref_angle;
-					else if (x2 > x/2)
-							plane_angle = 360 - ref_angle;
-			}
+		if (y2 < y/2)
+		{
+				if (x2 > x/2)
+						plane_angle = ref_angle;
+				else if (x2 < x/2)
+						plane_angle = 180 - ref_angle;
+		}
+		else if (y2 > y/2)
+		{
+				if (x2 < x/2)
+						plane_angle = 180 + ref_angle;
+				else if (x2 > x/2)
+						plane_angle = 360 - ref_angle;
+		}
 
-			// Draw bounding box
-			cv::rectangle(img, rect, cv::Scalar(255,0,0), 1);
+		// Draw bounding box
+		cv::rectangle(img, rect, cv::Scalar(255,0,0), 1);
 
-			// Draw line from center of frame to hand center
-			cv::Point img_center = cv::Point(x/2, y/2);
-			cv::Point hand_center = cv::Point(x2, y2);
-			cv::line(img, img_center, hand_center, cv::Scalar(0,255,0), 1);
+		// Draw line from center of frame to hand center
+		cv::Point img_center = cv::Point(x/2, y/2);
+		cv::Point hand_center = cv::Point(x2, y2);
+		cv::line(img, img_center, hand_center, cv::Scalar(0,255,0), 1);
 
-				// ---- Compute vector from image center to hull center ----
-				cv::Point2f direction = hand_center - img_center;
+		// ---- Compute vector from image center to hull center ----
+		cv::Point2f direction = hand_center - img_center;
 
-				// Print vector
-				std::cout << "Vector (dx, dy): "
-						<< direction.x << ", "
-						<< direction.y << std::endl;
+		// Print vector
+		std::cout << "Vector (dx, dy): "
+				<< direction.x << ", "
+				<< direction.y << std::endl;
 
-				// ---- Optional: Draw it ----
-				cv::arrowedLine(img,
-								img_center,
-								hand_center,
-								cv::Scalar(255, 0, 0),
-								2);
+		// ---- Optional: Draw it ----
+		cv::arrowedLine(img,
+						img_center,
+						hand_center,
+						cv::Scalar(255, 0, 0),
+						2);
 
-				hand_direction = godot::Vector2i(direction.x, direction.y);
+		hand_direction = godot::Vector2i(direction.x, direction.y);
 	}
 	return mat_to_image(img);
 }
