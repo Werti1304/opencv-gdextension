@@ -32,6 +32,9 @@ void OpenCVCamera::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_skin_color_ranges", "lower skin color", "upper skin color"), &OpenCVCamera::set_skin_color_ranges);
 	ClassDB::bind_method(D_METHOD("get_hand_direction"), &OpenCVCamera::get_hand_direction);
 
+	ClassDB::bind_method(D_METHOD("get_hands_image_through_cascade"), &OpenCVCamera::get_hands_image_through_cascade);
+	ClassDB::bind_method(D_METHOD("set_cascade_qualifier", "cascade xml path"), &OpenCVCamera::set_cascade_qualifier);
+
 	ClassDB::bind_method(D_METHOD("find_rectangles"), &OpenCVCamera::find_rectangles);
 }
 
@@ -291,6 +294,89 @@ void OpenCVCamera::set_skin_color_ranges(Color skin_color_lower, Color skin_colo
 godot::Vector2i OpenCVCamera::get_hand_direction()
 {
 	return hand_direction;
+}
+
+void OpenCVCamera::set_cascade_qualifier(godot::String haar_cascade_xml_path) {
+	std::string path = haar_cascade_xml_path.ascii();
+	hand_cascade.load(path);
+	if(hand_cascade.empty())
+	{
+		UtilityFunctions::push_error("Haar Cascade File not loaded!");
+	}
+}
+
+Ref<Image> OpenCVCamera::get_hands_image_through_cascade() {
+	if(hand_cascade.empty())
+	{
+		return mat_to_image(frame_rgb);
+	}
+
+ cv::Mat img;
+	cv::flip(frame_rgb, img, 1);  // Flip horizontally
+
+	int x = img.cols;
+	int y = img.rows;
+
+	// Convert to grayscale
+	cv::Mat gray;
+	cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+
+	// Detect hands
+	std::vector<cv::Rect> hands;
+	hand_cascade.detectMultiScale(gray, hands, 1.6, 5);
+
+	// Draw grid
+	cv::line(img, cv::Point(x/2, 0), cv::Point(x/2, y), cv::Scalar(0,0,0), 1);
+	cv::line(img, cv::Point(0, y/2), cv::Point(x, y/2), cv::Scalar(0,0,0), 1);
+
+	// If hands detected
+	for (const auto& rect : hands)
+	{
+			int a = rect.x;
+			int b = rect.y;
+			int w = rect.width;
+			int h = rect.height;
+
+			int x2 = a + w/2;
+			int y2 = b + h/2;
+
+			// ----- Angle calculation -----
+			cv::Point a1(x2, y2);
+			cv::Point a2(x2, y/2);
+			cv::Point a3(x/2, y/2);
+
+			double hypotVal = std::hypot(a1.x - a3.x, a1.y - a3.y);
+			double ydistance = std::hypot(a1.x - a2.x, a1.y - a2.y);
+
+			double ref_angle = 0.0;
+			if (hypotVal > 0.0)
+					ref_angle = std::asin(ydistance / hypotVal) * 180.0 / CV_PI;
+
+			double plane_angle = 0.0;
+
+			if (y2 < y/2)
+			{
+					if (x2 > x/2)
+							plane_angle = ref_angle;
+					else if (x2 < x/2)
+							plane_angle = 180 - ref_angle;
+			}
+			else if (y2 > y/2)
+			{
+					if (x2 < x/2)
+							plane_angle = 180 + ref_angle;
+					else if (x2 > x/2)
+							plane_angle = 360 - ref_angle;
+			}
+
+			// Draw bounding box
+			cv::rectangle(img, rect, cv::Scalar(255,0,0), 1);
+
+			// Draw line from center of frame to hand center
+			cv::line(img, cv::Point(x/2, y/2), cv::Point(x2, y2), cv::Scalar(0,255,0), 1);
+	}
+
+	return mat_to_image(img);
 }
 
 void OpenCVCamera::update_frame() {

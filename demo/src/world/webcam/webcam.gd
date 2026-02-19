@@ -33,6 +33,7 @@ func _ready():
 	overlay_texture = ImageTexture.new();
 	threshold_slider.value_changed.connect(_on_threshold_changed);
 	camera.set_skin_color_ranges(color_picker_lower.color, color_picker_higher.color)
+	camera.set_cascade_qualifier("res://res/haar_cascades/aGest.xml")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("esc"):
@@ -57,9 +58,12 @@ func _process(_delta):
 			texture.set_image(camera.get_hands(1));
 		5: # Hand Detection - Blurred Range
 			texture.set_image(camera.get_hands(2));
-		6: # Hand Detection - Blurred Range
+		6: # Hand Detection - Final
 			texture.set_image(camera.get_hands(3));
 			ball_game._on_direction_change(camera.get_hand_direction())
+		6: # Hand Detection - Haar Cascade Method
+			texture.set_image(camera.get_hands_image_through_cascade());
+			
 	rectangle_label.text = str(camera.find_rectangles(overlay_button.button_pressed));
 	
 	if overlay_button.button_pressed:

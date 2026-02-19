@@ -9,6 +9,7 @@
 #include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/imgproc.hpp>
+#include "opencv2/objdetect.hpp"
 #include <stdio.h>
 
 struct StripDimensions {
@@ -45,6 +46,12 @@ class OpenCVCamera : public RefCounted {
 	godot::Vector2i get_hand_direction();
 
 	// Hand Detection End
+
+	cv::CascadeClassifier hand_cascade;
+	void set_cascade_qualifier(godot::String haar_cascade_xml_path);
+	Ref<Image> get_hands_image_through_cascade();
+
+	// Hand Detection Haar Cascade
 
 	void update_frame();
 	Ref<Image> mat_to_image(cv::Mat mat);
