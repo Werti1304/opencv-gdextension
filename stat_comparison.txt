@@ -1,0 +1,58 @@
+
+Laptop:
+
+  2.475 ms  Grab from video
+  0.001 ms  Image to Mat
+  9.758 ms  Processing
+  1.624 ms  Processed -> BGRA
+  0.001 ms  Mat to Image
+=  13.860 ms  Total per Frame
+Samples: 4337
+
+4102
+
+=== Averaged Timings ===
+ 16.199 ms  Grab from viewport/gpu
+  3.040 ms  Image to Mat
+  5.668 ms  Processing
+  2.117 ms  Processed -> Godot Color Space
+  3.971 ms  Mat to Image
+=  30.996 ms  Total per Frame
+
+25328
+
+PC:
+
+  1.289 ms  Grab from video
+  0.000 ms  Image to Mat
+  5.182 ms  Processing
+  0.972 ms  Processed -> BGRA
+  0.000 ms  Mat to Image
+=   7.445 ms  Total per Frame
+Samples: 4197
+
+=== Averaged Timings ===
+  7.736 ms  Grab from viewport/gpu
+  3.610 ms  Image to Mat
+  8.896 ms  Processing
+  1.948 ms  Processed -> Godot Color Space
+  3.353 ms  Mat to Image
+=  25.543 ms  Total per Frame
+
+Cora PC:
+
+=== Averaged Timings ===
+ 14.896 ms  Grab from viewport/gpu
+  3.813 ms  Image to Mat
+  8.589 ms  Processing
+  1.833 ms  Processed -> Godot Color Space
+  3.886 ms  Mat to Image
+=  33.017 ms  Total per Frame
+
+  1.627 ms  Grab from video
+  0.000 ms  Image to Mat
+  3.795 ms  Processing
+  0.724 ms  Processed -> BGRA
+  0.000 ms  Mat to Image
+=   6.147 ms  Total per Frame
+Samples: 4197

@@ -22,13 +22,17 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7aqon"]
-albedo_color = Color(0.24477637, 0.2447764, 0.24477637, 1)
+albedo_color = Color(0.33333334, 0.27450982, 0.25490198, 1)
 emission_enabled = true
 emission = Color(0.056291588, 0.056291603, 0.056291595, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7aqon"]
 material = SubResource("StandardMaterial3D_7aqon")
 size = Vector3(10, 0.2, 12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pft2m"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7aqon"]
 points = PackedVector3Array(-5.0952387, -0.19520079, -6.094045, 5.1904764, 0.18567698, 6.094045, 5.1904764, -0.19520079, 6.094045, 5.1904764, 0.18567698, -6.094045, -5.0952387, 0.18567698, 6.094045, -5.0952387, -0.19520079, 6.094045, 5.1904764, -0.19520079, -6.094045, -5.0952387, 0.18567698, -6.094045)
@@ -50,13 +54,14 @@ points = PackedVector3Array(-2.357815, -2.3573534, -0.5, 2.5391855, 2.5386884, 0
 [sub_resource type="BoxMesh" id="BoxMesh_8wmmo"]
 size = Vector3(50, 0.5, 50)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1rxl"]
+albedo_color = Color(0.014199986, 0.6172267, 0.71, 1)
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2u72s"]
 points = PackedVector3Array(25.391855, 0.9404762, 25.391855, -25.391855, -0.6468253, -25.391855, -25.391855, 0.9404762, -25.391855, 25.391855, -0.6468253, -25.391855, -25.391855, -0.6468253, 25.391855, -25.391855, 0.9404762, 25.391855, 25.391855, 0.9404762, -25.391855, 25.391855, -0.6468253, 25.391855)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7owda"]
-metallic = 0.5
-roughness = 0.5
-emission_enabled = true
+albedo_color = Color(0.84488565, 0.7925888, 0.7752646, 1)
 emission = Color(0.48570347, 0.48570353, 0.48570347, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_41b0i"]
@@ -88,6 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 5)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Roof" unique_id=1485149453]
 mesh = SubResource("BoxMesh_7aqon")
+surface_material_override/0 = SubResource("StandardMaterial3D_pft2m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Roof" unique_id=1995710715]
 shape = SubResource("ConvexPolygonShape3D_7aqon")
@@ -141,16 +147,16 @@ shape = SubResource("ConvexPolygonShape3D_41b0i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/FloorCollision" unique_id=722650535]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 mesh = SubResource("BoxMesh_8wmmo")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1rxl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/FloorCollision" unique_id=964641869]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-visible = false
 shape = SubResource("ConvexPolygonShape3D_2u72s")
+debug_color = Color(0.9175017, 0.25389504, 0.34836158, 0.41960785)
 
 [node name="BevelParent" type="Node3D" parent="Room/Floor" unique_id=386881467]
+visible = false
 script = ExtResource("1_7aqon")
 tile_scene = ExtResource("2_41b0i")
 tiles_x = 10
@@ -1211,6 +1217,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.724, 0, 10.7439995)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 8)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/PropsParent/HideProp" unique_id=2115345639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_41b0i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/PropsParent/HideProp" unique_id=1378284718]
@@ -1220,6 +1227,7 @@ shape = SubResource("ConvexPolygonShape3D_wsess")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 6)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/PropsParent/HideProp2" unique_id=868620530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_41b0i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/PropsParent/HideProp2" unique_id=1830542063]
@@ -1229,6 +1237,7 @@ shape = SubResource("ConvexPolygonShape3D_wsess")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.5, 4)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Room/Floor/PropsParent/HideProp3" unique_id=89406276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_41b0i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room/Floor/PropsParent/HideProp3" unique_id=1343365597]
@@ -1258,7 +1267,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 spot_angle = 20.0
 
 [node name="Character" parent="." unique_id=1145805555 instance=ExtResource("1_2u72s")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3, 0.5, 10)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 3, 0.5, 10)
 
 [node name="WinArea" type="Area3D" parent="." unique_id=1952026259]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 1)
@@ -1272,8 +1281,11 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 3, 0, 0)
 room_light = NodePath("../Lights/CenterOmniLight/RoomLight")
 
 [node name="Camera3D" parent="HideAndSeek/AI/SubViewport" parent_id_path=PackedInt32Array(1601410567, 120751376) index="0" unique_id=1685741371]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.9980574, 0.5, 6.4291487)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.9980574, 0.5, 0.42914867)
 far = 15.0
+
+[node name="VisionCarpet" parent="HideAndSeek/AI" parent_id_path=PackedInt32Array(1601410567, 1953950361) index="4" unique_id=2016691970]
+visible = false
 
 [node name="HideAndSeekSeekerView" parent="HideAndSeek/AI" parent_id_path=PackedInt32Array(1601410567, 1953950361) index="5" unique_id=323801954]
 transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 5, 3.5, 3)

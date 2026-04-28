@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 			found_label.modulate = Color.GREEN
 			var c_char_gui = Character.current_character.gui
 			c_char_gui.back_to_main_menu.show_menu()
-			c_char_gui.back_to_main_menu.label.text = "You lose! :("
+			c_char_gui.back_to_main_menu.label.text = "Player was found!"
 			disable_light_switching = true
 		else:
 			var new_texture = viewport.get_texture()

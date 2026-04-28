@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bykjnkwx3fovi"]
 
 [ext_resource type="Script" uid="uid://du15aonps2ddm" path="res://src/world/video_benchmark/video_benchmark_room.gd" id="1_r56dq"]
-[ext_resource type="VideoStream" uid="uid://cx4npfr4t0uk2" path="res://res/benchmark/Brompton_MBOX_HDR-Selects_BT2020-ST2084_UHDp60_v2_cut_3.ogv" id="2_fok5u"]
+[ext_resource type="VideoStream" uid="uid://b184kcrhqeguc" path="res://res/benchmark/Brompton_MBOX_HDR-Selects_BT2020-ST2084_UHDp60_v2.ogv" id="2_fok5u"]
 [ext_resource type="PackedScene" uid="uid://bv4t70se73k7n" path="res://src/interactable/lever.tscn" id="3_5bgxi"]
 [ext_resource type="PackedScene" uid="uid://b7t7co8lltyk3" path="res://src/interactable/button.tscn" id="3_6g5d1"]
 [ext_resource type="Script" uid="uid://bvwr5dkh578nv" path="res://src/world/video_benchmark/viewport_size_settings.gd" id="3_ja6y4"]
