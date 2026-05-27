@@ -68,7 +68,7 @@ endif()
 
 # OPENCV Stuff start
 
-set(OpenCV_DIR "D:/BA/opencv-gdextension/lib/opencv")
+set(OpenCV_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/opencv/")
 
 find_package(OpenCV REQUIRED)
 
@@ -90,6 +90,9 @@ set_target_properties(${LIBNAME}
 
 set(GODOT_PROJECT_BINARY_DIR "${PROJECT_SOURCE_DIR}/${GODOT_PROJECT_DIR}/bin/${GODOTCPP_PLATFORM}")
 
+file(GLOB OPENCV_DLLS "${OpenCV_DIR}/bin/*.dll")
+
 add_custom_command(TARGET ${LIBNAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:${LIBNAME}>" "${GODOT_PROJECT_BINARY_DIR}/$<TARGET_FILE_NAME:${LIBNAME}>"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${OPENCV_DLLS} "${GODOT_PROJECT_BINARY_DIR}/"
 )

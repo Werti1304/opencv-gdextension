@@ -48,9 +48,25 @@ if(env['platform'] == "web"):
 
 # OPENCV Stuff start
 
-env.Append(CPPPATH=["src/", "include/"])
+# env.Append(CPPPATH=["src/", "include/"])
+# env.Append(LIBS=["opencv_world4130"])
+# env.Append(LIBPATH=["lib/opencv"])
+
+opencv_install_dir = "lib/opencv"
+opencv_include_dir = os.path.join(opencv_install_dir, "include")
+x64_dir = os.path.join(opencv_install_dir, "x64")
+vc_dirs = [d for d in os.listdir(x64_dir) if d.startswith("vc")]
+if not vc_dirs:
+    print_error("Could not find vc* directory under " + x64_dir)
+    sys.exit(1)
+vc_dir = vc_dirs[0]  # take the first one found
+
+opencv_lib_dir = os.path.join(x64_dir, vc_dir, "lib")
+opencv_bin_dir = os.path.join(x64_dir, vc_dir, "bin")
+
+env.Append(CPPPATH=["src/", "include/", opencv_include_dir])
 env.Append(LIBS=["opencv_world4130"])
-env.Append(LIBPATH=["lib/opencv"])
+env.Append(LIBPATH=[opencv_lib_dir])
 
 # OPENCV Stuff end
 
@@ -86,7 +102,6 @@ elif env["target"] in ["editor", "template_debug"]:
 else:
     opencv_dll = "opencv_world4130.dll"
 
-opencv_bin_dir = "lib/opencv/"
 opencv_dll_path = os.path.join(opencv_bin_dir, opencv_dll)
 opencv_copy = env.Install(
     "{}/bin/{}/".format(projectdir, env["platform"]),
